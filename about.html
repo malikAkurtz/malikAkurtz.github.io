@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Malik Kurtz</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --surface: #141414;
+            --border: #222;
+            --text: #c8c8c8;
+            --text-muted: #666;
+            --accent: #e0e0e0;
+            --highlight: #ff6b35;
+            --mono: 'JetBrains Mono', monospace;
+            --serif: 'Source Serif 4', Georgia, serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--serif);
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px 120px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-family: var(--mono);
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--highlight); }
+
+        .about-content {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .about-content h2 {
+            font-family: var(--mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin: 48px 0 16px;
+        }
+
+        .about-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .about-content p {
+            margin-bottom: 18px;
+        }
+
+        .about-content a {
+            color: var(--highlight);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .about-content a:hover {
+            border-bottom-color: var(--highlight);
+        }
+
+        .contact-line {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px 80px; }
+            header { margin-bottom: 48px; }
+            body { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Malik Kurtz</h1>
+            <p>math · quantum · systems</p>
+            <nav>
+                <a href="index.html">log</a>
+                <a href="about.html">about</a>
+                <a href="https://github.com/YOUR_USERNAME" target="_blank">github</a>
+            </nav>
+        </header>
+
+        <div class="about-content">
+            <h2>About</h2>
+            <p>I'm Malik. I study mathematics and computer science at the University of Virginia and research superconducting quantum circuits. I build things from scratch — autodiff engines, neural networks in raw C++, quantum simulators — because I want to own every layer of what I understand.</p>
+            <p>This site is a log. It exists so that future-me has evidence that past-me was thinking, building, and making progress. Nothing here is polished. It's chronological accumulation.</p>
+
+            <h2>Contact</h2>
+            <p class="contact-line">kra8ku@virginia.edu</p>
+            <p class="contact-line"><a href="https://www.linkedin.com/in/malik-kurtz">linkedin.com/in/malik-kurtz</a></p>
+            <p class="contact-line"><a href="https://github.com/YOUR_USERNAME">github.com/YOUR_USERNAME</a></p>
+        </div>
+
+        <footer>
+            &copy; 2026 Malik Kurtz
+        </footer>
+    </div>
+</body>
+</html>
