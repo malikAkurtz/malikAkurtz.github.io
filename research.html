@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research — Malik Kurtz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]});"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --surface: #141414;
+            --border: #222;
+            --text: #c8c8c8;
+            --text-muted: #666;
+            --accent: #e0e0e0;
+            --highlight: #ff6b35;
+            --mono: 'JetBrains Mono', monospace;
+            --serif: 'Source Serif 4', Georgia, serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--serif);
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px 120px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-family: var(--mono);
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--highlight); }
+
+        .entries { list-style: none; }
+
+        .entry {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry:first-child { padding-top: 0; }
+
+        .entry-date {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .entry-title {
+            font-family: var(--mono);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .entry-body {
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .entry-body p { margin-bottom: 14px; }
+        .entry-body p:last-child { margin-bottom: 0; }
+
+        .entry-tags {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px 80px; }
+            header { margin-bottom: 48px; }
+            body { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Malik Kurtz</h1>
+            <p>math · quantum · systems</p>
+            <nav>
+                <a href="index.html">log</a>
+                <a href="research.html">research</a>
+                <a href="about.html">about</a>
+                <a href="https://github.com/malikAkurtz" target="_blank">github</a>
+            </nav>
+        </header>
+
+        <ul class="entries">
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- COPY THIS BLOCK FOR EACH NEW ENTRY          -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <li class="entry">
+                <div class="entry-date">2026-03-15</div>
+                <div class="entry-title">Quantum Harmonic Oscillator</div>
+                <div class="entry-body">
+                    <p>The potential energy for a classical harmonic oscillator takes the form:</p>
+                    <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
+                    <p>Equivalently</p>
+                    <p>$$V(x) = \frac{1}{2}m\omega^{2}x^{2}, \quad \omega = \sqrt{\frac{k}{m}}</p>
+                    <p>Thus, the Time-Independent Schrodinger Equation (TISE) reads:</p>
+                    <p>$$\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2} + V(x)\psi(x) = E\psi(x)$$</p>
+                    <p>and so we need to solve:</p>
+                    <p>$$\overbrace{\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}}^{T(x)} + \overbrace{\frac{m\omega^2 x^2}{2}}^{V(x)}\psi(x) = E\psi(x)$$</p>
+                    <p>Recall:</p>
+                    <p>$$T(x) = \frac{1}{2}mv^{2}$$</p>
+                    <p>and $$p = mv$$, so</p>
+                    <p>$$T(x) = \frac{1}{2}mv^{2} = \frac{m^{2}v^{2}}{2m} = \frac{p^{2}}{2m}</p>
+
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">quantum</span>
+                    <span class="tag">transmon</span>
+                    <span class="tag">hamiltonian</span>
+                </div>
+            </li>
+
+            <li class="entry">
+                <div class="entry-date">2026-03-15</div>
+                <div class="entry-title">Transmon Hamiltonian</div>
+                <div class="entry-body">
+                    <p>The transmon is a nonlinear oscillator. Its Hamiltonian in the charge basis is:</p>
+                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos\hat{\varphi}$$</p>
+                    <p>where $E_C$ is the charging energy, $E_J$ is the Josephson energy, $\hat{n}$ is the Cooper pair number operator, and $\hat{\varphi}$ is the superconducting phase. The transmon regime is defined by $E_J / E_C \gg 1$, which exponentially suppresses charge dispersion while only polynomially reducing anharmonicity.</p>
+                    <p>In the Fock (harmonic oscillator) approximation, we expand the cosine to fourth order:</p>
+                    <p>$$\hat{H} \approx \sqrt{8E_JE_C}\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) - \frac{E_C}{12}\left(\hat{a} + \hat{a}^\dagger\right)^4$$</p>
+                    <p>The first term gives us equispaced levels at frequency $\omega_q = \sqrt{8E_JE_C} - E_C$, and the quartic correction introduces the anharmonicity $\alpha \approx -E_C$ that makes the transmon usable as a qubit.</p>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">quantum</span>
+                    <span class="tag">transmon</span>
+                    <span class="tag">hamiltonian</span>
+                </div>
+            </li>
+
+            <!-- END ENTRY BLOCK -->
+
+        </ul>
+
+        <footer>
+            &copy; 2026 Malik Kurtz
+        </footer>
+    </div>
+</body>
+</html>
