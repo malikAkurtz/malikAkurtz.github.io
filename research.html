@@ -169,19 +169,36 @@
                 <div class="entry-date">2026-03-15</div>
                 <div class="entry-title">Quantum Harmonic Oscillator</div>
                 <div class="entry-body">
+                    <p>This a summary from Griffiths textbook</p>
                     <p>The potential energy for a classical harmonic oscillator takes the form:</p>
                     <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
                     <p>Equivalently</p>
-                    <p>$$V(x) = \frac{1}{2}m\omega^{2}x^{2}, \quad \omega = \sqrt{\frac{k}{m}}</p>
+                    <p>$$V(x) = \frac{1}{2}m\omega^{2}x^{2}, \quad \omega = \sqrt{\frac{k}{m}}$$</p>
                     <p>Thus, the Time-Independent Schrodinger Equation (TISE) reads:</p>
                     <p>$$\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2} + V(x)\psi(x) = E\psi(x)$$</p>
                     <p>and so we need to solve:</p>
                     <p>$$\overbrace{\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}}^{T(x)} + \overbrace{\frac{m\omega^2 x^2}{2}}^{V(x)}\psi(x) = E\psi(x)$$</p>
                     <p>Recall:</p>
                     <p>$$T(x) = \frac{1}{2}mv^{2}$$</p>
-                    <p>and $$p = mv$$, so</p>
-                    <p>$$T(x) = \frac{1}{2}mv^{2} = \frac{m^{2}v^{2}}{2m} = \frac{p^{2}}{2m}</p>
-
+                    <p>and $$p = mv$$ so</p>
+                    <p>$$T(x) = \frac{1}{2}mv^{2} = \frac{m^{2}v^{2}}{2m} = \frac{p^{2}}{2m}$$</p>
+                    <p>TISE now becomes:</p>
+                    <p>$$\frac{p^2}{2m}\psi(x) + \frac{m\omega^2 x^2}{2}\psi(x) = E\psi(x)$$</p>
+                    <p>$$\iff$$</p>
+                    <p>$$\overbrace{\frac{1}{2m}\left(p^2 + (m\omega x)^2\right)}^{\mathcal{H}}\psi(x) = E\psi(x)$$</p>
+                    <p>So we wish to factor the Hamiltonian as: </p>
+                    <p>$$\mathcal{H} = \frac{1}{2m}\left(p^2 + (m\omega x)^2\right)$$</p>
+                    <p>Classically, this would be easy, we simply recall: </p>
+                    <p>$$(u^2 + v^2) = (u + iv)(u - iv)$$</p>
+                    <p>But we have to quantize and upgrade to operators first: </p>
+                    <p>$$\hat{\mathcal{H}} = \frac{1}{2m}\left(\hat{p}^2 + (m\omega \hat{x})^2\right)$$</p>
+                    <p>and operators do not commute, nonetheless, we can define: </p>
+                    <p>$$\hat{a}_{\pm} = \frac{1}{\sqrt{2\hbar m\omega}}\left(\mp i\hat{p} + m\omega\hat{x}\right)$$</p>
+                    <p>Thus, </p>
+                    <p>$$\hat{a}_-\hat{a}_+ = \frac{1}{2\hbar m\omega}(i\hat{p} + m\omega\hat{x})(-i\hat{p} + m\omega\hat{x})$$</p>
+                    <p>$$= \frac{1}{2\hbar m\omega}\left[(i\hat{p})(-i\hat{p}) + (i\hat{p})(m\omega\hat{x}) + (m\omega\hat{x})(-i\hat{p}) + (m\omega\hat{x})^2\right]$$</p>
+                    <p>$$= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2 - im\omega(\hat{x}\hat{p} - \hat{p}\hat{x})\right] \quad \leftarrow \text{commutator}$$</p>
+                    <p>$$= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}[\hat{x}, \hat{p}]$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
