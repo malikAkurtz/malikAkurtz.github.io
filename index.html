@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malik Kurtz</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --surface: #141414;
+            --border: #222;
+            --text: #c8c8c8;
+            --text-muted: #666;
+            --accent: #e0e0e0;
+            --highlight: #ff6b35;
+            --mono: 'JetBrains Mono', monospace;
+            --serif: 'Source Serif 4', Georgia, serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--serif);
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px 120px;
+        }
+
+        /* ── Header ── */
+        header {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-family: var(--mono);
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--highlight);
+        }
+
+        /* ── Entry List ── */
+        .entries {
+            list-style: none;
+        }
+
+        .entry {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry:first-child {
+            padding-top: 0;
+        }
+
+        .entry-date {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .entry-title {
+            font-family: var(--mono);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .entry-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .entry-title a:hover {
+            color: var(--highlight);
+        }
+
+        .entry-body {
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .entry-body p {
+            margin-bottom: 14px;
+        }
+
+        .entry-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-tags {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        /* ── Full Post Page ── */
+        .post-content {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .post-content h2 {
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 40px 0 16px;
+            letter-spacing: 0.03em;
+        }
+
+        .post-content h3 {
+            font-family: var(--mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            margin: 32px 0 12px;
+        }
+
+        .post-content p {
+            margin-bottom: 18px;
+        }
+
+        .post-content code {
+            font-family: var(--mono);
+            font-size: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .post-content pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        .post-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .post-content blockquote {
+            border-left: 2px solid var(--highlight);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .post-content ul, .post-content ol {
+            padding-left: 24px;
+            margin-bottom: 18px;
+        }
+
+        .post-content li {
+            margin-bottom: 6px;
+        }
+
+        .post-content a {
+            color: var(--highlight);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: var(--highlight);
+        }
+
+        .post-content img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin: 24px 0;
+        }
+
+        /* ── Math (for KaTeX if you add it later) ── */
+        .math-block {
+            overflow-x: auto;
+            margin: 24px 0;
+            padding: 16px;
+            background: var(--surface);
+            border-radius: 4px;
+        }
+
+        /* ── Footer ── */
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px 80px;
+            }
+
+            header {
+                margin-bottom: 48px;
+            }
+
+            body {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Malik Kurtz</h1>
+            <p>math · quantum · systems</p>
+            <nav>
+                <a href="index.html">log</a>
+                <a href="about.html">about</a>
+                <a href="https://github.com/YOUR_USERNAME" target="_blank">github</a>
+            </nav>
+        </header>
+
+        <ul class="entries">
+
+            <!-- ════════════════════════════════════════════ -->
+            <!-- COPY THIS BLOCK FOR EACH NEW ENTRY          -->
+            <!-- ════════════════════════════════════════════ -->
+
+            <li class="entry">
+                <div class="entry-date">2026-03-15</div>
+                <div class="entry-title">Day One</div>
+                <div class="entry-body">
+                    <p>This is the first entry. I built this site because I needed a place to prove to myself that I'm accumulating something. Not for an audience — for me.</p>
+                    <p>Today I'm thinking about SFQ pulse control, the Blockhead argument, and the fact that optimizing how to spend time is itself spending time. The recursion has to bottom out somewhere. This is the base case.</p>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">meta</span>
+                    <span class="tag">quantum</span>
+                    <span class="tag">philosophy</span>
+                </div>
+            </li>
+
+            <!-- END ENTRY BLOCK -->
+
+        </ul>
+
+        <footer>
+            &copy; 2026 Malik Kurtz
+        </footer>
+    </div>
+</body>
+</html>
