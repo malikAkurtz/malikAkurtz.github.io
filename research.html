@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body, {delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
-        ]});"></script>
+    onload="renderMathInElement(document.body, {delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+    ], macros: {
+        '\\ket': '|#1\\rangle',
+        '\\bra': '\\langle #1|',
+        '\\braket': '\\langle #1|#2\\rangle'
+    }});"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -165,10 +169,10 @@
             <!-- ════════════════════════════════════════════ -->
 
             <li class="entry">
-                <div class="entry-date">2026-03-15</div>
+                <div class="entry-date">2026-03-14</div>
                 <div class="entry-title">Quantum Harmonic Oscillator</div>
                 <div class="entry-body">
-                    <p>This a summary from Griffiths textbook</p>
+                    <p>This a summary of chapter 2.3 of <em>Introduction to Quantum Mechanics</em>, by Griffiths</p>
                     <p>The potential energy for a classical harmonic oscillator takes the form:</p>
                     <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
                     <p>Equivalently</p>
@@ -204,10 +208,10 @@
                     <p>$$[\hat{x}, \hat{p}] = i\hbar$$</p>
                     <p>and we can now rewrite our equation as</p>
                     <p>$$\begin{aligned}
-                    \hat{a}_-\hat{a}_+ = \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}(i\hbar) \\
+                    \hat{a}_-\hat{a}_+ &= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}(i\hbar) \\
                     &= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] + \frac{1}{2} \\
-                    &= \frac{1}{\hbar\omega}\overbrace{\left(\frac{1}{2m}\left[\hat{p}^2 + (m\omega\hat{x})^2\right]\right)}^\hat{\mathcal{H}} + \frac{1}{2} \\
-                    &= \frac{1}{\hbar\omega}\hat{\mathcal{H}} + \frac{1}{2} \quad \iff \quad \hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_-\hat{a}_+ - \frac{1}{2}\right) \\
+                    &= \frac{1}{\hbar\omega}\overbrace{\left(\frac{1}{2m}\left[\hat{p}^2 + (m\omega\hat{x})^2\right]\right)}^{\hat{\mathcal{H}}} + \frac{1}{2} \\
+                    &= \frac{1}{\hbar\omega}\hat{\mathcal{H}} + \frac{1}{2} \quad \iff \quad \hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_-\hat{a}_+ - \frac{1}{2}\right)
                     \end{aligned}$$</p>
                     <p>Similarly,</p>
                     <p>$$\hat{a}_+\hat{a}_- = \frac{1}{\hbar\omega}\hat{\mathcal{H}} - \frac{1}{2} \quad \iff \quad \hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_+\hat{a}_- + \frac{1}{2}\right)$$</p>
@@ -229,6 +233,54 @@
 
             <li class="entry">
                 <div class="entry-date">2026-03-15</div>
+                <div class="entry-title">The Fock Basis</div>
+                <div class="entry-body">
+                    <p>First, it is important to note</p>
+                    <p>$$\psi = \|\psi\rangle$$</p>
+                    <p>this object is the physical wavefunction in the abstract sense, i.e. in no particular basis.</p>
+                    <p>We can then write</p>
+                    <p>$$\begin{aligned}
+                    |\psi\rangle &= \sum_{n=0}^{\infty} |\psi\rangle\langle\psi|\psi\rangle \\
+                    &\equiv \sum_{n=0}^{\infty} c_n|n\rangle_F, \quad |n\rangle_F = \mathbf{e_n} \\
+                    &= |\psi\rangle_F \\
+                    \end{aligned}$$</p>
+                    <p>Now, let us build $\hat(a)$ and $\hat(a^{\dagger}) in the Fock basis.</p>
+                    <p>We know: </p>
+                    <p>$$\hat{a}\,\psi_n = \sqrt{n}\;\psi_{n-1} \quad \text{and} \quad \hat{a}^\dagger\psi_n = \sqrt{n+1}\;\psi_{n+1}$$</p>
+                    <p>Which in the Fock basis reads:</p>
+                    <p>$$\hat{a}\ket{n} = \sqrt{n}\ket{n-1} \quad \text{and} \quad \hat{a}^\dagger\ket{n} = \sqrt{n+1}\ket{n+1}$$</p>
+                    <p>$$\implies \bra{m}\hat{a}\ket{n} = \sqrt{n}\braket{m}{n-1} = \sqrt{n}\;\delta_{m,n-1}$$</p>
+                    <p>and</p>
+                    <p>$$\bra{m}\hat{a}^\dagger\ket{n} = \sqrt{n+1}\braket{m}{n+1} = \sqrt{n+1}\;\delta_{m,n+1}$$</p>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">quantum</span>
+                    <span class="tag">transmon</span>
+                    <span class="tag">hamiltonian</span>
+                </div>
+            </li>
+
+            <li class="entry">
+                <div class="entry-date">2026-03-15</div>
+                <div class="entry-title">Approximating an $RY(\theta)$$ Unitary on a Harmonic Oscillator</div>
+                <div class="entry-body">
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.</p>
+                    <p>The transmon is a nonlinear oscillator. Its Hamiltonian in the charge basis is:</p>
+                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos\hat{\varphi}$$</p>
+                    <p>where $E_C$ is the charging energy, $E_J$ is the Josephson energy, $\hat{n}$ is the Cooper pair number operator, and $\hat{\varphi}$ is the superconducting phase. The transmon regime is defined by $E_J / E_C \gg 1$, which exponentially suppresses charge dispersion while only polynomially reducing anharmonicity.</p>
+                    <p>In the Fock (harmonic oscillator) approximation, we expand the cosine to fourth order:</p>
+                    <p>$$\hat{H} \approx \sqrt{8E_JE_C}\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) - \frac{E_C}{12}\left(\hat{a} + \hat{a}^\dagger\right)^4$$</p>
+                    <p>The first term gives us equispaced levels at frequency $\omega_q = \sqrt{8E_JE_C} - E_C$, and the quartic correction introduces the anharmonicity $\alpha \approx -E_C$ that makes the transmon usable as a qubit.</p>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">quantum</span>
+                    <span class="tag">transmon</span>
+                    <span class="tag">hamiltonian</span>
+                </div>
+            </li>
+
+            <li class="entry">
+                <div class="entry-date">2026-03-15</div>
                 <div class="entry-title">Transmon Hamiltonian</div>
                 <div class="entry-body">
                     <p>The transmon is a nonlinear oscillator. Its Hamiltonian in the charge basis is:</p>
@@ -237,8 +289,6 @@
                     <p>In the Fock (harmonic oscillator) approximation, we expand the cosine to fourth order:</p>
                     <p>$$\hat{H} \approx \sqrt{8E_JE_C}\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) - \frac{E_C}{12}\left(\hat{a} + \hat{a}^\dagger\right)^4$$</p>
                     <p>The first term gives us equispaced levels at frequency $\omega_q = \sqrt{8E_JE_C} - E_C$, and the quartic correction introduces the anharmonicity $\alpha \approx -E_C$ that makes the transmon usable as a qubit.</p>
-                    
-
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
