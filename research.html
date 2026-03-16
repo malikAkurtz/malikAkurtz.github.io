@@ -201,19 +201,21 @@
                     &= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}[\hat{x}, \hat{p}]
                     \end{aligned}$$</p>
                     <p>Now, we know that $$\hat{x}$$ and $$\hat{p}$$ are conjugate variables, so by definition,</p>
-                    <p>[\hat{x}, \hat{p}] = i\hbar</p>
+                    <p>$$[\hat{x}, \hat{p}] = i\hbar$$</p>
                     <p>and we can now rewrite our equation as</p>
-                    <p>$$\hat{a}_-\hat{a}_+ = \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}(i\hbar)$$</p>
-                    <p>$$= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] + \frac{1}{2}$$</p>
-                    <p>$$= \frac{1}{\hbar\omega}\overbrace{\left(\frac{1}{2m}\left[\hat{p}^2 + (m\omega\hat{x})^2\right]\right)}^{\mathcal{H}} + \frac{1}{2}$$</p>
-                    <p>$$= \frac{1}{\hbar\omega}\mathcal{H} + \frac{1}{2} \quad \iff \quad \mathcal{H} = \hbar\omega\left(\hat{a}_-\hat{a}_+ - \frac{1}{2}\right)$$</p>
+                    <p>$$\begin{aligned}
+                    \hat{a}_-\hat{a}_+ = \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] - \frac{i}{2\hbar}(i\hbar) \\
+                    &= \frac{1}{2\hbar m\omega}\left[\hat{p}^2 + (m\omega\hat{x})^2\right] + \frac{1}{2} \\
+                    &= \frac{1}{\hbar\omega}\overbrace{\left(\frac{1}{2m}\left[\hat{p}^2 + (m\omega\hat{x})^2\right]\right)}^\hat{\mathcal{H}} + \frac{1}{2} \\
+                    &= \frac{1}{\hbar\omega}\hat{\mathcal{H}} + \frac{1}{2} \quad \iff \quad \hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_-\hat{a}_+ - \frac{1}{2}\right) \\
+                    \end{aligned}$$</p>
                     <p>Similarly,</p>
-                    <p>$$\hat{a}_+\hat{a}_- = \frac{1}{\hbar\omega}\mathcal{H} - \frac{1}{2} \quad \iff \quad \mathcal{H} = \hbar\omega\left(\hat{a}_+\hat{a}_- + \frac{1}{2}\right)$$</p>
+                    <p>$$\hat{a}_+\hat{a}_- = \frac{1}{\hbar\omega}\hat{\mathcal{H}} - \frac{1}{2} \quad \iff \quad \hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_+\hat{a}_- + \frac{1}{2}\right)$$</p>
                     <p>Thus,</p>
-                    <p>$$\mathcal{H} = \hbar\omega\left(\hat{a}_{\pm}\hat{a}_{\mp} \pm \frac{1}{2}\right)$$</p>
+                    <p>$$\hat{\mathcal{H}} = \hbar\omega\left(\hat{a}_{\pm}\hat{a}_{\mp} \pm \frac{1}{2}\right)$$</p>
                     <p>SE now reads: </p>
                     <p>$$\hbar\omega\left(\hat{a}_{\pm}\hat{a}_{\mp} \pm \frac{1}{2}\right)\psi = E\psi$$</p>
-                    <p>$$\text{Lemma: } \mathcal{H}\psi = E\psi \implies \mathcal{H}(\hat{a}_+\psi) = (E + \hbar\omega)(\hat{a}_+\psi), \quad \mathcal{H}(\hat{a}_-\psi) = (E - \hbar\omega)(\hat{a}_-\psi)$$</p>
+                    <p>$$\text{Lemma: } \hat{\mathcal{H}}\psi = E\psi \implies \hat{\mathcal{H}}(\hat{a}_+\psi) = (E + \hbar\omega)(\hat{a}_+\psi), \quad \hat{\mathcal{H}}(\hat{a}_-\psi) = (E - \hbar\omega)(\hat{a}_-\psi)$$</p>
                     <p>$$\text{Lemma: } \hat{a}_+\psi_n = \sqrt{n+1}\;\psi_{n+1} \quad \text{and} \quad \hat{a}_-\psi_n = \sqrt{n}\;\psi_{n-1}$$</p>
                     <p>Also note, </p>
                     <p>$$\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}_+ - \hat{a}_-) \quad \text{and} \quad \hat{p} = i\sqrt{\frac{\hbar m\omega}{2}}(\hat{a}_+ - \hat{a}_-)$$</p>
