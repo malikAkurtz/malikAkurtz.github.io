@@ -259,10 +259,10 @@
                     <p>$$\begin{aligned}
                     \hat{\mathcal{H}}_0 &= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right) \\
                     &= \hbar\omega\left(\hat{n} + \tfrac{1}{2}\right) \\
-                    &equiv \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
+                    &=\equiv \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
                     \end{aligned}$$</p>
                     <p>Which is then diagonal in the Fock basis</p>
-                    <p>$$We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
+                    <p>We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
                     <p>$$\hat{\mathcal{H}}_0 \equiv [\mathcal{H}_0]_F = [V][\mathcal{H}_0]_E[V^{-1}] = [V][\mathcal{H}_0]_E[V^\dagger]$$</p>
                     <p>Since $\hat{\mathcal{H_0}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
                     <p>$$\text{and so the columns of } [V] \text{ are precisely the energy eigenstates (eigenvectors) of } [\mathcal{H}_0]_E \text{ in the Fock basis}$$</p>
@@ -319,7 +319,7 @@
                     &= [U_4][V]e^{-\frac{\theta}{2}[D]}[V^{-1}]\vec{e}_1 \\
                     &= [U_4][V]\begin{bmatrix} e^{-\frac{\theta}{2}\lambda_1} & 0 & 0 \\ 0 & e^{-\frac{\theta}{2}\lambda_2} & 0 \\ 0 & 0 & e^{-\frac{\theta}{2}\lambda_3} \end{bmatrix}[V^{-1}]\vec{e}_1 \\
                     &= [U_4]\ket{\psi}_{\text{1}} \quad \leftarrow \text{rotated a little more toward } \ket{1} \\
-                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}_0] \text{ is diagonal} \\
+                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}_0] \text{ is diagonal in the Fock basis for Harmonic Oscillator} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iT\hbar\omega(0+\frac{1}{2})/\hbar} & 0 & 0 \\ 0 & e^{-iT\hbar\omega(1+\frac{1}{2})/\hbar} & 0 \\ 0 & 0 & e^{-iT\hbar\omega(2+\frac{1}{2})/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iT\omega/2} & 0 & 0 \\ 0 & e^{-3iT\omega/2} & 0 \\ 0 & 0 & e^{-5iT\omega/2} \end{bmatrix}\ket{\psi_1} \\
@@ -328,6 +328,13 @@
                     &= \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{bmatrix}\ket{\psi_1} \\
                     &= -\ket{\psi_1} \quad \leftarrow \text{global phase}
                     \end{aligned}$$</p>
+                    <p>and so after 52 more (kick + free evolve $T$ sec), we get our final state:</p>
+
+                    <p>$$\ket{\psi_{\text{final}}} = \begin{bmatrix} -0.72905 \\ -0.5796 \\ -0.32582 \end{bmatrix}$$</p>
+
+                    <p>Now wait a second... What the hell? That's definitely not $\ket{+}$! Also look at how much leakage we have to $\ket{2}$! This "qubit" is thus useless.</p>
+
+                    <p>Enter... The Transmon</p>
 
                 </div>
                 <div class="entry-tags">
