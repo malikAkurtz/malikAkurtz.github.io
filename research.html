@@ -241,7 +241,7 @@
                     <p>We can then write</p>
                     <p>$$\begin{aligned}
                     |\psi\rangle &= \sum_{n=0}^{\infty} |n\rangle\langle n|\psi\rangle \\
-                    &\equiv \sum_{n=0}^{\infty} c_n|n\rangle, \quad |n\rangle = \mathbf{e_n} \\
+                    &=\equiv \sum_{n=0}^{\infty} c_n|n\rangle, \quad |n\rangle = \mathbf{e_n} \\
                     &= |\psi\rangle \\
                     \end{aligned}$$</p>
                     <p>Now, let us build $\hat{a}$ and $\hat{a^{\dagger}}$ in the Fock basis.</p>
@@ -313,8 +313,28 @@
                     <p>Lets apply the first kick, (in Fock basis)</p>
                     <p>$$\begin{aligned}
                     \ket{\psi_1} &= \hat{U}_4\hat{U}_\theta\ket{\psi_0} \\
-                    &\equiv U_4 \exp(-\tfrac{\theta}{2}[[a^\dagger] - [a]])\ket{\mathbf{e_1}}
+                    &\equiv [U_4]\exp\left(-\tfrac{\theta}{2}[a^\dagger] - [a]\right)\vec{e}_1 \\
+                    &= [U_4]\exp\left(-\tfrac{\theta}{2}([V][D][V^{-1}])\right)\vec{e}_1 \\
+                    &= [U_4][V]\exp\left(-\tfrac{\theta}{2}[D]\right)[V^{-1}]\vec{e}_1
                     \end{aligned}$$</p>
+
+                    <p>$$= [U_4][V]\begin{bmatrix} \exp\tfrac{\theta}{2}\lambda_1 & 0 & 0 \\ 0 & \exp\tfrac{\theta}{2}\lambda_2 & 0 \\ 0 & 0 & \exp\tfrac{\theta}{2}\lambda_3 \end{bmatrix}[V^{-1}]$$</p>
+
+                    <p>$$= [U_4]\begin{bmatrix} -0.82 & 0.41i & -0.41i \\ 0 & 0.71 & 0.71 \\ -0.58 & -0.58i & 0.58i \end{bmatrix}\begin{bmatrix} \exp\tfrac{\theta}{2}(0) & 0 & 0 \\ 0 & \exp\tfrac{\theta}{2}(1.73i) & 0 \\ 0 & 0 & \exp\tfrac{\theta}{2}(-1.73i) \end{bmatrix}\begin{bmatrix} -0.82 & 0 & -0.58 \\ -0.41i & 0.71 & 0.58i \\ 0.41i & 0.71 & -0.58i \end{bmatrix}\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$$</p>
+
+                    <p>$$= [U_4]\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix} \leftarrow \text{rotated a little more toward } \ket{1}$$</p>
+
+                    <p>$$= \exp(-i[\mathcal{H}_0]T/\hbar)\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix}, \quad [\mathcal{H}_0] \text{ is diagonal!}$$</p>
+
+                    <p>$$= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix}$$</p>
+
+                    <p>$$= \begin{bmatrix} e^{-iT(\hbar\omega(0+\frac{1}{2}))/\hbar} & 0 & 0 \\ 0 & e^{-iT(\hbar\omega(1+\frac{1}{2}))/\hbar} & 0 \\ 0 & 0 & e^{-iT(\hbar\omega(2+\frac{1}{2}))/\hbar} \end{bmatrix}\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix}$$</p>
+
+                    <p>$$= \begin{bmatrix} e^{-iT\omega/2} & 0 & 0 \\ 0 & e^{-3iT\omega/2} & 0 \\ 0 & 0 & e^{-5iT\omega/2} \end{bmatrix}\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix}$$</p>
+
+                    <p>$$= \begin{bmatrix} \exp(-i(\tfrac{2\pi}{\omega})\omega/2) & & \\ & \exp(-i\tfrac{3}{2}(\tfrac{2\pi}{\omega})\omega) & \\ & & \exp(-i\tfrac{5}{2}(\tfrac{2\pi}{\omega})\omega) \end{bmatrix}$$</p>
+
+                    <p>$$= \begin{bmatrix} e^{-i\pi} & 0 & 0 \\ 0 & e^{-3i\pi} & 0 \\ 0 & 0 & e^{-5i\pi} \end{bmatrix}\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix} = \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{bmatrix}\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix} = -\begin{bmatrix} 0.99 \\ 0.01 \\ 0 \end{bmatrix} \quad \leftarrow \text{global phase}$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
