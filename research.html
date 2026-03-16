@@ -240,7 +240,7 @@
                     <p>this object is the physical wavefunction in the abstract sense, i.e. in no particular basis.</p>
                     <p>We can then write</p>
                     <p>$$\begin{aligned}
-                    |\psi\rangle &= \sum_{n=0}^{\infty} |\psi\rangle\langle\psi|\psi\rangle \\
+                    |\psi\rangle &= \sum_{n=0}^{\infty} |n\rangle\langle n|\psi\rangle \\
                     &\equiv \sum_{n=0}^{\infty} c_n|n\rangle, \quad |n\rangle = \mathbf{e_n} \\
                     &= |\psi\rangle \\
                     \end{aligned}$$</p>
@@ -253,31 +253,20 @@
                     <p>and</p>
                     <p>$$\bra{m}\hat{a}^\dagger\ket{n} = \sqrt{n+1}\braket{m}{n+1} = \sqrt{n+1}\;\delta_{m,n+1}$$</p>
                     <p>In the Fock basis,</p>
-                    <p>$$\rightarrow \hat{a} \equiv \begin{bmatrix} 0 & \sqrt{1} & 0 & 0 & \cdots \\ 0 & 0 & \sqrt{2} & 0 & \cdots \\ 0 & 0 & 0 & \sqrt{3} & \\ \vdots & \vdots & \vdots & \vdots & \end{bmatrix}, \quad \hat{a}^\dagger \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ \sqrt{1} & 0 & 0 & 0 & \cdots \\ 0 & \sqrt{2} & 0 & 0 & \cdots \\ \vdots & \vdots & \sqrt{3} & \vdots & \end{bmatrix}$$</p>
-                    <p>$$\text{Now let } \hat{n} = \hat{a}^\dagger\hat{a} \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ 0 & 1 & 0 & 0 & \cdots \\ 0 & 0 & 2 & 0 & \cdots \\ 0 & 0 & 0 & 3 & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix}, \quad \text{call it the number operator}$$</p>
+                    <p>$$\hat{a} \equiv \begin{bmatrix} 0 & \sqrt{1} & 0 & 0 & \cdots \\ 0 & 0 & \sqrt{2} & 0 & \cdots \\ 0 & 0 & 0 & \sqrt{3} & \\ \vdots & \vdots & \vdots & \vdots & \end{bmatrix}, \quad \hat{a}^\dagger \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ \sqrt{1} & 0 & 0 & 0 & \cdots \\ 0 & \sqrt{2} & 0 & 0 & \cdots \\ \vdots & \vdots & \sqrt{3} & \vdots & \end{bmatrix}$$</p>
+                    <p>$$\text{Now let } \hat{n} = \hat{a}^\dagger\hat{a} \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ 0 & 1 & 0 & 0 & \cdots \\ 0 & 0 & 2 & 0 & \cdots \\ 0 & 0 & 0 & 3 & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [n]_F, \quad \text{call it the number operator}$$</p>
                     <p>Thus, </p>
                     <p>$$\begin{aligned}
                     \hat{\mathcal{H}}_0 &= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right) \\
-                    &= \hbar\omega\left(\hat{N} + \tfrac{1}{2}\right) \\
-                    &= \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
+                    &= \hbar\omega\left(\hat{n} + \tfrac{1}{2}\right) \\
+                    &equiv \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
                     \end{aligned}$$</p>
                     <p>Which is then diagonal in the Fock basis</p>
-                    <p>$$\text{We can now diagonalize } \hat{\mathcal{H}} \text{ to get}$$</p>
+                    <p>$$We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
                     <p>$$\hat{\mathcal{H}}_0 \equiv [\mathcal{H}_0]_F = [V][\mathcal{H}_0]_E[V^{-1}] = [V][\mathcal{H}_0]_E[V^\dagger]$$</p>
-                    <p>$$\text{since } \hat{\mathcal{H}} \text{ is Hermitian} \implies V \text{ unitary} \implies V^{-1} = V^\dagger$$</p>
+                    <p>Since $\hat{\mathcal{H_0}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
                     <p>$$\text{and so the columns of } [V] \text{ are precisely the energy eigenstates (eigenvectors) of } [\mathcal{H}_0]_E \text{ in the Fock basis}$$</p>
                     <p>$$\text{In the case of a harmonic oscillator, } [\mathcal{H}_0]_F \text{ is diagonal so } [V] = \mathbb{I} \text{, i.e the energy basis and Fock basis are identical.}$$</p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
@@ -291,12 +280,41 @@
                 <div class="entry-title">Approximating an $RY(\theta)$$ Unitary on a Harmonic Oscillator</div>
                 <div class="entry-body">
                     <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.</p>
-                    <p>The transmon is a nonlinear oscillator. Its Hamiltonian in the charge basis is:</p>
-                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos\hat{\varphi}$$</p>
-                    <p>where $E_C$ is the charging energy, $E_J$ is the Josephson energy, $\hat{n}$ is the Cooper pair number operator, and $\hat{\varphi}$ is the superconducting phase. The transmon regime is defined by $E_J / E_C \gg 1$, which exponentially suppresses charge dispersion while only polynomially reducing anharmonicity.</p>
-                    <p>In the Fock (harmonic oscillator) approximation, we expand the cosine to fourth order:</p>
-                    <p>$$\hat{H} \approx \sqrt{8E_JE_C}\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) - \frac{E_C}{12}\left(\hat{a} + \hat{a}^\dagger\right)^4$$</p>
-                    <p>The first term gives us equispaced levels at frequency $\omega_q = \sqrt{8E_JE_C} - E_C$, and the quartic correction introduces the anharmonicity $\alpha \approx -E_C$ that makes the transmon usable as a qubit.</p>
+                    <p>Lets now set ncut = 3 and see how we might apply an RY gate</p>
+                    <p>Set our initial state</p>
+                    <p>$$\psi_0 = \ket{\psi_0} \equiv \sum_{n=1}^{3} c_n\ket{\psi_n}_F = \sum_{n=1}^{3} c_n\ket{n}_F = \vec{e}_1$$</p>
+                    <p>Define qubit period in seconds $T = \frac{2\pi}{\omega}$</p>
+                    <p>Define free evolution unitaries:</p>
+                    <p>$$\hat{U}(t)\ket{\psi} = \exp(-i\hat{\mathcal{H}}_0 t/\hbar)\ket{\psi}$$</p>
+                    <p>let</p>
+                    <p>$$\begin{aligned}
+                    \hat{U}_1 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{T}{4})/\hbar) \\
+                    \hat{U}_2 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{2T}{4})/\hbar) \\
+                    \hat{U}_3 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{3T}{4})/\hbar) \\
+                    \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{4T}{4})/\hbar)
+                    \end{aligned}$$</p>
+                    <p>Fix our kick angle defined by our system</p>
+                    <p>$$\theta = C_c \Phi_0 \sqrt{2\omega / C}$$</p>
+                    <p>w/ $C_c$ = capacitance between oscillator and SFQ driver</p>
+                    <p>Define kick unitary operator</p>
+                    <p>$$\hat{U}_\theta = \exp(-\tfrac{\theta}{2}[\hat{a}^\dagger - \hat{a}])$$</p>
+                    <p>Then</p>
+                    <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
+                    <p>and</p>
+                    <p>$$\begin{aligned}
+                    \hat{RY}(\theta_{\text{target}}) &\approx \hat{RY}(n\theta) \qquad (n = \theta_{\text{target}} / \theta) \\
+                    &= \hat{RY}(\theta)^n \\
+                    &\approx (\hat{U}_4\hat{U}_\theta)^n \\
+                    &= (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^n
+                    \end{aligned}$$</p>
+                    <p>Let $\theta_{\text{target}} = \pi/2$ and $\theta = 0.03$ (typical) s.t $n = \frac{\pi}{2\theta} \approx 52$</p>
+                    <p>So</p>
+                    <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^{52}$$</p>
+                    <p>Lets apply the first kick, (in Fock basis)</p>
+                    <p>$$\begin{aligned}
+                    \ket{\psi_1} &= \hat{U}_4\hat{U}_\theta\ket{\psi_0} \\
+                    &\equiv U_4 \exp(-\tfrac{\theta}{2}[a^\dagger - a])\overset{\vec{e}_1}{\downarrow}\ket{\psi_0}
+                    \end{aligned}$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
@@ -309,12 +327,7 @@
                 <div class="entry-date">2026-03-15</div>
                 <div class="entry-title">Transmon Hamiltonian</div>
                 <div class="entry-body">
-                    <p>The transmon is a nonlinear oscillator. Its Hamiltonian in the charge basis is:</p>
-                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos\hat{\varphi}$$</p>
-                    <p>where $E_C$ is the charging energy, $E_J$ is the Josephson energy, $\hat{n}$ is the Cooper pair number operator, and $\hat{\varphi}$ is the superconducting phase. The transmon regime is defined by $E_J / E_C \gg 1$, which exponentially suppresses charge dispersion while only polynomially reducing anharmonicity.</p>
-                    <p>In the Fock (harmonic oscillator) approximation, we expand the cosine to fourth order:</p>
-                    <p>$$\hat{H} \approx \sqrt{8E_JE_C}\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right) - \frac{E_C}{12}\left(\hat{a} + \hat{a}^\dagger\right)^4$$</p>
-                    <p>The first term gives us equispaced levels at frequency $\omega_q = \sqrt{8E_JE_C} - E_C$, and the quartic correction introduces the anharmonicity $\alpha \approx -E_C$ that makes the transmon usable as a qubit.</p>
+                    <p>To paste</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
