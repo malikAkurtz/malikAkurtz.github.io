@@ -10,7 +10,7 @@
     onload="renderMathInElement(document.body, {delimiters: [
         {left: '$$', right: '$$', display: true},
         {left: '$', right: '$', display: false}
-    ], macros: {
+    ], throwOnError: false, macros: {
         '\\ket': ['|#1\\rangle', 1],
         '\\bra': ['\\langle #1|', 1],
         '\\braket': ['\\langle #1|#2\\rangle', 2]
