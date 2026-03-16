@@ -319,7 +319,7 @@
                     \end{aligned}$$</p>
 
                     <p>$$\begin{aligned}
-                    \ket{\psi_1} &= \hat{U}_4\hat{U}_\theta\ket{\psi_0} \\
+                    \ket{\psi_2} &= \hat{U}_4\hat{U}_\theta\ket{\psi_0} \\
                     &\equiv [U_4]e^{-\frac{\theta}{2}([a^\dagger] - [a])}\vec{e}_1 \\
                     &= [U_4]e^{-\frac{\theta}{2}[V][D][V^{-1}]}\vec{e}_1 \\
                     &= [U_4][V]e^{-\frac{\theta}{2}[D]}[V^{-1}]\vec{e}_1
@@ -327,17 +327,17 @@
 
                     <p>$$= [U_4][V]\begin{bmatrix} e^{-\frac{\theta}{2}\lambda_1} & 0 & 0 \\ 0 & e^{-\frac{\theta}{2}\lambda_2} & 0 \\ 0 & 0 & e^{-\frac{\theta}{2}\lambda_3} \end{bmatrix}[V^{-1}]\vec{e}_1$$</p>
 
-                    <p>$$= [U_4]\ket{\psi}_{\text{kicked}} \quad \leftarrow \text{rotated a little more toward } \ket{1}$$</p>
+                    <p>$$= [U_4]\ket{\psi}_{\text{1}} \quad \leftarrow \text{rotated a little more toward } \ket{1}$$</p>
 
                     <p>$$\begin{aligned}
-                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi}_{\text{kicked}}, \quad [\mathcal{H}_0] \text{ is diagonal} \\
-                    &= \begin{bmatrix} e^{-iTE_0/\hbar} & & \\ & e^{-iTE_1/\hbar} & \\ & & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= \begin{bmatrix} e^{-iT\hbar\omega(0+\frac{1}{2})/\hbar} & & \\ & e^{-iT\hbar\omega(1+\frac{1}{2})/\hbar} & \\ & & e^{-iT\hbar\omega(2+\frac{1}{2})/\hbar} \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= \begin{bmatrix} e^{-iT\omega/2} & & \\ & e^{-3iT\omega/2} & \\ & & e^{-5iT\omega/2} \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= \begin{bmatrix} e^{-i\frac{2\pi}{\omega}\frac{\omega}{2}} & & \\ & e^{-i\frac{3}{2}\frac{2\pi}{\omega}\omega} & \\ & & e^{-i\frac{5}{2}\frac{2\pi}{\omega}\omega} \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= \begin{bmatrix} e^{-i\pi} & & \\ & e^{-3i\pi} & \\ & & e^{-5i\pi} \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= \begin{bmatrix} -1 & & \\ & -1 & \\ & & -1 \end{bmatrix}\ket{\psi}_{\text{kicked}} \\
-                    &= -\ket{\psi}_{\text{kicked}} \quad \leftarrow \text{global phase}
+                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi}_{1}, \quad [\mathcal{H}_0] \text{ is diagonal} \\
+                    &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi}_{1} \\
+                    &= \begin{bmatrix} e^{-iT\hbar\omega(0+\frac{1}{2})/\hbar} & 0 & 0 \\ 0 & e^{-iT\hbar\omega(1+\frac{1}{2})/\hbar} & 0 \\ 0 & 0 & e^{-iT\hbar\omega(2+\frac{1}{2})/\hbar} \end{bmatrix}\ket{\psi}_{1} \\
+                    &= \begin{bmatrix} e^{-iT\omega/2} & 0 & 0 \\ 0 & e^{-3iT\omega/2} & 0 \\ 0 & 0 & e^{-5iT\omega/2} \end{bmatrix}\ket{\psi}_{1} \\
+                    &= \begin{bmatrix} e^{-i\frac{2\pi}{\omega}\frac{\omega}{2}} & 0 & 0 \\ 0 & e^{-i\frac{3}{2}\frac{2\pi}{\omega}\omega} & 0 \\ 0 & 0 & e^{-i\frac{5}{2}\frac{2\pi}{\omega}\omega} \end{bmatrix}\ket{\psi}_{1} \\
+                    &= \begin{bmatrix} e^{-i\pi} & 0 & 0 \\ 0 & e^{-3i\pi} & 0 \\ 0 & 0 & e^{-5i\pi} \end{bmatrix}\ket{\psi}_{1} \\
+                    &= \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{bmatrix}\ket{\psi}_{1} \\
+                    &= -\ket{\psi}_{1} \quad \leftarrow \text{global phase}
                     \end{aligned}$$</p>
                 </div>
                 <div class="entry-tags">
