@@ -236,22 +236,48 @@
                 <div class="entry-title">The Fock Basis</div>
                 <div class="entry-body">
                     <p>First, it is important to note</p>
-                    <p>$$\psi = \|\psi\rangle$$</p>
+                    <p>$$\psi = \ket{\psi}$$</p>
                     <p>this object is the physical wavefunction in the abstract sense, i.e. in no particular basis.</p>
                     <p>We can then write</p>
                     <p>$$\begin{aligned}
                     |\psi\rangle &= \sum_{n=0}^{\infty} |\psi\rangle\langle\psi|\psi\rangle \\
-                    &\equiv \sum_{n=0}^{\infty} c_n|n\rangle_F, \quad |n\rangle_F = \mathbf{e_n} \\
-                    &= |\psi\rangle_F \\
+                    &\equiv \sum_{n=0}^{\infty} c_n|n\rangle, \quad |n\rangle = \mathbf{e_n} \\
+                    &= |\psi\rangle \\
                     \end{aligned}$$</p>
-                    <p>Now, let us build $\hat(a)$ and $\hat(a^{\dagger}) in the Fock basis.</p>
+                    <p>Now, let us build $\hat{a}$ and $\hat{a^{\dagger}}$ in the Fock basis.</p>
                     <p>We know: </p>
                     <p>$$\hat{a}\,\psi_n = \sqrt{n}\;\psi_{n-1} \quad \text{and} \quad \hat{a}^\dagger\psi_n = \sqrt{n+1}\;\psi_{n+1}$$</p>
-                    <p>Which in the Fock basis reads:</p>
+                    <p>Equivalently:</p>
                     <p>$$\hat{a}\ket{n} = \sqrt{n}\ket{n-1} \quad \text{and} \quad \hat{a}^\dagger\ket{n} = \sqrt{n+1}\ket{n+1}$$</p>
                     <p>$$\implies \bra{m}\hat{a}\ket{n} = \sqrt{n}\braket{m}{n-1} = \sqrt{n}\;\delta_{m,n-1}$$</p>
                     <p>and</p>
                     <p>$$\bra{m}\hat{a}^\dagger\ket{n} = \sqrt{n+1}\braket{m}{n+1} = \sqrt{n+1}\;\delta_{m,n+1}$$</p>
+                    <p>In the Fock basis,</p>
+                    <p>$$\rightarrow \hat{a} \equiv \begin{bmatrix} 0 & \sqrt{1} & 0 & 0 & \cdots \\ 0 & 0 & \sqrt{2} & 0 & \cdots \\ 0 & 0 & 0 & \sqrt{3} & \\ \vdots & \vdots & \vdots & \vdots & \end{bmatrix}, \quad \hat{a}^\dagger \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ \sqrt{1} & 0 & 0 & 0 & \cdots \\ 0 & \sqrt{2} & 0 & 0 & \cdots \\ \vdots & \vdots & \sqrt{3} & \vdots & \end{bmatrix}$$</p>
+                    <p>$$\text{Now let } \hat{n} = \hat{a}^\dagger\hat{a} \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ 0 & 1 & 0 & 0 & \cdots \\ 0 & 0 & 2 & 0 & \cdots \\ 0 & 0 & 0 & 3 & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix}, \quad \text{call it the number operator}$$</p>
+                    <p>Thus, </p>
+                    <p>$$\begin{aligned}
+                    \hat{\mathcal{H}}_0 &= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right) \\
+                    &= \hbar\omega\left(\hat{N} + \tfrac{1}{2}\right) \\
+                    &= \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
+                    \end{aligned}$$</p>
+                    <p>Which is then diagonal in the Fock basis</p>
+                    <p>$$\text{We can now diagonalize } \hat{\mathcal{H}} \text{ to get}$$</p>
+                    <p>$$\hat{\mathcal{H}}_0 \equiv [\mathcal{H}_0]_F = [V][\mathcal{H}_0]_E[V^{-1}] = [V][\mathcal{H}_0]_E[V^\dagger]$$</p>
+                    <p>$$\text{since } \hat{\mathcal{H}} \text{ is Hermitian} \implies V \text{ unitary} \implies V^{-1} = V^\dagger$$</p>
+                    <p>$$\text{and so the columns of } [V] \text{ are precisely the energy eigenstates (eigenvectors) of } [\mathcal{H}_0]_E \text{ in the Fock basis}$$</p>
+                    <p>$$\text{In the case of a harmonic oscillator, } [\mathcal{H}_0]_F \text{ is diagonal so } [V] = \mathbb{I} \text{, i.e the energy basis and Fock basis are identical.}$$</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
