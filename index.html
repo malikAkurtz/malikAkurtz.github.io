@@ -396,9 +396,9 @@
 
                     <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)$$</p>
 
-                    <p>Lemma: $[\hat{n}, \hat{\varphi}] = -i \implies e^{i\hat{\varphi}}\ket{n} = \ket{n+1}$ and $e^{-i\hat{\varphi}}\ket{n} = \ket{n-1}$ in the charge basis</p>
+                    <p>Lemma: $[\hat{n}, \hat{\varphi}] = -i \implies e^{i\hat{\varphi}}\ket{n} = \ket{n+1}$ and $e^{-i\hat{\varphi}}\ket{n} = \ket{n-1}$</p>
 
-                    <p>Thus, in the charge basis:</p>
+                    <p>Thus,</p>
 
                     <p>$$\begin{aligned}
                     -E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\ket{n} &= -\frac{E_J}{2}\left(e^{i\hat{\varphi}}\ket{n} + e^{-i\hat{\varphi}}\ket{n}\right) \\
@@ -407,7 +407,7 @@
 
                     <p>$$\implies \bra{m}\left[-E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\right]\ket{n} = -\frac{E_J}{2}\left(\braket{m}{n+1} + \braket{m}{n-1}\right)$$</p>
 
-                    <p>$\implies$ populates super and subdiagonal with $-\frac{E_J}{2} such that$</p>
+                    <p>and since $\hat{n}$ is diagonal in the charge basis, we get</p>
                     <p>$$\hat{H} \equiv \begin{bmatrix} 0 & -\frac{E_J}{2} & 0 & 0 & \cdots \\ -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & \cdots \\ 0 & -\frac{E_J}{2} & 16E_C & -\frac{E_J}{2} & \cdots \\ 0 & 0 & -\frac{E_J}{2} & 36E_C & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
 
                     <p>Now diagonalize $\hat{H}$ in the charge basis:</p>
