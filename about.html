@@ -135,6 +135,39 @@
             header { margin-bottom: 48px; }
             body { font-size: 16px; }
         }
+
+        html { scroll-behavior: smooth; }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--highlight);
+            z-index: 999;
+            transition: width 0.08s linear;
+            box-shadow: 0 0 8px var(--highlight);
+        }
+
+        header h1::after {
+            content: '_';
+            color: var(--highlight);
+            animation: blink 1.2s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        nav a.nav-active { color: var(--accent); }
+        nav a.nav-active::before { content: '› '; color: var(--highlight); }
     </style>
 </head>
 <body>
@@ -161,5 +194,19 @@
             &copy; 2026 Malik Kurtz
         </footer>
     </div>
+    <script>
+        const bar = document.createElement('div');
+        bar.id = 'progress-bar';
+        document.body.prepend(bar);
+        window.addEventListener('scroll', () => {
+            const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            bar.style.width = Math.min(pct, 100) + '%';
+        });
+
+        const page = location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('nav a').forEach(a => {
+            if (a.getAttribute('href') === page) a.classList.add('nav-active');
+        });
+    </script>
 </body>
 </html>

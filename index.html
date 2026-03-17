@@ -140,6 +140,108 @@
             header { margin-bottom: 48px; }
             body { font-size: 16px; }
         }
+
+        /* ── Smooth scroll ── */
+        html { scroll-behavior: smooth; }
+
+        /* ── Background dot grid ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ── Scroll progress bar ── */
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--highlight);
+            z-index: 999;
+            transition: width 0.08s linear;
+            box-shadow: 0 0 8px var(--highlight);
+        }
+
+        /* ── Blinking cursor on name ── */
+        header h1::after {
+            content: '_';
+            color: var(--highlight);
+            animation: blink 1.2s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ── Active nav link ── */
+        nav a.nav-active { color: var(--accent); }
+        nav a.nav-active::before { content: '› '; color: var(--highlight); }
+
+        /* ── Entry reveal animation ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .entry {
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards;
+            position: relative;
+        }
+
+        /* ── Entry hover left-accent ── */
+        .entry::before {
+            content: '';
+            position: absolute;
+            left: -20px; top: 0; bottom: 0;
+            width: 2px;
+            background: var(--highlight);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.25s ease;
+            box-shadow: 0 0 6px var(--highlight);
+        }
+        .entry:hover::before { transform: scaleY(1); }
+
+        /* ── Tag styles ── */
+        .tag {
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .tag:hover, .tag.tag-active {
+            color: var(--highlight);
+            border-color: var(--highlight);
+        }
+
+        /* ── Tag filter bar ── */
+        #tag-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        #tag-filter .tag { font-size: 12px; padding: 3px 10px; }
+        #tag-filter .tag.tag-active {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* ── KaTeX display blocks ── */
+        .katex-display {
+            background: var(--surface);
+            border-left: 2px solid var(--border);
+            padding: 10px 16px !important;
+            border-radius: 0 3px 3px 0;
+            margin: 16px 0 !important;
+            overflow-x: auto;
+            transition: border-color 0.2s;
+        }
+        .katex-display:hover { border-left-color: var(--highlight); }
+
+        /* ── Hidden entries (tag filter) ── */
+        .entry.filtered { display: none; }
     </style>
 </head>
 <body>
@@ -153,6 +255,8 @@
                 <a href="philosophy.html">philosophy</a>
             </nav>
         </header>
+
+        <div id="tag-filter"></div>
 
         <ul class="entries">
 
@@ -508,6 +612,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // KaTeX
             renderMathInElement(document.body, {
                 delimiters: [
                     {left: '$$', right: '$$', display: true},
@@ -519,6 +624,54 @@
                     '\\bra': '\\langle #1|',
                     '\\braket': '\\langle #1|#2\\rangle'
                 }
+            });
+
+            // Scroll progress bar
+            const bar = document.createElement('div');
+            bar.id = 'progress-bar';
+            document.body.prepend(bar);
+            window.addEventListener('scroll', () => {
+                const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                bar.style.width = Math.min(pct, 100) + '%';
+            });
+
+            // Active nav
+            const page = location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('nav a').forEach(a => {
+                if (a.getAttribute('href') === page) a.classList.add('nav-active');
+            });
+
+            // Staggered entry animation
+            document.querySelectorAll('.entry').forEach((el, i) => {
+                el.style.animationDelay = `${i * 0.08}s`;
+            });
+
+            // Build tag filter bar from all tags in entries
+            const allTags = new Set();
+            document.querySelectorAll('.entry .tag').forEach(t => allTags.add(t.textContent.trim()));
+            const filterBar = document.getElementById('tag-filter');
+            let activeTag = null;
+            allTags.forEach(tagVal => {
+                const btn = document.createElement('span');
+                btn.className = 'tag';
+                btn.textContent = tagVal;
+                btn.addEventListener('click', () => {
+                    if (activeTag === tagVal) {
+                        // Deselect
+                        activeTag = null;
+                        btn.classList.remove('tag-active');
+                        document.querySelectorAll('.entry').forEach(e => e.classList.remove('filtered'));
+                    } else {
+                        activeTag = tagVal;
+                        filterBar.querySelectorAll('.tag').forEach(b => b.classList.remove('tag-active'));
+                        btn.classList.add('tag-active');
+                        document.querySelectorAll('.entry').forEach(e => {
+                            const tags = [...e.querySelectorAll('.tag')].map(t => t.textContent.trim());
+                            e.classList.toggle('filtered', !tags.includes(tagVal));
+                        });
+                    }
+                });
+                filterBar.appendChild(btn);
             });
         });
     </script>
