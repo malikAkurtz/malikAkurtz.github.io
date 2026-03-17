@@ -376,7 +376,9 @@
 
                     <p>Now, $Q = 2en$, $n$ is # of Cooper pairs</p>
 
-                    <p>So $\frac{\hat{Q}^2}{2C} = \frac{4e^2\hat{n}^2}{2C} = 4E_C\hat{n}^2$, call $\hat{n}$ the charge operator</p>
+                    <p>So</p>
+                    <p>$$\frac{\hat{Q}^2}{2C} = \frac{4e^2\hat{n}^2}{2C} = 4E_C\hat{n}^2$$</p>
+                    <p>call $\hat{n}$ the charge operator</p>
 
                     <p>Now</p>
 
@@ -393,6 +395,19 @@
                     <p>So $\hat{H}$ can also be written as</p>
 
                     <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)$$</p>
+
+                    <p>Lemma: $[\hat{n}, \hat{\varphi}] = -i \implies e^{i\hat{\varphi}}\ket{n} = \ket{n+1}$ and $e^{-i\hat{\varphi}}\ket{n} = \ket{n-1}$ in the charge basis</p>
+
+                    <p>Thus, in the charge basis:</p>
+
+                    <p>$$\begin{aligned}
+                    -E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\ket{n} &= -\frac{E_J}{2}\left(e^{i\hat{\varphi}}\ket{n} + e^{-i\hat{\varphi}}\ket{n}\right) \\
+                    &= -\frac{E_J}{2}\left(\ket{n+1} + \ket{n-1}\right)
+                    \end{aligned}$$</p>
+
+                    <p>$$\implies \bra{m}\left[-E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\right]\ket{n} = -\frac{E_J}{2}\left(\braket{m}{n+1} + \braket{m}{n-1}\right)$$</p>
+
+                    <p>$\implies$ populates super and subdiagonal with $-\frac{E_J}{2}$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
