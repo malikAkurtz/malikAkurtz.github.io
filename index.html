@@ -483,10 +483,14 @@
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix} \\
                     &= \begin{bmatrix} \alpha e^{-iTE_0/\hbar} \\ \beta e^{-iTE_1/\hbar} \\ \gamma e^{-iTE_2/\hbar} \end{bmatrix} \\
-
+                    &= e^{-iTE_1/\hbar} = e^{-iTE_0/\hbar} \cdot e^{-iT(E_1 - E_0)/\hbar} = e^{-iTE_0/\hbar} \cdot e^{-i2\pi} = e^{-iTE_0/\hbar} \\
+                    &= e^{-iTE_0/\hbar}\begin{bmatrix} \alpha \\ \beta \\ \gamma e^{-iT(E_2 - E_0)/\hbar} \end{bmatrix} \\
                     \end{aligned}$$</p>
-                    <p>By construction, </p>
-                    <p>$$E_1 - E_0 = \hbar\omega_q, \quad E_2 - E_1 = \hbar\omega_q + \alpha \approx -E_C$$</p>
+                    <p>The global phase $e^{-iTE_0/\hbar}$ is unphysical. But the $\ket{2}$ component picks up an extra phase $e^{-iT(E_2 - E_0)/\hbar} \neq 1$, because $E_2 - E_0 = 2\hbar\omega_q + \alpha \neq 2\hbar\omega_q$.</p>
+
+                    <p>That residual phase on $\ket{2}$ is the anharmonicity doing its job — it rotates the leakage component relative to the qubit subspace, which is exactly what prevents the unbounded leakage accumulation we saw in the harmonic oscillator.</p>
+
+                    <p>The free evolution is no longer $\approx -I$ — it selectively phases the leakage level while leaving the computational subspace untouched.</p>
                 </div> 
                 <div class="entry-tags">
                     <span class="tag">meta</span>
