@@ -409,6 +409,30 @@
 
                     <p>$\implies$ populates super and subdiagonal with $-\frac{E_J}{2} such that$</p>
                     <p>$$\hat{H} \equiv \begin{bmatrix} 0 & -\frac{E_J}{2} & 0 & 0 & \cdots \\ -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & \cdots \\ 0 & -\frac{E_J}{2} & 16E_C & -\frac{E_J}{2} & \cdots \\ 0 & 0 & -\frac{E_J}{2} & 36E_C & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
+
+                    <p>Now diagonalize $\hat{H}$ in the charge basis:</p>
+
+                    <p>$$[\mathcal{H}]_{\text{charge}} = [V][\mathcal{H}]_E[V^\dagger]$$</p>
+
+                    <p>where $[\mathcal{H}]_E = \text{diag}(E_0, E_1, E_2, \ldots)$ and the columns of $[V]$ are the energy eigenstates in the charge basis.</p>
+
+                    <p>The charge operator in the energy basis is then:</p>
+
+                    <p>$$[\hat{n}]_E = [V^\dagger][\hat{n}]_{\text{charge}}[V]$$</p>
+
+                    <p>Define the anharmonicity:</p>
+
+                    <p>$$\alpha = (E_2 - E_1) - (E_1 - E_0)$$</p>
+
+                    <p>the qubit frequency:</p>
+
+                    <p>$$f_q = \frac{E_1 - E_0}{h}$$</p>
+
+                    <p>and the angular frequency:</p>
+
+                    <p>$$\omega_q = 2\pi f_q$$</p>
+
+                    <p>Note: unlike the harmonic oscillator, $[\mathcal{H}]_{\text{charge}}$ is <em>not</em> diagonal, so $[V] \neq \mathbb{I}$ — the energy basis and charge basis are distinct.</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
