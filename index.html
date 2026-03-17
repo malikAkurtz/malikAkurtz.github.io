@@ -8,6 +8,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
     <style>
         :root {
             --bg: #0c0c0c;
@@ -242,6 +243,84 @@
 
         /* ── Hidden entries (tag filter) ── */
         .entry.filtered { display: none; }
+
+        /* ── Code toggle panels ── */
+        .code-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            letter-spacing: 0.03em;
+        }
+        .code-toggle::before {
+            content: '$';
+            color: var(--highlight);
+            margin-right: 2px;
+        }
+        .code-toggle:hover {
+            color: var(--accent);
+            border-color: #444;
+        }
+        .code-toggle .chevron {
+            display: inline-block;
+            transition: transform 0.2s ease;
+            color: var(--highlight);
+            font-size: 10px;
+        }
+        .code-panel {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.25s ease;
+            margin-top: 0;
+            border-left: 2px solid var(--border);
+            border-radius: 0 3px 3px 0;
+        }
+        .code-panel.open {
+            max-height: 900px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+        .code-panel-header {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            background: #111;
+            padding: 6px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .code-panel-header::before {
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--highlight);
+            flex-shrink: 0;
+        }
+        .code-panel pre[class*="language-"] {
+            margin: 0 !important;
+            border-radius: 0 !important;
+            background: var(--surface) !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .code-panel pre code {
+            font-size: 12px !important;
+            line-height: 1.6 !important;
+        }
     </style>
 </head>
 <body>
@@ -324,6 +403,29 @@
                     <span class="tag">transmon</span>
                     <span class="tag">hamiltonian</span>
                 </div>
+                <button class="code-toggle"><span class="chevron">▶</span> cat HarmonicOscillator.py</button>
+                <div class="code-panel">
+                    <div class="code-panel-header">HarmonicOscillator.py</div>
+                    <pre><code class="language-python">class HarmonicOscillator(QuantumOscillator):
+    def __init__(self, mass: float, angular_frequency: float, n_cut: int):
+        self.mass              = mass
+        self.angular_frequency = angular_frequency
+
+        # Build a_hat and a_hat_dagger in the Fock basis
+        self.annihilation, self.creation = QuantumOscillator.create_ladder_operators(n_cut=n_cut)
+
+        # Number operator: n_hat = a_hat_dagger @ a_hat
+        self.n = Operator(
+            basis_to_matrix={"fock": self.creation["fock"] @ self.annihilation["fock"]}
+        )
+
+        # Hamiltonian: H0 = hbar * omega * (n_hat + 0.5 * I)
+        self.H0 = Operator(
+            basis_to_matrix={"fock": hbar * angular_frequency * (self.n["fock"] + (0.5 * np.eye(n_cut)))}
+        )
+
+        self.energies, self.energy_states = np.linalg.eigh(self.H0["fock"])</code></pre>
+                </div>
             </li>
 
             <li class="entry">
@@ -367,6 +469,37 @@
                     <span class="tag">quantum</span>
                     <span class="tag">transmon</span>
                     <span class="tag">hamiltonian</span>
+                </div>
+                <button class="code-toggle"><span class="chevron">▶</span> cat QuantumOscillator.py</button>
+                <div class="code-panel">
+                    <div class="code-panel-header">QuantumOscillator.py + Operator.py</div>
+                    <pre><code class="language-python"># QuantumOscillator.py
+@staticmethod
+def create_ladder_operators(n_cut: int):
+    fock_annihilation_matrix = np.zeros((n_cut, n_cut))
+
+    for m in range(n_cut):
+        for n in range(n_cut):
+            if m == (n - 1):          # &lt;m|a|n&gt; = sqrt(n) * delta_{m, n-1}
+                fock_annihilation_matrix[m][n] = np.sqrt(n)
+
+    annihilation = Operator(basis_to_matrix={"fock": fock_annihilation_matrix})
+    creation     = Operator(basis_to_matrix={"fock": fock_annihilation_matrix.conj().T})
+
+    return annihilation, creation
+
+
+# Operator.py
+class Operator():
+    """An Operator is a matrix in a chosen basis."""
+    def __init__(self, basis_to_matrix: dict):
+        self.basis_to_matrix = basis_to_matrix
+
+    def __getitem__(self, key):        # op["fock"] -> matrix
+        return self.basis_to_matrix[key]
+
+    def __setitem__(self, key, value):
+        self.basis_to_matrix[key] = value</code></pre>
                 </div>
             </li>
 
@@ -438,9 +571,42 @@
                     <span class="tag">transmon</span>
                     <span class="tag">hamiltonian</span>
                 </div>
+                <button class="code-toggle"><span class="chevron">▶</span> cat SFQDriver.py</button>
+                <div class="code-panel">
+                    <div class="code-panel-header">SFQDriver.py + System.py</div>
+                    <pre><code class="language-python"># SFQDriver.py  (Fock basis path)
+class SFQDriver():
+    def __init__(self, theta: float, oscillator: QuantumOscillator, basis: str):
+        self.theta = theta
+
+        # U_kick = exp((theta/2) * (a_dagger - a))
+        self.U_kick = Operator(
+            basis_to_matrix={basis: expm(
+                (theta / 2) * (oscillator.creation["fock"] - oscillator.annihilation["fock"])
+            )}
+        )
+
+    def apply_pulse(self, psi: Wavefunction):
+        return psi.apply(operator=self.U_kick)
+
+
+# System.py
+def RY(self, theta_target: float):
+    N = int(np.round(np.abs(theta_target) / self.sfq_driver.theta)) + 1
+
+    U = Operator({self.basis: np.eye(N=len(self.state[self.basis]))})
+    for _ in range(N):
+        self.state = self.sfq_driver.apply_pulse(self.state)       # kick
+        U[self.basis] = self.sfq_driver.U_kick[self.basis] @ U[self.basis]
+
+        self.free_evolve(duration=4)                               # free evolve T seconds
+        U[self.basis] = self.U_free_4[self.basis] @ U[self.basis]
+
+    return U, U_target</code></pre>
+                </div>
             </li>
 
-            
+
             <li class="entry">
                 <div class="entry-title">The Transmon, an Anharmonic Quantum Oscillator</div>
                 <div class="entry-body">
@@ -539,6 +705,38 @@
                     <span class="tag">transmon</span>
                     <span class="tag">hamiltonian</span>
                 </div>
+                <button class="code-toggle"><span class="chevron">▶</span> cat Transmon.py</button>
+                <div class="code-panel">
+                    <div class="code-panel-header">Transmon.py</div>
+                    <pre><code class="language-python">class Transmon(QuantumOscillator):
+    def __init__(self, charging_energy: float, EJ_EC: float, n_cut: int, basis: str):
+        self.EC = charging_energy
+        self.EJ = EJ_EC * self.EC            # Josephson energy
+        self.r  = (1/2) * (EJ_EC / 2)**(1/4) # charge zero-point fluctuation
+
+        # Charge operator (diagonal in charge basis)
+        self.n = Operator(
+            basis_to_matrix={"charge": np.diag([n for n in range(int(-(n_cut-1)/2), int((n_cut-1)/2) + 1)])}
+        )
+
+        # Kinetic energy: T = 4 * E_C * n^2
+        self.T = Operator(basis_to_matrix={"charge": 4 * self.EC * (self.n["charge"] ** 2)})
+
+        # Potential energy: V = -(E_J/2) * (e^{i*phi} + e^{-i*phi})  -> tridiagonal
+        self.V = Operator(basis_to_matrix={"charge": create_upper_lower(value=-self.EJ / 2, dim=n_cut)})
+
+        # Hamiltonian in charge basis (NOT diagonal -> must diagonalize)
+        self.H0 = Operator(basis_to_matrix={"charge": self.T["charge"] + self.V["charge"]})
+
+        # Diagonalize: columns of energy_states are eigenvectors in charge basis
+        self.energies, self.energy_states = np.linalg.eigh(self.H0["charge"])
+        self.H0["energy"] = np.diag(self.energies)
+
+        # Anharmonicity: alpha = (E2 - E1) - (E1 - E0)
+        self.anharmonicity     = (self.energies[2] - self.energies[1]) - (self.energies[1] - self.energies[0])
+        self.frequency         = (self.energies[1] - self.energies[0]) / h
+        self.angular_frequency = self.frequency * (2 * np.pi)</code></pre>
+                </div>
             </li>
 
             <li class="entry">
@@ -601,8 +799,45 @@
                     <span class="tag">transmon</span>
                     <span class="tag">hamiltonian</span>
                 </div>
+                <button class="code-toggle"><span class="chevron">▶</span> cat SFQDriver.py</button>
+                <div class="code-panel">
+                    <div class="code-panel-header">SFQDriver.py + Transmon.py + System.py</div>
+                    <pre><code class="language-python"># SFQDriver.py  (energy basis path)
+class SFQDriver():
+    def __init__(self, theta: float, oscillator: QuantumOscillator, basis: str):
+        self.theta = theta
+
+        if basis == "energy":
+            # theta' = theta / r,   r = 0.5 * (E_J/E_C / 2)^(1/4)
+            theta_prime = oscillator.theta_prime(theta)
+
+            # U_kick = exp(-i * (theta'/2) * n_hat_energy)
+            self.U_kick = Operator(
+                basis_to_matrix={basis: expm((-1j * theta_prime / 2) * oscillator.n["fock"])}
+            )
+
+
+# Transmon.py
+def theta_prime(self, theta):
+    return theta / self.r   # rescale by charge zero-point fluctuation
+
+
+# System.py
+def RY(self, theta_target: float):
+    N = int(np.round(np.abs(theta_target) / self.sfq_driver.theta)) + 1
+
+    U = Operator({self.basis: np.eye(N=len(self.state[self.basis]))})
+    for _ in range(N):
+        self.state = self.sfq_driver.apply_pulse(self.state)       # kick
+        U[self.basis] = self.sfq_driver.U_kick[self.basis] @ U[self.basis]
+
+        self.free_evolve(duration=4)                               # free evolve T seconds
+        U[self.basis] = self.U_free_4[self.basis] @ U[self.basis]
+
+    return U, U_target</code></pre>
+                </div>
             </li>
-            
+
 
         </ul>
 
@@ -610,6 +845,8 @@
             &copy; 2026 Malik Kurtz
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // KaTeX
@@ -625,6 +862,7 @@
                     '\\braket': '\\langle #1|#2\\rangle'
                 }
             });
+            Prism.highlightAll();
 
             // Scroll progress bar
             const bar = document.createElement('div');
@@ -644,6 +882,17 @@
             // Staggered entry animation
             document.querySelectorAll('.entry').forEach((el, i) => {
                 el.style.animationDelay = `${i * 0.08}s`;
+            });
+
+            // Code toggle panels
+            document.querySelectorAll('.code-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const panel = btn.nextElementSibling;
+                    const chevron = btn.querySelector('.chevron');
+                    const isOpen = panel.classList.toggle('open');
+                    btn.classList.toggle('open', isOpen);
+                    chevron.style.transform = isOpen ? 'rotate(90deg)' : '';
+                });
             });
 
             // Build tag filter bar from all tags in entries
