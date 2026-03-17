@@ -169,14 +169,14 @@
                     <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
                     <p>Equivalently</p>
                     <p>$$V(x) = \frac{1}{2}m\omega^{2}x^{2}, \quad \omega = \sqrt{\frac{k}{m}}$$</p>
-                    <p>The Time-Independent Schrodinger Equation (TISE) reads:</p>
+                    <p>The Time-Independent Schrodinger Equation (TISE) in the position basis reads:</p>
                     <p>$$\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2} + V(x)\psi(x) = E\psi(x)$$</p>
                     <p>and so we need to solve:</p>
-                    <p>$$\overbrace{\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}}^{T(x)} + \overbrace{\frac{m\omega^2 x^2}{2}}^{V(x)}\psi(x) = E\psi(x)$$</p>
+                    <p>$$\overbrace{\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}}^{T} + \overbrace{\frac{m\omega^2 x^2}{2}}^{V(x)}\psi(x) = E\psi(x)$$</p>
                     <p>Recall:</p>
-                    <p>$$T(x) = \frac{1}{2}mv^{2}$$</p>
+                    <p>$$T = \frac{1}{2}mv^{2}$$</p>
                     <p>and $$p = mv$$ so</p>
-                    <p>$$T(x) = \frac{1}{2}mv^{2} = \frac{m^{2}v^{2}}{2m} = \frac{p^{2}}{2m}$$</p>
+                    <p>$$T = \frac{1}{2}mv^{2} = \frac{m^{2}v^{2}}{2m} = \frac{p^{2}}{2m}$$</p>
                     <p>TISE now becomes:</p>
                     <p>$$\frac{p^2}{2m}\psi(x) + \frac{m\omega^2 x^2}{2}\psi(x) = E\psi(x)$$</p>
                     <p>$$\iff$$</p>
@@ -257,7 +257,7 @@
                     <p>We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
                     <p>$$\hat{\mathcal{H}}_0 \equiv [\mathcal{H}_0]_F = [V][\mathcal{H}_0]_E[V^{-1}] = [V][\mathcal{H}_0]_E[V^\dagger]$$</p>
                     <p>Since $\hat{\mathcal{H_0}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
-                    <p>and the columns of $[V]$ are the energy eigenstates/vectorseigenvectors of $[\mathcal{H}_0]_E$ in the Fock basis</p>
+                    <p>and the columns of $[V]$ are the energy eigenstates/vectors of $[\mathcal{H}_0]_E$ in the Fock basis</p>
                     <p>In the case of a harmonic oscillator, $[\mathcal{H}_0]_F$ is diagonal so $[V] = \mathbb{I}$</p>
                     <p>i.e the energy basis and Fock basis are identical.</p>
                 </div>
@@ -355,14 +355,14 @@
 
                     <p>A transmon can be parameterized by a charging energy, $E_C$, as 
                     well as a ratio $\frac{E_J}{E_C} \gg 1$, where E_J is the Josephson energy and</p>
-                    <p>$$E_C = \frac{(2e)^2}{2C}$$</p>
+                    <p>$$E_C = \frac{e^2}{2C}$$</p>
 
                     <p>The potential energy for the transmon then takes the form:</p>
-                    <p>$$V(x) = -E_J\cos{\varphi}, \quad \varphi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \frac{h}{2e}$$</p>
+                    <p>$$V(x) = -E_J\cos(\varphi), \quad \varphi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \frac{h}{2e}$$</p>
                     <p>That is, $\varphi$ is the dimensionless flux $\Phi$</p>
 
                     <p>TISE then reads:</p>
-                    <p>$$\frac{-\hbar^2}{2C}\frac{d^2\psi(\varphi)}{d\varphi^2} - E_J\cos{\varphi}\psi(\varphi) = E\psi(\varphi)$$</p>
+                    <p>$$\frac{-\hbar^2}{2C}\frac{d^2\psi(\varphi)}{d\varphi^2} - E_J\cos(\varphi)\psi(\varphi) = E\psi(\varphi)$$</p>
                     <p>Now, since </p>
                     <p>$$\begin{aligned}
                         \hat{p}^2 &= (-i\hbar\frac{d}{dx})^2 \\
@@ -372,7 +372,7 @@
                     \end{aligned}$$
                     </p>
                     <p>We get</p>
-                    <p>$$\frac{\hat{Q}^2}{2C}\psi - E_J\cos{\hat{\varphi}}\psi = E\psi$$</p>
+                    <p>$$\frac{\hat{Q}^2}{2C}\psi - E_J\cos(\hat{\varphi})\psi = E\psi$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
