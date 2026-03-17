@@ -169,7 +169,7 @@
                     <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
                     <p>Equivalently</p>
                     <p>$$V(x) = \frac{1}{2}m\omega^{2}x^{2}, \quad \omega = \sqrt{\frac{k}{m}}$$</p>
-                    <p>Thus, the Time-Independent Schrodinger Equation (TISE) reads:</p>
+                    <p>The Time-Independent Schrodinger Equation (TISE) reads:</p>
                     <p>$$\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2} + V(x)\psi(x) = E\psi(x)$$</p>
                     <p>and so we need to solve:</p>
                     <p>$$\overbrace{\frac{-\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}}^{T(x)} + \overbrace{\frac{m\omega^2 x^2}{2}}^{V(x)}\psi(x) = E\psi(x)$$</p>
@@ -289,7 +289,7 @@
                     <p>Fix the kick angle defined by our system</p>
                     <p>$$\theta = C_c \Phi_0 \sqrt{2\omega / C}$$</p>
                     <p>w/ $C_c$ = capacitance between oscillator and SFQ driver</p>
-                    <p>Define kick unitary operator</p>
+                    <p>Define the kick unitary operator</p>
                     <p>$$\hat{U}_\theta = \exp(-\tfrac{\theta}{2}[\hat{a}^\dagger - \hat{a}])$$</p>
                     <p>Then</p>
                     <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
@@ -302,7 +302,7 @@
                     \end{aligned}$$</p>
                     <p>Let $\theta_{\text{target}} = \pi/2$ and $\theta = 0.03$ (typical) s.t $n = \frac{\pi}{2\theta} \approx 52$</p>
                     <p>Also, let $m = C = 100\times10^{-15} F$ and $L = 10\times10^{-9} H$</p>
-                    <p>and define $k = \tfrac{1}{L}$ s.t. $\omega = \sqrt(\tfrac{k}{m}) = \tfrac{1}{\sqrt{LC}} rad/sec$</p> 
+                    <p>and define $k = \tfrac{1}{L}$ s.t. $\omega = \sqrt{\tfrac{k}{m}} = \tfrac{1}{\sqrt{LC}} rad/sec$</p> 
                     <p>So</p>
                     <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^{52}$$</p>
                     <p>Lets apply the first kick, (in Fock basis)</p>
@@ -339,12 +339,40 @@
                 </div>
             </li>
 
-            <!--
+            
             <li class="entry">
-                <div class="entry-date">2026-03-15</div>
-                <div class="entry-title">Transmon Hamiltonian</div>
+                <div class="entry-date">2026-03-16</div>
+                <div class="entry-title">The Transmon</div>
                 <div class="entry-body">
-                    <p>To paste</p>
+                    <p>Note that in a superconducting circuit, </p>
+                    <p>$$\text{Flux } \Phi \equiv \text{Position } x$$</p>
+                    <p>and</p>
+                    <p>$$\text{Charge } Q \equiv \text{Momentum } p$$</p>
+                    <p>in that</p>
+                    <p>$$[\Phi, Q] = i\hbar</p>
+                    <p>Also</p>
+                    <p>$$C \equiv m$$</p>
+
+                    <p>A transmon can be parameterized by a charging energy, $E_C$ as 
+                    well as a ratio $\frac{E_J}{E_C} \gg 1$, where E_J is the Josephson energy and</p>
+                    <p>$$E_C = \frac{e^2}{2C}$$</p>
+
+                    <p>The potential energy for the transmon then takes the form:</p>
+                    <p>$$V(x) = -E_J\cos{\phi}, \quad \phi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \frac{\h}{2e}</p>
+                    <p>That is, $\phi$ is the dimensionless flux $\Phi$</p>
+
+                    <p>TISE then reads:</p>
+                    <p>$$\frac{-\hbar^2}{2C}\frac{d^2\psi(\phi)}{d\phi^2} - E_J\cos{\phi}\psi(\phi) = E\psi(\phi)$$</p>
+                    <p>Now, since </p>$
+                    <p>$$\begin{aligned}
+                        \hat{p}^2 &= (-i\hbar\frac{d}{dx})^2 \\
+                        &= -\hbar^2 \frac{d^2}{dx^2} \\
+                        &\equiv -\hbar^2 \frac{d^2}{d\phi^2} \\
+                        &= \hat{Q}^2
+                    \end{aligned}$$
+                    </p>
+                    <p>We get</p>
+                    <p>$$\frac{\hat{Q}^2}{2C}\psi(\hat{\phi}) - E_J\cos{\hat{\phi}}\psi(\phi)$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
@@ -352,7 +380,7 @@
                     <span class="tag">hamiltonian</span>
                 </div>
             </li>
-            -->
+            
 
         </ul>
 
