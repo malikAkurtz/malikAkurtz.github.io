@@ -357,8 +357,8 @@
                     &\equiv \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
                     \end{aligned}$$</p>
                     <p>Which is then diagonal in the Fock basis</p>
-                    <p>We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
-                    <p>$$\hat{\mathcal{H}}_0 \equiv [\mathcal{H}_0]_F = [V][\mathcal{H}_0]_E[V^{-1}] = [V][\mathcal{H}_0]_E[V^\dagger]$$</p>
+                    <p>We can now diagonalize $\hat{\mathcal{H}_0}$ to get: </p>
+                    <p>$$[\mathcal{H}_0]_E = [V][\mathcal{H}_0]_F[V^{-1}] = [V][\mathcal{H}_0]_F[V^\dagger]$$</p>
                     <p>Since $\hat{\mathcal{H_0}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
                     <p>and the columns of $[V]$ are the energy eigenstates/vectors of $[\mathcal{H}_0]_E$ in the Fock basis</p>
                     <p>In the case of a harmonic oscillator, $[\mathcal{H}_0]_F$ is diagonal so $[V] = \mathbb{I}$</p>
@@ -389,7 +389,7 @@
                     \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{4T}{4})/\hbar)
                     \end{aligned}$$</p>
                     <p>Fix the kick angle defined by our system</p>
-                    <p>$$\theta = C_c \Phi_0 \sqrt{2\omega / C}$$</p>
+                    <p>$$\theta = C_c \Phi_0 \sqrt{2\omega / C}, \quad \Phi_0 = \frac{\h}{2e}$$</p>
                     <p>w/ $C_c$ = capacitance between oscillator and SFQ driver</p>
                     <p>Define the kick unitary operator</p>
                     <p>$$\hat{U}_\theta = \exp(-\tfrac{\theta}{2}[\hat{a}^\dagger - \hat{a}])$$</p>
@@ -458,7 +458,7 @@
                     <p>$$E_C = \frac{e^2}{2C}$$</p>
 
                     <p>The potential energy for the transmon then takes the form:</p>
-                    <p>$$V(x) = -E_J\cos(\varphi), \quad \varphi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \frac{\hbar}{2e}$$</p>
+                    <p>$$V(x) = -E_J\cos(\varphi), \quad \varphi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \tfrac{\h}{2e}$$</p>
                     <p>That is, $\varphi$ is the dimensionless flux $\Phi$</p>
 
                     <p>TISE then reads:</p>
