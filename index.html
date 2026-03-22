@@ -136,9 +136,9 @@
             overflow: visible;
         }
 
-        @keyframes glow-pulse {
-            0%, 100% { stroke: #2a2a2a; filter: drop-shadow(0 0 0px transparent); }
-            50%       { stroke: #555;    filter: drop-shadow(0 0 6px rgba(255,255,255,0.15)); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1);    opacity: 1; }
+            50%       { transform: scale(1.09); opacity: 0.85; }
         }
 
         .gnode { cursor: pointer; }
@@ -147,8 +147,10 @@
             fill: var(--surface);
             stroke: var(--border);
             stroke-width: 1.5;
-            transition: stroke 0.25s, fill 0.25s, filter 0.25s;
-            animation: glow-pulse 2.8s ease-in-out infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+            transition: stroke 0.25s, fill 0.25s;
+            animation: pulse 2.8s ease-in-out infinite;
         }
 
         .gnode:hover circle {
@@ -541,7 +543,10 @@
                     <p>Lemma: $\Delta n = \pm 1$</p>
 
                     <p>Define $\hat{T}^+$ such that</p>
-                    <p>$$\hat{T}^+|n\rangle = |n+1\rangle \iff \hat{T}^+ = \sum_n |n+1\rangle\langle n|$$</p>
+                    <p>$$\hat{T}^+|n\rangle = |n+1\rangle$$</p>
+                    <p>Now, </p>
+                    <p>$$\hat{T}^+ = \hat{T}^+\mathbb{I} = \hat{T}^+\sum_n |n\rangle\langle n| = \sum_n 
+                        \hat{T}^+|n\rangle\langle n| = \sum_n |n+1\rangle\langle n|$$</p>
                     <p>Then in the charge basis:</p>
                     <p>$$\langle m|\hat{T}^+|n\rangle = \langle m|n+1\rangle = \delta_{m,n+1}$$</p>
 
