@@ -562,21 +562,32 @@
                     <p>$$|\theta\rangle = \sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle, \quad \theta \in [0, 2\pi)$$</p>
 
                     <p>We want to show that: </p>
-                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta$$</p>
+                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = |m\rangle$$</p>
                     <p>So we expand, </p>
                     <p>$$\begin{aligned}
-                        \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta &= \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}\sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle\,d\theta \\
-                        &= \sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta
-                        \end{aligned}$$
-                    </p>
+                    \frac{1}{2\pi}e^{-im\theta}|\theta\rangle &= \frac{1}{2\pi}e^{-im\theta}\sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle
+                    \end{aligned}$$</p>
+                    <p>Integrate both sides:</p>
+                    <p>$$\begin{aligned}
+                    \int_0^{2\pi}\frac{1}{2\pi}e^{-im\theta}|\theta\rangle\,d\theta &= \int_0^{2\pi}\frac{1}{2\pi}e^{-im\theta}\sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle\,d\theta \\
+                    &= \sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta
+                    \end{aligned}$$</p>
+
                     <p><strong>Case 1:</strong> $n = m$</p>
-                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = \frac{1}{2\pi}\int_0^{2\pi} d\theta = \frac{1}{2\pi}\cdot 2\pi = 1$$</p>
+                    <p>$$\begin{aligned}
+                    \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta &= \frac{1}{2\pi}\int_0^{2\pi} d\theta \\
+                    &= \frac{1}{2\pi}\cdot 2\pi \\
+                    &= 1
+                    \end{aligned}$$</p>
 
                     <p><strong>Case 2:</strong> $n \neq m$</p>
                     <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = 0$$</p>
 
                     <p>Therefore:</p>
-                    <p>$$\sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = \sum_n |n\rangle\,\delta_{n,m} = |m\rangle$$</p>
+                    <p>$$\begin{aligned}
+                    \sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta &= \sum_n |n\rangle\,\delta_{n,m} \\
+                    &= |m\rangle
+                    \end{aligned}$$</p>
                     <p>$$\implies \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = |m\rangle$$</p>
 
                     <p>Now rewrite $\hat{h}_{CPT}$:</p>
