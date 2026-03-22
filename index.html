@@ -439,7 +439,7 @@
                     <span class="tag">hamiltonian</span>
                 </div>
             </li>
-
+            
             <li class="entry">
                 <div class="entry-title">The Transmon, an Anharmonic Quantum Oscillator</div>
                 <div class="entry-body">
@@ -456,49 +456,95 @@
                     well as a ratio $\frac{E_J}{E_C} \gg 1$, where $E_J$ is the Josephson energy and</p>
                     <p>$$E_C = \frac{e^2}{2C}$$</p>
 
-                    <p>The potential energy for the transmon then takes the form:</p>
-                    <p>$$V(x) = -E_J\cos(\varphi), \quad \varphi = \frac{\Phi}{\Phi_0}, \quad \Phi_0 = \tfrac{\hbar}{2e}$$</p>
-                    <p>That is, $\varphi$ is the dimensionless flux $\Phi$</p>
+                    <p>The energy for the Josephson element in the phase basis reads:</p>
+                    <p>$$h_J(\Phi) = -E_J\cos\!\left(\frac{\Phi - \Phi_{\text{offset}}}{\Phi_0}\right), \quad \Phi_0 = \frac{\hbar}{2e}$$</p>
+                    <p>where $\varphi = \frac{\Phi}{\Phi_0}$ is the gauge-invariant phase difference, so equivalently:</p>
+                    <p>$$h_J(\varphi) = -E_J\cos(\varphi)$$</p>
 
-                    <p>TISE then reads:</p>
-                    <p>$$\frac{-\hbar^2}{2C}\frac{d^2\psi(\varphi)}{d\varphi^2} - E_J\cos(\varphi)\psi(\varphi) = E\psi(\varphi)$$</p>
-                    <p>Now, since </p>
-                    <p>$$\begin{aligned}
-                        \hat{p}^2 &= (-i\hbar\frac{d}{dx})^2 \\
-                        &= -\hbar^2 \frac{d^2}{dx^2} \\
-                        &\equiv -\hbar^2 \frac{d^2}{d\varphi^2} \\
-                        &= \hat{Q}^2
-                    \end{aligned}$$
-                    </p>
-                    <p>We get</p>
-                    <p>$$\frac{\hat{Q}^2}{2C}\psi - E_J\cos(\hat{\varphi})\psi = E\psi$$</p>
+                    <p>In a superconducting circuit with a ground node electrode and an island electrode separated by a Josephson junction,</p>
+                    <p>$$n = \text{number of Cooper pairs that crossed the junction}$$</p>
+                    <p>and we know, in the charge basis:</p>
+                    <p>$$\hat{n} \equiv \sum_{n=0}^{\infty} n|n\rangle\langle n|$$</p>
 
-                    <p>Now, $Q = 2en$, where $n$ is # of Cooper pairs</p>
+                    <p>Lemma: $\Delta n = \pm 1$</p>
 
-                    <p>So</p>
-                    <p>$$\frac{\hat{Q}^2}{2C} = \frac{4e^2\hat{n}^2}{2C} = 4E_C\hat{n}^2$$</p>
-                    <p>call $\hat{n}$ the charge operator</p>
+                    <p>Define $\hat{T}^+$ such that</p>
+                    <p>$$\hat{T}^+|n\rangle = |n+1\rangle \iff \hat{T}^+ = \sum_n |n+1\rangle\langle n|$$</p>
+                    <p>Then in the charge basis:</p>
+                    <p>$$\langle m|\hat{T}^+|n\rangle = \langle m|n+1\rangle = \delta_{m,n+1}$$</p>
 
-                    <p>Now</p>
+                    <p>Similarly, define $\hat{T}^-$ such that</p>
+                    <p>$$\hat{T}^-|n\rangle = |n-1\rangle \iff \hat{T}^- = \sum_n |n-1\rangle\langle n|$$</p>
+                    <p>Then:</p>
+                    <p>$$\langle m|\hat{T}^-|n\rangle = \delta_{m,n-1}$$</p>
 
+                    <p>Lemma: The coupling Hamiltonian reads:</p>
+                    <p>$$\hat{h}_{CPT} = -\frac{E_J}{2}\left[\hat{T}^- + \hat{T}^+\right]$$</p>
+
+                    <p>Now, in the charge basis, define the phase states:</p>
+                    <p>$$|\theta\rangle = \sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle, \quad \theta \in [0, 2\pi)$$</p>
+
+                    <p>We want to show that $\frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = |m\rangle$. Expand:</p>
+                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}\sum_{n=-\infty}^{\infty} e^{in\theta}|n\rangle\,d\theta = \sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta$$</p>
+
+                    <p><strong>Case 1:</strong> $n = m$</p>
+                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = \frac{1}{2\pi}\int_0^{2\pi} d\theta = \frac{1}{2\pi}\cdot 2\pi = 1$$</p>
+
+                    <p><strong>Case 2:</strong> $n \neq m$</p>
+                    <p>$$\frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = 0$$</p>
+
+                    <p>Therefore:</p>
+                    <p>$$\sum_n |n\rangle \frac{1}{2\pi}\int_0^{2\pi} e^{i(n-m)\theta}\,d\theta = \sum_n |n\rangle\,\delta_{n,m} = |m\rangle$$</p>
+                    <p>$$\implies \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = |m\rangle$$</p>
+
+                    <p>Now rewrite $\hat{h}_{CPT}$:</p>
+                    <p>$$\hat{h}_{CPT} = -\frac{E_J}{2}\left[\hat{T}^- + \hat{T}^+\right]$$</p>
+                    <p>$$\equiv -\frac{E_J}{2}\sum_n \left[|n-1\rangle\langle n| + |n+1\rangle\langle n|\right]$$</p>
+                    <p>$$= -\frac{E_J}{2}\sum_n \left[|n-1\rangle + |n+1\rangle\right]\langle n|$$</p>
+
+                    <p>Substituting the phase-state resolution of the identity:</p>
+                    <p>$$= -\frac{E_J}{2}\sum_n \left[\left(\int_0^{2\pi} \frac{1}{2\pi}e^{-i(n-1)\theta}|\theta\rangle\,d\theta\right) + \left(\int_0^{2\pi}\frac{1}{2\pi}e^{-i(n+1)\theta}|\theta\rangle\,d\theta\right)\right]\left(\int_0^{2\pi}\frac{1}{2\pi}e^{in\theta'}\langle\theta'|\,d\theta'\right)$$</p>
+
+                    <p>$$= -\frac{E_J}{2}\sum_n \frac{1}{2\pi}\int_0^{2\pi}\left(e^{-i(n-1)\theta} + e^{-i(n+1)\theta}\right)|\theta\rangle\,d\theta \left(\int_0^{2\pi}\frac{1}{2\pi}e^{in\theta'}\langle\theta'|\,d\theta'\right)$$</p>
+
+                    <p>$$= -\frac{E_J}{2}\sum_n \frac{1}{2\pi}\int_0^{2\pi}\left(e^{-i(n-1)\theta} + e^{-i(n+1)\theta}\right)e^{in\theta}|\theta\rangle\langle\theta|\,d\theta$$</p>
+
+                    <p>$$= -\frac{E_J}{2}\sum_n \int_0^{2\pi}\frac{1}{2\pi}\left(e^{i\theta} + e^{-i\theta}\right)|\theta\rangle\langle\theta|\,d\theta$$</p>
+
+                    <p>Now define the phase operator:</p>
+                    <p>$$e^{i\hat{\theta}} \equiv \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle\langle\theta|\,d\theta$$</p>
+
+                    <p>Then:</p>
+                    <p>$$e^{i\hat{\theta}}|n\rangle \equiv \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle\langle\theta|n\rangle\,d\theta$$</p>
+                    <p>Using $|\theta\rangle = \sum_n e^{in\theta}|n\rangle \iff \langle\theta| = \sum_m e^{-im\theta}\langle m|$, we get $\langle\theta|n\rangle = e^{-in\theta}$, so:</p>
+                    <p>$$= \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle e^{-in\theta}\,d\theta = \frac{1}{2\pi}\int_0^{2\pi} e^{-i\theta(n-1)}|\theta\rangle\,d\theta = |n-1\rangle$$</p>
+
+                    <p>Thus:</p>
+                    <p>$$e^{i\hat{\theta}} = \hat{T}^+$$</p>
+                    <p>Similarly:</p>
+                    <p>$$e^{-i\hat{\theta}} = \hat{T}^-$$</p>
+
+                    <p>And so:</p>
+                    <p>$$\hat{h}_{CPT} = -\frac{E_J}{2}\left[\hat{T}^- + \hat{T}^+\right] = -\frac{E_J}{2}\left[e^{-i\hat{\theta}} + e^{i\hat{\theta}}\right] = -\frac{E_J}{2}\cdot 2\cos(\hat{\theta}) = -E_J\cos(\hat{\theta})$$</p>
+
+                    <p>Let $\varphi = \theta \mod 2\pi$, then:</p>
+                    <p>$$\hat{h}_J \equiv h_J(\varphi) = -E_J\cos(\varphi) \equiv -E_J\cos(\hat{\varphi}) = \hat{h}_{CPT}$$</p>
+
+                    <p>This confirms that the Josephson cosine potential and the Cooper pair tunneling Hamiltonian are identical.</p>
+
+                    <p>The full transmon Hamiltonian is therefore:</p>
                     <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos(\hat{\varphi})$$</p>
 
                     <p>We know:</p>
-
                     <p>$$e^{i\theta} = \cos(\theta) + i\sin(\theta), \quad e^{-i\theta} = \cos(\theta) - i\sin(\theta)$$</p>
-
-                    <p>$$\implies e^{i\theta} + e^{-i\theta} = 2\cos\theta$$</p>
-
                     <p>$$\implies \cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}$$</p>
-
                     <p>So $\hat{H}$ can also be written as</p>
-
                     <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)$$</p>
 
                     <p>Lemma: $[\hat{n}, \hat{\varphi}] = -i \implies e^{i\hat{\varphi}}\ket{n} = \ket{n+1}$ and $e^{-i\hat{\varphi}}\ket{n} = \ket{n-1}$</p>
+                    <p>(which we have now proven above via the tunneling operators)</p>
 
                     <p>Thus,</p>
-
                     <p>$$\begin{aligned}
                     -E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\ket{n} &= -\frac{E_J}{2}\left(e^{i\hat{\varphi}}\ket{n} + e^{-i\hat{\varphi}}\ket{n}\right) \\
                     &= -\frac{E_J}{2}\left(\ket{n+1} + \ket{n-1}\right)
@@ -510,21 +556,14 @@
                     <p>$$\hat{H} \equiv \begin{bmatrix} 0 & -\frac{E_J}{2} & 0 & 0 & \cdots \\ -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & \cdots \\ 0 & -\frac{E_J}{2} & 16E_C & -\frac{E_J}{2} & \cdots \\ 0 & 0 & -\frac{E_J}{2} & 36E_C & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [\hat{\mathcal{H}}]_{charge}$$</p>
 
                     <p>Now diagonalize $\hat{H}$ in the charge basis:</p>
-
                     <p>$$[\mathcal{H}]_{\text{charge}} = [V][\mathcal{H}]_E[V^\dagger]$$</p>
-
                     <p>where $[\mathcal{H}]_E = \text{diag}(E_0, E_1, E_2, \ldots)$ and the columns of $[V]$ are the energy eigenstates in the charge basis.</p>
 
                     <p>Define the anharmonicity:</p>
-
                     <p>$$\alpha = (E_2 - E_1) - (E_1 - E_0)$$</p>
-
                     <p>the qubit frequency:</p>
-
                     <p>$$f_q = \frac{E_1 - E_0}{h}$$</p>
-
                     <p>and the angular frequency:</p>
-
                     <p>$$\omega_q = 2\pi f_q$$</p>
 
                     <p>Note: unlike the harmonic oscillator, $[\mathcal{H}]_{\text{charge}}$ is <em>not</em> diagonal, so $[V] \neq \mathbb{I}$ — the energy basis and charge basis are distinct.</p>
