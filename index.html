@@ -103,6 +103,18 @@
             z-index: -1;
         }
 
+        /* ── Warm top vignette ── */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -120px; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 420px;
+            background: radial-gradient(ellipse at center, rgba(255,107,53,0.07) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         #progress-bar {
             position: fixed;
             top: 0; left: 0;
@@ -127,6 +139,20 @@
         /* ── Graph ── */
         #graph-section {
             margin-bottom: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 0 12px;
+            background: rgba(255,255,255,0.012);
+        }
+
+        .graph-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            opacity: 0.45;
+            padding-left: 20px;
+            margin-bottom: 12px;
         }
 
         #graph-svg {
@@ -308,6 +334,7 @@
 
         <!-- ── Knowledge Graph ── -->
         <div id="graph-section">
+            <p class="graph-label">// knowledge map</p>
             <svg id="graph-svg" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
@@ -790,12 +817,12 @@
         ];
 
         const edges = [
-            { from: 0, to: 1 },
-            { from: 0, to: 3 },
-            { from: 1, to: 2 },
-            { from: 1, to: 3 },
-            { from: 2, to: 4 },
-            { from: 3, to: 4 },
+            { from: 0, to: 1, curve:  28 },
+            { from: 0, to: 3, curve: -28 },
+            { from: 1, to: 2, curve: -22 },
+            { from: 1, to: 3, curve:  22 },
+            { from: 2, to: 4, curve:  22 },
+            { from: 3, to: 4, curve: -22 },
         ];
 
         // ── Build SVG graph ──
@@ -818,15 +845,21 @@
         edges.forEach(e => {
             const a = nodes[e.from], b = nodes[e.to];
             const p = edgePts(a, b);
-            const line = document.createElementNS(svgNS, 'line');
-            line.setAttribute('x1', p.x1); line.setAttribute('y1', p.y1);
-            line.setAttribute('x2', p.x2); line.setAttribute('y2', p.y2);
-            line.setAttribute('class', 'gedge');
-            line.setAttribute('marker-end', 'url(#arr)');
-            edgesLayer.appendChild(line);
+            // Midpoint + perpendicular offset for quadratic Bezier control point
+            const mx = (p.x1 + p.x2) / 2, my = (p.y1 + p.y2) / 2;
+            const dx = p.x2 - p.x1, dy = p.y2 - p.y1;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            const px = -dy / d, py = dx / d; // perpendicular unit vector
+            const cx = mx + px * e.curve, cy = my + py * e.curve;
+            const path = document.createElementNS(svgNS, 'path');
+            path.setAttribute('d', `M ${p.x1} ${p.y1} Q ${cx} ${cy} ${p.x2} ${p.y2}`);
+            path.setAttribute('class', 'gedge');
+            path.setAttribute('marker-end', 'url(#arr)');
+            edgesLayer.appendChild(path);
         });
 
-        nodes.forEach(n => {
+        const PULSE_PERIOD = 2.8;
+        nodes.forEach((n, i) => {
             const g = document.createElementNS(svgNS, 'g');
             g.setAttribute('class', 'gnode');
             g.dataset.id = n.id;
@@ -835,6 +868,8 @@
             circle.setAttribute('cx', n.x);
             circle.setAttribute('cy', n.y);
             circle.setAttribute('r', R);
+            // Stagger each node's pulse so they breathe independently
+            circle.style.animationDelay = `-${(i * PULSE_PERIOD / nodes.length).toFixed(2)}s`;
             g.appendChild(circle);
 
             const lineHeight = 14;
