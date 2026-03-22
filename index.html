@@ -591,18 +591,14 @@
                     <p>$$\implies \frac{1}{2\pi}\int_0^{2\pi} e^{-im\theta}|\theta\rangle\,d\theta = |m\rangle$$</p>
 
                     <p>Now rewrite $\hat{h}_{CPT}$:</p>
-                    <p>$$\hat{h}_{CPT} = -\frac{E_J}{2}\left[\hat{T}^- + \hat{T}^+\right]$$</p>
-                    <p>$$\equiv -\frac{E_J}{2}\sum_n \left[|n-1\rangle\langle n| + |n+1\rangle\langle n|\right]$$</p>
-                    <p>$$= -\frac{E_J}{2}\sum_n \left[|n-1\rangle + |n+1\rangle\right]\langle n|$$</p>
-
-                    <p>Substituting the phase-state resolution of the identity:</p>
-                    <p>$$= -\frac{E_J}{2}\sum_n \left[\left(\int_0^{2\pi} \frac{1}{2\pi}e^{-i(n-1)\theta}|\theta\rangle\,d\theta\right) + \left(\int_0^{2\pi}\frac{1}{2\pi}e^{-i(n+1)\theta}|\theta\rangle\,d\theta\right)\right]\left(\int_0^{2\pi}\frac{1}{2\pi}e^{in\theta'}\langle\theta'|\,d\theta'\right)$$</p>
-
-                    <p>$$= -\frac{E_J}{2}\sum_n \frac{1}{2\pi}\int_0^{2\pi}\left(e^{-i(n-1)\theta} + e^{-i(n+1)\theta}\right)|\theta\rangle\,d\theta \left(\int_0^{2\pi}\frac{1}{2\pi}e^{in\theta'}\langle\theta'|\,d\theta'\right)$$</p>
-
-                    <p>$$= -\frac{E_J}{2}\sum_n \frac{1}{2\pi}\int_0^{2\pi}\left(e^{-i(n-1)\theta} + e^{-i(n+1)\theta}\right)e^{in\theta}|\theta\rangle\langle\theta|\,d\theta$$</p>
-
-                    <p>$$= -\frac{E_J}{2}\sum_n \int_0^{2\pi}\frac{1}{2\pi}\left(e^{i\theta} + e^{-i\theta}\right)|\theta\rangle\langle\theta|\,d\theta$$</p>
+                    <p>$$\begin{aligned}
+                    \hat{h}_{CPT} &= -\frac{E_J}{2}\left[\hat{T}^- + \hat{T}^+\right] \\
+                    &\equiv -\frac{E_J}{2}\sum_n \left[|n-1\rangle\langle n| + |n+1\rangle\langle n|\right] \\
+                    &= -\frac{E_J}{2}\sum_n \left[|n-1\rangle + |n+1\rangle\right]\langle n| \\
+                    &= -\frac{E_J}{2}\sum_n \left[\left(\int_0^{2\pi} \frac{1}{2\pi}e^{-i(n-1)\theta}|\theta\rangle\,d\theta\right) + \left(\int_0^{2\pi}\frac{1}{2\pi}e^{-i(n+1)\theta}|\theta\rangle\,d\theta\right)\right]\left(\int_0^{2\pi}\frac{1}{2\pi}e^{in\theta}\langle\theta|\,d\theta\right) \\
+                    &= -\frac{E_J}{2}\sum_n \frac{1}{2\pi}\int_0^{2\pi}\left(e^{-i(n-1)\theta} + e^{-i(n+1)\theta}\right)e^{in\theta}|\theta\rangle\langle\theta|\,d\theta \\
+                    &= -\frac{E_J}{2}\sum_n \int_0^{2\pi}\frac{1}{2\pi}\left(e^{i\theta} + e^{-i\theta}\right)|\theta\rangle\langle\theta|\,d\theta
+                    \end{aligned}$$</p>
 
                     <p>Now define the phase operator:</p>
                     <p>$$e^{i\hat{\theta}} \equiv \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle\langle\theta|\,d\theta$$</p>
