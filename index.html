@@ -605,8 +605,16 @@
 
                     <p>Then:</p>
                     <p>$$e^{i\hat{\theta}}|n\rangle \equiv \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle\langle\theta|n\rangle\,d\theta$$</p>
-                    <p>Using $|\theta\rangle = \sum_n e^{in\theta}|n\rangle \iff \langle\theta| = \sum_m e^{-im\theta}\langle m|$, we get $\langle\theta|n\rangle = e^{-in\theta}$, so:</p>
-                    <p>$$= \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle e^{-in\theta}\,d\theta = \frac{1}{2\pi}\int_0^{2\pi} e^{-i\theta(n-1)}|\theta\rangle\,d\theta = |n-1\rangle$$</p>
+                    <p>Using </p>
+                    <p>$$|\theta\rangle = \sum_n e^{in\theta}|n\rangle \iff \langle\theta| = \sum_m e^{-im\theta}\langle m|$$</p>
+                    <p>we get </p>
+                    <p>$$\langle\theta|n\rangle = e^{-in\theta}$$</p>
+                    <p>so: </p>
+                    <p>$$\begin{aligned}
+                        &= \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle e^{-in\theta}\,d\theta \\
+                        &= \frac{1}{2\pi}\int_0^{2\pi} e^{-i\theta(n-1)}|\theta\rangle\,d\theta \\
+                        &= |n-1\rangle
+                        \end{aligned}$$</p>
 
                     <p>Thus:</p>
                     <p>$$e^{i\hat{\theta}} = \hat{T}^+$$</p>
