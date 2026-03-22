@@ -76,56 +76,6 @@
 
         nav a:hover { color: var(--highlight); }
 
-        .entries { list-style: none; }
-
-        .entry {
-            padding: 32px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .entry:first-child { padding-top: 0; }
-
-        .entry-date {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .entry-title {
-            font-family: var(--mono);
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .entry-body {
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.75;
-        }
-
-        .entry-body p { margin-bottom: 14px; }
-        .entry-body p:last-child { margin-bottom: 0; }
-
-        .entry-tags {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 2px 8px;
-            border-radius: 3px;
-        }
-
         footer {
             margin-top: 80px;
             padding-top: 24px;
@@ -141,10 +91,8 @@
             body { font-size: 16px; }
         }
 
-        /* ── Smooth scroll ── */
         html { scroll-behavior: smooth; }
 
-        /* ── Background dot grid ── */
         body::before {
             content: '';
             position: fixed;
@@ -155,7 +103,6 @@
             z-index: -1;
         }
 
-        /* ── Scroll progress bar ── */
         #progress-bar {
             position: fixed;
             top: 0; left: 0;
@@ -167,7 +114,6 @@
             box-shadow: 0 0 8px var(--highlight);
         }
 
-        /* ── Blinking cursor on name ── */
         header h1::after {
             content: '_';
             color: var(--highlight);
@@ -175,60 +121,161 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* ── Active nav link ── */
         nav a.nav-active { color: var(--accent); }
         nav a.nav-active::before { content: '› '; color: var(--highlight); }
 
-        /* ── Entry reveal animation ── */
+        /* ── Graph ── */
+        #graph-section {
+            margin-bottom: 8px;
+        }
+
+        #graph-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+
+        .gnode { cursor: pointer; }
+
+        .gnode circle {
+            fill: var(--surface);
+            stroke: var(--border);
+            stroke-width: 1.5;
+            transition: stroke 0.25s, fill 0.25s;
+        }
+
+        .gnode:hover circle {
+            stroke: var(--highlight);
+            fill: rgba(255, 107, 53, 0.07);
+        }
+
+        .gnode.active circle {
+            stroke: var(--highlight);
+            fill: rgba(255, 107, 53, 0.13);
+            stroke-width: 2;
+        }
+
+        .gnode text {
+            fill: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 10px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            pointer-events: none;
+            transition: fill 0.25s;
+        }
+
+        .gnode:hover text, .gnode.active text {
+            fill: var(--accent);
+        }
+
+        .gedge {
+            stroke: #282828;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        #graph-hint {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 10px;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+
+        /* ── Entry panel ── */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-        .entry {
-            opacity: 0;
-            animation: fadeUp 0.5s ease forwards;
-            position: relative;
+
+        #entry-panel {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding-top: 36px;
+            margin-top: 40px;
         }
 
-        /* ── Entry hover left-accent ── */
-        .entry::before {
+        #entry-panel.visible {
+            display: block;
+            animation: fadeUp 0.3s ease forwards;
+        }
+
+        .panel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .panel-back {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+            user-select: none;
+        }
+        .panel-back::before { content: '← '; }
+        .panel-back:hover { color: var(--highlight); }
+
+        .panel-counter {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .panel-entry-title {
+            font-family: var(--mono);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .panel-entry-title::before {
             content: '';
             position: absolute;
-            left: -20px; top: 0; bottom: 0;
+            left: 0; top: 0; bottom: 0;
             width: 2px;
             background: var(--highlight);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.25s ease;
             box-shadow: 0 0 6px var(--highlight);
         }
-        .entry:hover::before { transform: scaleY(1); }
 
-        /* ── Tag styles ── */
-        .tag {
-            cursor: pointer;
-            transition: color 0.2s, border-color 0.2s, background 0.2s;
-        }
-        .tag:hover, .tag.tag-active {
-            color: var(--highlight);
-            border-color: var(--highlight);
+        .panel-entry-body {
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.75;
         }
 
-        /* ── Tag filter bar ── */
-        #tag-filter {
+        .panel-entry-body p { margin-bottom: 14px; }
+        .panel-entry-body p:last-child { margin-bottom: 0; }
+
+        .panel-entry-body em { font-style: italic; }
+        .panel-entry-body strong { font-weight: 600; color: var(--accent); }
+
+        .panel-entry-tags {
+            margin-top: 20px;
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        #tag-filter .tag { font-size: 12px; padding: 3px 10px; }
-        #tag-filter .tag.tag-active {
-            background: rgba(255, 107, 53, 0.1);
         }
 
-        /* ── KaTeX display blocks ── */
+        .tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        /* ── KaTeX ── */
         .katex-display {
             background: var(--surface);
             border-left: 2px solid var(--border);
@@ -239,12 +286,10 @@
             transition: border-color 0.2s;
         }
         .katex-display:hover { border-left-color: var(--highlight); }
-
-        /* ── Hidden entries (tag filter) ── */
-        .entry.filtered { display: none; }
     </style>
 </head>
 <body>
+    <div id="progress-bar"></div>
     <div class="container">
         <header>
             <h1>Malik Kurtz</h1>
@@ -256,15 +301,36 @@
             </nav>
         </header>
 
-        <div id="tag-filter"></div>
+        <!-- ── Knowledge Graph ── -->
+        <div id="graph-section">
+            <svg id="graph-svg" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
+                            markerWidth="5" markerHeight="5" orient="auto">
+                        <path d="M 0 1 L 9 5 L 0 9 z" fill="#303030"/>
+                    </marker>
+                </defs>
+                <g id="edges-layer"></g>
+                <g id="nodes-layer"></g>
+            </svg>
+            <p id="graph-hint">click a node to read</p>
+        </div>
 
-        <ul class="entries">
+        <!-- ── Entry detail panel ── -->
+        <div id="entry-panel">
+            <div class="panel-nav">
+                <span class="panel-back" id="panel-back">back to graph</span>
+                <span class="panel-counter" id="panel-counter"></span>
+            </div>
+            <div class="panel-entry-title" id="panel-title"></div>
+            <div class="panel-entry-body" id="panel-body"></div>
+            <div class="panel-entry-tags" id="panel-tags"></div>
+        </div>
 
-            <!-- ════════════════════════════════════════════ -->
-            <!-- COPY THIS BLOCK FOR EACH NEW ENTRY          -->
-            <!-- ════════════════════════════════════════════ -->
+        <!-- ── Hidden entry store (all content preserved) ── -->
+        <ul id="entry-store" style="display:none">
 
-            <li class="entry">
+            <li class="entry" data-index="0">
                 <div class="entry-title">Quantum Harmonic Oscillator</div>
                 <div class="entry-body">
                     <p>This a summary of chapter 2.3 of <em>Introduction to Quantum Mechanics</em>, by Griffiths</p>
@@ -326,7 +392,7 @@
                 </div>
             </li>
 
-            <li class="entry">
+            <li class="entry" data-index="1">
                 <div class="entry-title">The Fock Basis</div>
                 <div class="entry-body">
                     <p>First, it is important to note</p>
@@ -371,7 +437,7 @@
                 </div>
             </li>
 
-            <li class="entry">
+            <li class="entry" data-index="2">
                 <div class="entry-title">Approximating an $RY(\theta)$ Unitary with a Harmonic Oscillator</div>
                 <div class="entry-body">
                     <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.</p>
@@ -426,7 +492,7 @@
                     \end{aligned}$$</p>
 
                     <p>The issue here stems from the fact that we are unable to address the computational subspace, those being
-                        the amplitudes corresponding to $\alpha$ and $\beta$, and inevitably interact with higher levels like 
+                        the amplitudes corresponding to $\alpha$ and $\beta$, and inevitably interact with higher levels like
                         that corresponding to $\gamma$, which would be $\ket{2}$ (bad).
                     </p>
 
@@ -439,8 +505,8 @@
                     <span class="tag">hamiltonian</span>
                 </div>
             </li>
-            
-            <li class="entry">
+
+            <li class="entry" data-index="3">
                 <div class="entry-title">The Transmon, an Anharmonic Quantum Oscillator</div>
                 <div class="entry-body">
                     <p>Note that in a superconducting circuit, </p>
@@ -452,7 +518,7 @@
                     <p>Also</p>
                     <p>$$C \equiv m$$</p>
 
-                    <p>A transmon can be parameterized by a charging energy, $E_C$, as 
+                    <p>A transmon can be parameterized by a charging energy, $E_C$, as
                     well as a ratio $\frac{E_J}{E_C} \gg 1$, where $E_J$ is the Josephson energy and</p>
                     <p>$$E_C = \frac{e^2}{2C}$$</p>
 
@@ -575,7 +641,7 @@
                 </div>
             </li>
 
-            <li class="entry">
+            <li class="entry" data-index="4">
                 <div class="entry-title">Approximating an $RY(\theta)$ Unitary with a Transmon</div>
                 <div class="entry-body">
                     <p>First, note that the charge operator can be approximated in the Fock basis as follows:</p>
@@ -623,7 +689,7 @@
                     &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}_0] \text{ is diagonal in the energy basis} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix} \\
-                    &= \begin{bmatrix} \alpha e^{-iTE_0/\hbar} \\ \beta e^{-iTE_1/\hbar} \\ 
+                    &= \begin{bmatrix} \alpha e^{-iTE_0/\hbar} \\ \beta e^{-iTE_1/\hbar} \\
                     \gamma e^{-iTE_2/\hbar} \end{bmatrix}, \quad e^{-iTE_1/\hbar} = e^{-iTE_0/\hbar} \cdot e^{-iT(E_1 - E_0)/\hbar} = e^{-iTE_0/\hbar} \cdot e^{-i2\pi} = e^{-iTE_0/\hbar}\\
                     &= e^{-iTE_0/\hbar}\begin{bmatrix} \alpha \\ \beta \\ \gamma e^{-iT(E_2 - E_0)/\hbar} \end{bmatrix} \\
                     \end{aligned}$$</p>
@@ -632,7 +698,7 @@
                     <p>That residual phase on $\ket{2}$ is the anharmonicity doing its job — it rotates the leakage component relative to the qubit subspace, which is exactly what prevents the unbounded leakage accumulation we saw in the harmonic oscillator.</p>
 
                     <p>The free evolution is no longer $\approx -I$ — it selectively phases the leakage level while leaving the computational subspace untouched.</p>
-                </div> 
+                </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
                     <span class="tag">transmon</span>
@@ -646,70 +712,165 @@
             &copy; 2026 Malik Kurtz
         </footer>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // KaTeX
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ],
-                throwOnError: false,
-                macros: {
-                    '\\ket': '|#1\\rangle',
-                    '\\bra': '\\langle #1|',
-                    '\\braket': '\\langle #1|#2\\rangle'
-                }
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // ── Scroll progress bar ──
+        const bar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            bar.style.width = Math.min(pct, 100) + '%';
+        });
+
+        // ── Active nav ──
+        const page = location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('nav a').forEach(a => {
+            if (a.getAttribute('href') === page) a.classList.add('nav-active');
+        });
+
+        // ── KaTeX: render hidden entry store ──
+        renderMathInElement(document.getElementById('entry-store'), {
+            delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false,
+            macros: {
+                '\\ket': '|#1\\rangle',
+                '\\bra': '\\langle #1|',
+                '\\braket': '\\langle #1|#2\\rangle'
+            }
+        });
+
+        // ── Graph data ──
+        const R = 42; // node radius
+        const nodes = [
+            { id: 0, x: 80,  y: 140, lines: ['Quantum', 'Harmonic', 'Oscillator'] },
+            { id: 1, x: 260, y: 72,  lines: ['The Fock', 'Basis'] },
+            { id: 2, x: 490, y: 72,  lines: ['RY(θ) via', 'Harm. Osc.'] },
+            { id: 3, x: 295, y: 205, lines: ['The', 'Transmon'] },
+            { id: 4, x: 490, y: 205, lines: ['RY(θ) via', 'Transmon'] },
+        ];
+
+        const edges = [
+            { from: 0, to: 1 },
+            { from: 0, to: 3 },
+            { from: 1, to: 2 },
+            { from: 1, to: 3 },
+            { from: 2, to: 4 },
+            { from: 3, to: 4 },
+        ];
+
+        // ── Build SVG graph ──
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const edgesLayer = document.getElementById('edges-layer');
+        const nodesLayer = document.getElementById('nodes-layer');
+
+        function edgePts(a, b) {
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            const ux = dx / d, uy = dy / d;
+            return {
+                x1: a.x + ux * R,
+                y1: a.y + uy * R,
+                x2: b.x - ux * R,
+                y2: b.y - uy * R,
+            };
+        }
+
+        edges.forEach(e => {
+            const a = nodes[e.from], b = nodes[e.to];
+            const p = edgePts(a, b);
+            const line = document.createElementNS(svgNS, 'line');
+            line.setAttribute('x1', p.x1); line.setAttribute('y1', p.y1);
+            line.setAttribute('x2', p.x2); line.setAttribute('y2', p.y2);
+            line.setAttribute('class', 'gedge');
+            line.setAttribute('marker-end', 'url(#arr)');
+            edgesLayer.appendChild(line);
+        });
+
+        nodes.forEach(n => {
+            const g = document.createElementNS(svgNS, 'g');
+            g.setAttribute('class', 'gnode');
+            g.dataset.id = n.id;
+
+            const circle = document.createElementNS(svgNS, 'circle');
+            circle.setAttribute('cx', n.x);
+            circle.setAttribute('cy', n.y);
+            circle.setAttribute('r', R);
+            g.appendChild(circle);
+
+            const lineHeight = 14;
+            const totalH = (n.lines.length - 1) * lineHeight;
+            n.lines.forEach((ln, i) => {
+                const t = document.createElementNS(svgNS, 'text');
+                t.setAttribute('x', n.x);
+                t.setAttribute('y', n.y - totalH / 2 + i * lineHeight);
+                t.textContent = ln;
+                g.appendChild(t);
             });
 
-            // Scroll progress bar
-            const bar = document.createElement('div');
-            bar.id = 'progress-bar';
-            document.body.prepend(bar);
-            window.addEventListener('scroll', () => {
-                const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                bar.style.width = Math.min(pct, 100) + '%';
-            });
+            g.addEventListener('click', () => selectNode(n.id));
+            nodesLayer.appendChild(g);
+        });
 
-            // Active nav
-            const page = location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('nav a').forEach(a => {
-                if (a.getAttribute('href') === page) a.classList.add('nav-active');
-            });
-
-            // Staggered entry animation
-            document.querySelectorAll('.entry').forEach((el, i) => {
-                el.style.animationDelay = `${i * 0.08}s`;
-            });
-
-            // Build tag filter bar from all tags in entries
-            const allTags = new Set();
-            document.querySelectorAll('.entry .tag').forEach(t => allTags.add(t.textContent.trim()));
-            const filterBar = document.getElementById('tag-filter');
-            let activeTag = null;
-            allTags.forEach(tagVal => {
-                const btn = document.createElement('span');
-                btn.className = 'tag';
-                btn.textContent = tagVal;
-                btn.addEventListener('click', () => {
-                    if (activeTag === tagVal) {
-                        // Deselect
-                        activeTag = null;
-                        btn.classList.remove('tag-active');
-                        document.querySelectorAll('.entry').forEach(e => e.classList.remove('filtered'));
-                    } else {
-                        activeTag = tagVal;
-                        filterBar.querySelectorAll('.tag').forEach(b => b.classList.remove('tag-active'));
-                        btn.classList.add('tag-active');
-                        document.querySelectorAll('.entry').forEach(e => {
-                            const tags = [...e.querySelectorAll('.tag')].map(t => t.textContent.trim());
-                            e.classList.toggle('filtered', !tags.includes(tagVal));
-                        });
-                    }
-                });
-                filterBar.appendChild(btn);
+        // ── Entry data extraction ──
+        const entries = [];
+        document.querySelectorAll('#entry-store .entry').forEach(el => {
+            entries.push({
+                title:  el.querySelector('.entry-title').innerHTML,
+                body:   el.querySelector('.entry-body').innerHTML,
+                tags:   [...el.querySelectorAll('.tag')].map(t => t.textContent),
             });
         });
+
+        // ── Panel elements ──
+        const panel       = document.getElementById('entry-panel');
+        const panelTitle  = document.getElementById('panel-title');
+        const panelBody   = document.getElementById('panel-body');
+        const panelTags   = document.getElementById('panel-tags');
+        const panelBack   = document.getElementById('panel-back');
+        const panelCounter = document.getElementById('panel-counter');
+        const hint        = document.getElementById('graph-hint');
+
+        let activeId = null;
+
+        function selectNode(id) {
+            if (activeId === id) return;
+            activeId = id;
+
+            // Update node styles
+            document.querySelectorAll('.gnode').forEach(g => {
+                g.classList.toggle('active', parseInt(g.dataset.id) === id);
+            });
+
+            // Populate panel
+            const e = entries[id];
+            panelTitle.innerHTML  = e.title;
+            panelBody.innerHTML   = e.body;
+            panelTags.innerHTML   = e.tags.map(t => `<span class="tag">${t}</span>`).join('');
+            panelCounter.textContent = `${id + 1} / ${entries.length}`;
+
+            // Re-render KaTeX in the panel (body was already rendered, but innerHTML copy preserves HTML)
+            // Nothing needed — innerHTML carries rendered KaTeX DOM
+
+            panel.classList.add('visible');
+            hint.style.opacity = '0.3';
+
+            // Smooth scroll to panel
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        panelBack.addEventListener('click', () => {
+            activeId = null;
+            panel.classList.remove('visible');
+            hint.style.opacity = '0.7';
+            document.querySelectorAll('.gnode').forEach(g => g.classList.remove('active'));
+            document.getElementById('graph-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+    });
     </script>
 </body>
 </html>
