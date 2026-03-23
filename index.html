@@ -637,6 +637,8 @@
                     <p>Also</p>
                     <p>$$C \equiv \text{Mass } m$$</p>
 
+                    <p><strong>Deriving the Potential Energy Term</strong></p>
+
                     <p>A transmon can be parameterized by a charging energy, $E_C$, as
                     well as a ratio $\frac{E_J}{E_C} \gg 1$, where $E_J$ is the Josephson energy and</p>
                     <p>$$E_C = \frac{e^2}{2C}$$</p>
@@ -649,7 +651,7 @@
                     <p>In a superconducting circuit with a ground node electrode and an island electrode separated by a Josephson junction,</p>
                     <p>$$n = \text{number of Cooper pairs that crossed the junction}$$</p>
                     <p>and we know, in the charge basis:</p>
-                    <p>$$\hat{n} \equiv \sum_{n=0}^{\infty} n|n\rangle\langle n|$$</p>
+                    <p>$$\hat{n} \equiv \sum_{n=-\infty}^{\infty} n|n\rangle\langle n|$$</p>
 
                     <p>Lemma: $\Delta n = \pm 1$</p>
 
@@ -728,7 +730,7 @@
                     <p>so: </p>
                     <p>$$\begin{aligned}
                         e^{i\hat{\theta}}|n\rangle
-                        &= \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle e^{-in\theta}\,d\theta \\
+                        &\equiv \frac{1}{2\pi}\int_0^{2\pi} e^{i\theta}|\theta\rangle e^{-in\theta}\,d\theta \\
                         &= \frac{1}{2\pi}\int_0^{2\pi} e^{-i\theta(n-1)}|\theta\rangle\,d\theta \\
                         &= |n-1\rangle
                         \end{aligned}$$</p>
@@ -754,35 +756,40 @@
                         &= -E_J\cos(\theta) \\
                         &\equiv -E_J\cos(\hat{\theta}) \\
                         &= \hat{h}_{CPT}
-                    \end{aligned}</p>
+                    \end{aligned}$$</p>
                     <p>Also note that since $\theta$ is periodic, only periodic functions of $\hat{\theta}$, like $e^{i\hat{\theta}}$ are unambiguous</p>
 
                     <p>This confirms that the Josephson cosine potential and the Cooper pair tunneling Hamiltonian are identical.</p>
                     <p>All this to say, the potential energy for a transmon takes the form: </p>
-                    <p>$$V(\varphi) = h_J(\varphi) = h_{CPT}(\varphi) -E_J\cos(\varphi)= </p>
+                    <p>$$V(\varphi) = h_J(\varphi) = h_{CPT}(\varphi) = -E_J\cos(\varphi)$$</p>
+                    <p>In operator form: </p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{V} = -E_J\cos(\hat{\varphi})$$</p>
+                    </div>
 
-                    <p>The full transmon Hamiltonian is therefore:</p>
-                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos(\hat{\varphi})$$</p>
-
-                    <p>We know:</p>
-                    <p>$$e^{i\theta} = \cos(\theta) + i\sin(\theta), \quad e^{-i\theta} = \cos(\theta) - i\sin(\theta)$$</p>
-                    <p>$$\implies \cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}$$</p>
-                    <p>So $\hat{H}$ can also be written as</p>
-                    <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)$$</p>
-
-                    <p>Lemma: $[\hat{n}, \hat{\varphi}] = -i \implies e^{i\hat{\varphi}}\ket{n} = \ket{n+1}$ and $e^{-i\hat{\varphi}}\ket{n} = \ket{n-1}$</p>
-                    <p>(which we have now proven above via the tunneling operators)</p>
-
-                    <p>Thus,</p>
+                    <p><strong>Deriving the Potential Energy Term</strong></p>
+                    
+                    <p>Fairly simple, </p>
                     <p>$$\begin{aligned}
-                    -E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\ket{n} &= -\frac{E_J}{2}\left(e^{i\hat{\varphi}}\ket{n} + e^{-i\hat{\varphi}}\ket{n}\right) \\
-                    &= -\frac{E_J}{2}\left(\ket{n+1} + \ket{n-1}\right)
+                        \hat{T} &= \tfrac{\hat{Q}^2}{2C}, \quad \hat{Q} = 2e\hat{n} \\
+                        &= \tfrac{(2e\hat{n})^2}{2C} \\
+                        &= \tfrac{4e^2\hat{n}^2}{2C} \\
+                        &= 4E_C\hat{n}^2
                     \end{aligned}$$</p>
-
-                    <p>$$\implies \bra{m}\left[-E_J\left(\frac{e^{i\hat{\varphi}} + e^{-i\hat{\varphi}}}{2}\right)\right]\ket{n} = -\frac{E_J}{2}\left(\braket{m}{n+1} + \braket{m}{n-1}\right)$$</p>
+                    <p>That is, </p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{T} = 4E_C\hat{n}^2$$</p>
+                    </div>
+                    
+                    <p>The full transmon Hamiltonian is therefore:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos(\hat{\varphi})$$</p>
+                    </div>
 
                     <p>and since $\hat{n}$ is diagonal in the charge basis, we get</p>
-                    <p>$$\hat{H} \equiv \begin{bmatrix} 0 & -\frac{E_J}{2} & 0 & 0 & \cdots \\ -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & \cdots \\ 0 & -\frac{E_J}{2} & 16E_C & -\frac{E_J}{2} & \cdots \\ 0 & 0 & -\frac{E_J}{2} & 36E_C & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [\hat{\mathcal{H}}]_{charge}$$</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{H} \equiv \begin{bmatrix} \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \\ \cdots & 16E_C & -\frac{E_J}{2} & 0 & 0 & 0 & \cdots \\ \cdots & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & 0 & \cdots \\ \cdots & 0 & -\frac{E_J}{2} & 0 & -\frac{E_J}{2} & 0 & \cdots \\ \cdots & 0 & 0 & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & \cdots \\ \cdots & 0 & 0 & 0 & -\frac{E_J}{2} & 16E_C & \cdots \\ & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [\hat{\mathcal{H}}]_{charge}$$</p>
+                    </div>
 
                     <p>Now diagonalize $\hat{H}$ in the charge basis:</p>
                     <p>$$[\mathcal{H}]_{\text{charge}} = [V][\mathcal{H}]_E[V^\dagger]$$</p>
@@ -797,25 +804,27 @@
 
                     <p>Note: unlike the harmonic oscillator, $[\mathcal{H}]_{\text{charge}}$ is <em>not</em> diagonal, so $[V] \neq \mathbb{I}$ — the energy basis and charge basis are distinct.</p>
 
-                    <p>Now the quantum constitutive relations: </p>
-                    <p><strong>Recall</strong></p>
+                    <p><strong>Now the quantum constitutive relations:</strong></p>
+                    <p>Recall</p>
                     <p>$$[\hat{\Phi}, \hat{Q}] = i\hbar$$</p>
 
                     <p>Now, since $\hat{\varphi} = \hat{\Phi}/\Phi_0$, $\Phi_0 = \hbar/2e$:</p>
 
-                    <p>$$[\hat{\Phi}, \hat{Q}] = i\hbar$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\Phi}/\Phi_0, \hat{Q}] = i\hbar/\Phi_0$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\varphi}, \hat{Q}] = i\hbar\left(\frac{2e}{\hbar}\right), \quad n = \frac{Q}{2e}$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\varphi}, \hat{Q}] = 2ei, \quad \hat{Q} = 2e\hat{n}$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\varphi}, 2e\hat{n}] = 2ei$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\varphi}, \hat{n}] = i$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$[\hat{\theta}, \hat{n}] = i$$</p>
+                    <p>$$\begin{aligned}
+                    [\hat{\Phi}, \hat{Q}] &= i\hbar \\
+                    &\iff \\
+                    [\hat{\Phi}/\Phi_0, \hat{Q}] &= i\hbar/\Phi_0 \\
+                    &\iff \\
+                    [\hat{\varphi}, \hat{Q}] &= i\hbar\left(\frac{2e}{\hbar}\right), \quad n = \frac{Q}{2e} \\
+                    &\iff \\
+                    [\hat{\varphi}, \hat{Q}] &= 2ei, \quad \hat{Q} = 2e\hat{n} \\
+                    &\iff \\
+                    [\hat{\varphi}, 2e\hat{n}] &= 2ei \\
+                    &\iff \\
+                    [\hat{\varphi}, \hat{n}] &= i \\
+                    &\iff \\
+                    [\hat{\theta}, \hat{n}] &= i
+                    \end{aligned}$$</p>
 
                     <p>Thus, using eq. 3.7 in the paper:</p>
                     <p>$$\frac{\partial\hat{\theta}}{\partial t} = \frac{1}{i\hbar}[\hat{\theta}, \hat{\mathcal{H}}]$$</p>
