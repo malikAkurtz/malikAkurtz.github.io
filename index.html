@@ -815,7 +815,7 @@
                     &\iff \\
                     [\hat{\Phi}/\Phi_0, \hat{Q}] &= i\hbar/\Phi_0 \\
                     &\iff \\
-                    [\hat{\varphi}, \hat{Q}] &= i\hbar\left(\frac{2e}{\hbar}\right), \quad n = \frac{Q}{2e} \\
+                    [\hat{\varphi}, \hat{Q}] &= i\hbar\left(\frac{2e}{\hbar}\right) \\
                     &\iff \\
                     [\hat{\varphi}, \hat{Q}] &= 2ei, \quad \hat{Q} = 2e\hat{n} \\
                     &\iff \\
@@ -826,15 +826,15 @@
                     [\hat{\theta}, \hat{n}] &= i
                     \end{aligned}$$</p>
 
-                    <p>Thus, using eq. 3.7 in the paper:</p>
+                    <p>Using eq. 3.7 in the paper:</p>
                     <p>$$\frac{\partial\hat{\theta}}{\partial t} = \frac{1}{i\hbar}[\hat{\theta}, \hat{\mathcal{H}}]$$</p>
 
-                    <p>Using eq. 3.6:</p>
-                    <p>$$\frac{\partial\hat{\mathcal{H}}}{\partial\hat{n}} = \frac{-1}{i}[\hat{\mathcal{H}}, \hat{\theta}]$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$\frac{\partial\hat{\mathcal{H}}}{\partial\hat{n}} = \frac{-1}{i}[\hat{\mathcal{H}}, \hat{\theta}]$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$\frac{\partial\hat{\mathcal{H}}}{\partial\hat{n}} = \frac{1}{i}[\hat{\theta}, \hat{\mathcal{H}}]$$</p>
+                    <p>and eq. 3.6:</p>
+                    <p>$$\begin{aligned}
+                    \frac{\partial\hat{\mathcal{H}}}{\partial\hat{n}} &= \frac{-1}{i}[\hat{\mathcal{H}}, \hat{\theta}] \\
+                    &\iff \\
+                    \frac{\partial\hat{\mathcal{H}}}{\partial\hat{n}} &= \frac{1}{i}[\hat{\theta}, \hat{\mathcal{H}}]
+                    \end{aligned}$$</p>
 
                     <p>So:</p>
                     <p>$$\begin{aligned}
@@ -850,15 +850,22 @@
                     &= \frac{2e}{\hbar}\hat{V}
                     \end{aligned}$$</p>
 
-                    <p>And so:</p>
-                    <p>$$\frac{d\hat{\theta}}{dt} = \frac{2e}{\hbar}\hat{V}$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$\frac{d\hat{\varphi}}{dt} = \frac{2e}{\hbar}\hat{V}$$</p>
+                    <p>And so finally:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\begin{aligned}
+                        \frac{d\hat{\theta}}{dt} &= \frac{2e}{\hbar}\hat{V} \\
+                        &\iff \\
+                        \frac{d\hat{\varphi}}{dt} &= \frac{2e}{\hbar}\hat{V}
+                        \end{aligned}$$</p>
+                    </div>
+                    
 
                     <p>Similarly:</p>
-                    <p>$$\hat{I} = 2e\frac{d\hat{n}}{dt}$$</p>
-                    <p>$$\iff$$</p>
-                    <p>$$\hat{I} = I_0\sin\hat{\varphi}, \quad I_0 = \frac{2e}{\hbar}E_J$$</p>
+                    <p>$$\begin{aligned}
+                    \hat{I} &= 2e\frac{d\hat{n}}{dt} \\
+                    &\iff \\
+                    \hat{I} &= I_0\sin\hat{\varphi}, \quad I_0 = \frac{2e}{\hbar}E_J
+                    \end{aligned}$$</p>
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
