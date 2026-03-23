@@ -642,7 +642,7 @@
                     <p>$$E_C = \frac{e^2}{2C}$$</p>
 
                     <p>The energy for the Josephson element in the phase basis reads:</p>
-                    <p>$$h_J(\Phi) = -E_J\cos\!\left(\frac{\Phi - \Phi_{\text{offset}}}{\Phi_0}\right), \quad \Phi_0 = \frac{\hbar}{2e}$$</p>
+                    <p>$$h_J(\Phi) = -E_J\cos\!\left(\frac{\Phi}{\Phi_0}\right), \quad \Phi_0 = \frac{\hbar}{2e}$$</p>
                     <p>where $\varphi = \frac{\Phi}{\Phi_0}$ is the gauge-invariant phase difference, so equivalently:</p>
                     <p>$$h_J(\varphi) = -E_J\cos(\varphi)$$</p>
 
@@ -748,10 +748,18 @@
                     \end{aligned}$$</p>
 
                     <p>Let $\varphi \mod 2\pi = \theta, \quad \varphi \in \mathbb{R}, \quad \theta \in [0, 2\pi)$, then:</p>
-                    <p>$$\hat{h}_J \equiv h_J(\varphi) = -E_J\cos(\varphi) \equiv -E_J\cos(\hat{\varphi}) = \hat{h}_{CPT}$$</p>
+                    <p>$$\begin{aligned}
+                        \hat{h}_J &\equiv h_J(\varphi) \\
+                        &= -E_J\cos(\varphi) \\
+                        &= -E_J\cos(\theta) \\
+                        &\equiv -E_J\cos(\hat{\theta}) \\
+                        &= \hat{h}_{CPT}
+                    \end{aligned}</p>
                     <p>Also note that since $\theta$ is periodic, only periodic functions of $\hat{\theta}$, like $e^{i\hat{\theta}}$ are unambiguous</p>
 
                     <p>This confirms that the Josephson cosine potential and the Cooper pair tunneling Hamiltonian are identical.</p>
+                    <p>All this to say, the potential energy for a transmon takes the form: </p>
+                    <p>$$V(\varphi) = h_J(\varphi) = h_{CPT}(\varphi) -E_J\cos(\varphi)= </p>
 
                     <p>The full transmon Hamiltonian is therefore:</p>
                     <p>$$\hat{H} = 4E_C\hat{n}^2 - E_J\cos(\hat{\varphi})$$</p>
