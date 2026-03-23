@@ -307,6 +307,73 @@
             border-radius: 3px;
         }
 
+        /* ── Citations ── */
+        .cite {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--highlight);
+            text-decoration: none;
+            cursor: pointer;
+            vertical-align: super;
+            line-height: 0;
+            margin-left: 1px;
+            transition: opacity 0.2s;
+        }
+        .cite:hover { opacity: 0.65; }
+
+        /* ── References section ── */
+        #panel-refs {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .refs-heading {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            opacity: 0.55;
+        }
+
+        .ref {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            padding: 5px 8px;
+            border-radius: 3px;
+            scroll-margin-top: 24px;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        .ref-num {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--highlight);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ref-body { flex: 1; }
+
+        .ref-body a {
+            color: var(--highlight);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .ref-body a:hover { border-bottom-color: var(--highlight); }
+
+        .ref.ref-flash {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--text);
+        }
+
         /* ── KaTeX ── */
         .katex-display {
             background: var(--surface);
@@ -356,6 +423,7 @@
             </div>
             <div class="panel-entry-title" id="panel-title"></div>
             <div class="panel-entry-body" id="panel-body"></div>
+            <div id="panel-refs"></div>
             <div class="panel-entry-tags" id="panel-tags"></div>
         </div>
 
@@ -365,7 +433,7 @@
             <li class="entry" data-index="0">
                 <div class="entry-title">Quantum Harmonic Oscillator</div>
                 <div class="entry-body">
-                    <p>This a summary of chapter 2.3 of <em>Introduction to Quantum Mechanics</em>, by Griffiths</p>
+                    <p>This a summary of chapter 2.3 of <em>Introduction to Quantum Mechanics</em>, by Griffiths<a class="cite" data-ref="1">[1]</a></p>
                     <p>The potential energy for a classical harmonic oscillator takes the form:</p>
                     <p>$$V(x) = \frac{1}{2}kx^{2}$$</p>
                     <p>Equivalently</p>
@@ -417,6 +485,12 @@
                     <p>Also note, </p>
                     <p>$$\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}_+ - \hat{a}_-) \quad \text{and} \quad \hat{p} = i\sqrt{\frac{\hbar m\omega}{2}}(\hat{a}_+ - \hat{a}_-)$$</p>
                 </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">D.J. Griffiths. <em>Introduction to Quantum Mechanics</em>, 3rd ed. Cambridge University Press, 2018.</span>
+                    </div>
+                </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
                     <span class="tag">transmon</span>
@@ -462,6 +536,12 @@
                     <p>In the case of a harmonic oscillator, $[\mathcal{H}_0]_F$ is diagonal so $[V] = \mathbb{I}$</p>
                     <p>i.e the energy basis and Fock basis are identical.</p>
                 </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">D.J. Griffiths. <em>Introduction to Quantum Mechanics</em>, 3rd ed. Cambridge University Press, 2018.</span>
+                    </div>
+                </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
                     <span class="tag">transmon</span>
@@ -472,7 +552,7 @@
             <li class="entry" data-index="2">
                 <div class="entry-title">Approximating an $RY(\theta)$ Unitary with a Harmonic Oscillator</div>
                 <div class="entry-body">
-                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.</p>
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
                     <p>Lets now set ncut = 3 and see how we might apply an RY gate</p>
                     <p>Set our initial state</p>
                     <p>$$\psi_0 = \ket{\psi_0} \equiv \sum_{n=1}^{3} c_n\ket{\psi_n} = \sum_{n=1}^{3} c_n\ket{n} = \vec{e}_1$$</p>
@@ -530,6 +610,12 @@
 
                     <p>Enter... The Transmon</p>
 
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
@@ -704,8 +790,6 @@
                     <p>Note: unlike the harmonic oscillator, $[\mathcal{H}]_{\text{charge}}$ is <em>not</em> diagonal, so $[V] \neq \mathbb{I}$ — the energy basis and charge basis are distinct.</p>
 
                     <p>Now the quantum constitutive relations: </p>
-                    <p>These are notes on <em>Introduction to Quantum Electromagnetic Circuits</em>, by Uri Vool and Michel Devoret</p>
-
                     <p><strong>Recall</strong></p>
                     <p>$$[\hat{\Phi}, \hat{Q}] = i\hbar$$</p>
 
@@ -759,6 +843,12 @@
                     <p>$$\iff$$</p>
                     <p>$$\hat{I} = I_0\sin\hat{\varphi}, \quad I_0 = \frac{2e}{\hbar}E_J$$</p>
                 </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
+                </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
                     <span class="tag">transmon</span>
@@ -771,7 +861,7 @@
                 <div class="entry-body">
                     <p>First, note that the charge operator can be approximated in the Fock basis as follows:</p>
                     <p>$$[\hat{n}]_F \approx ir(\hat{a}^{\dagger} - \hat{a}), \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}$$</p>
-                    <p>We will use $[\hat{n}]_F$ to build the kick unitary $\hat{U}_{\theta}$, as Shillito does in the paper.</p>
+                    <p>We will use $[\hat{n}]_F$ to build the kick unitary $\hat{U}_{\theta}$, as Shillito does in the paper.<a class="cite" data-ref="1">[1]</a></p>
                     <p>Lets once more set ncut = 3 and see how we might apply an RY gate</p>
                     <p>Set our initial state</p>
                     <p>$$\psi_0 = \ket{\psi_0} \equiv \sum_{n=1}^{3} c_n\ket{\psi_n} = \sum_{n=1}^{3} c_n\ket{n} = \vec{e}_1$$</p>
@@ -823,6 +913,12 @@
                     <p>That residual phase on $\ket{2}$ is the anharmonicity doing its job — it rotates the leakage component relative to the qubit subspace, which is exactly what prevents the unbounded leakage accumulation we saw in the harmonic oscillator.</p>
 
                     <p>The free evolution is no longer $\approx -I$ — it selectively phases the leakage level while leaving the computational subspace untouched.</p>
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">quantum</span>
@@ -951,21 +1047,24 @@
         // ── Entry data extraction ──
         const entries = [];
         document.querySelectorAll('#entry-store .entry').forEach(el => {
+            const refsEl = el.querySelector('.entry-refs');
             entries.push({
                 title:  el.querySelector('.entry-title').innerHTML,
                 body:   el.querySelector('.entry-body').innerHTML,
-                tags:   [...el.querySelectorAll('.tag')].map(t => t.textContent),
+                refs:   refsEl ? refsEl.innerHTML : '',
+                tags:   [...el.querySelectorAll('.entry-tags .tag')].map(t => t.textContent),
             });
         });
 
         // ── Panel elements ──
-        const panel       = document.getElementById('entry-panel');
-        const panelTitle  = document.getElementById('panel-title');
-        const panelBody   = document.getElementById('panel-body');
-        const panelTags   = document.getElementById('panel-tags');
-        const panelBack   = document.getElementById('panel-back');
+        const panel        = document.getElementById('entry-panel');
+        const panelTitle   = document.getElementById('panel-title');
+        const panelBody    = document.getElementById('panel-body');
+        const panelRefs    = document.getElementById('panel-refs');
+        const panelTags    = document.getElementById('panel-tags');
+        const panelBack    = document.getElementById('panel-back');
         const panelCounter = document.getElementById('panel-counter');
-        const hint        = document.getElementById('graph-hint');
+        const hint         = document.getElementById('graph-hint');
 
         let activeId = null;
 
@@ -980,13 +1079,31 @@
 
             // Populate panel
             const e = entries[id];
-            panelTitle.innerHTML  = e.title;
-            panelBody.innerHTML   = e.body;
-            panelTags.innerHTML   = e.tags.map(t => `<span class="tag">${t}</span>`).join('');
+            panelTitle.innerHTML     = e.title;
+            panelBody.innerHTML      = e.body;
+            panelTags.innerHTML      = e.tags.map(t => `<span class="tag">${t}</span>`).join('');
             panelCounter.textContent = `${id + 1} / ${entries.length}`;
 
-            // Re-render KaTeX in the panel (body was already rendered, but innerHTML copy preserves HTML)
-            // Nothing needed — innerHTML carries rendered KaTeX DOM
+            // Render references section
+            if (e.refs) {
+                panelRefs.innerHTML = '<div class="refs-heading">references</div>' + e.refs;
+                panelRefs.style.display = 'block';
+            } else {
+                panelRefs.innerHTML = '';
+                panelRefs.style.display = 'none';
+            }
+
+            // Wire up inline citation clicks → scroll to ref + flash
+            panelBody.querySelectorAll('.cite').forEach(cite => {
+                cite.addEventListener('click', ev => {
+                    ev.preventDefault();
+                    const target = panelRefs.querySelector(`[data-ref-id="${cite.dataset.ref}"]`);
+                    if (!target) return;
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.classList.add('ref-flash');
+                    setTimeout(() => target.classList.remove('ref-flash'), 1400);
+                });
+            });
 
             panel.classList.add('visible');
             hint.style.opacity = '0.3';
