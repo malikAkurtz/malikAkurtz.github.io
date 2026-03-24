@@ -1099,6 +1099,42 @@
                         y &= \sin\theta\sin\phi \\
                         z &= \cos\theta
                     \end{aligned}$$</p>
+                    
+                    <strong>1. Pauli-X Expectation Value</strong>
+                    <p>
+                        $$\begin{aligned}
+                        \langle X \rangle &= \langle \psi | X | \psi \rangle \\
+                        &= \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} \beta \\ \alpha \end{bmatrix} \\
+                        &= \alpha^* \beta + \beta^* \alpha \\
+                        &= (a - bi)(c + di) + (c - di)(a + bi) \\
+                        &= (ac + adi - bci + bd) + (ca + cbi - dai + db) \\
+                        &= 2ac + 2bd = 2(ac + bd) \\
+                        &= 2\text{Re}(\alpha^* \beta)
+                        \end{aligned}$$
+                    </p>
+                    
+                    <strong>2. Pauli-Y Expectation Value</strong>
+                    <p>
+                        $$\begin{aligned}
+                        \langle Y \rangle &= \langle \psi | Y | \psi \rangle \\
+                        &= \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} -i\beta \\ i\alpha \end{bmatrix} \\
+                        &= -i\alpha^*\beta + i\beta^*\alpha \\
+                        &= -i[(a - bi)(c + di)] + i[(c - di)(a + bi)] \\
+                        &= -i[2adi - 2bci] = 2ad - 2bc \\
+                        &= 2(ad - bc) \\
+                        &= 2\text{Im}(\alpha^* \beta)
+                        \end{aligned}$$
+                    </p>
+
+                    <strong>3. Pauli-Z Expectation Value</strong>
+                    <p>
+                        $$\begin{aligned}
+                        \langle Z \rangle &= \langle \psi | Z | \psi \rangle \\
+                        &= \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} \alpha \\ -\beta \end{bmatrix} \\
+                        &= \alpha^*\alpha - \beta^*\beta \\
+                        &= |\alpha|^2 - |\beta|^2 \\
+                        \end{aligned}$$
+                    </p>
 
                 </div>
                 <div class="entry-tags">
