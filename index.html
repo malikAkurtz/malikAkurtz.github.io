@@ -1054,6 +1054,60 @@
                 </div>
             </li>
 
+            <li class="entry" data-index="7">
+                <div class="entry-title">Bloch Sphere Parameterization</div>
+                <div class="entry-body">
+                    <p>A general qubit state can be written as:</p>
+                    <p>$$|\psi\rangle = \begin{pmatrix}\alpha\\\beta\end{pmatrix} = \begin{pmatrix}a+ib\\c+id\end{pmatrix}$$</p>
+                    <p>Converting each component to polar form $re^{i\theta}$:</p>
+                    <p>$$= \begin{pmatrix}\sqrt{a^2+b^2}\;e^{i\,\mathrm{atan2}(b,a)}\\\sqrt{c^2+d^2}\;e^{i\,\mathrm{atan2}(d,c)}\end{pmatrix} = |\alpha|e^{i\tau}|0\rangle + |\beta|e^{i\varphi}|1\rangle$$</p>
+
+                    <p><strong>Eliminating the Global Phase</strong></p>
+                    <p>Factor out $e^{i\tau}$ (global phase, physically irrelevant):</p>
+                    <p>$$= e^{i\tau}\!\left(|\alpha||0\rangle + |\beta|e^{i(\varphi-\tau)}|1\rangle\right) \equiv |\alpha||0\rangle + e^{i\phi}|\beta||1\rangle, \quad \phi = \varphi - \tau$$</p>
+                    <p>This leaves 3 free real parameters: $|\alpha|$, $|\beta|$, and $\phi$.</p>
+                    <p>Note that $\phi$ is precisely the relative phase between $\ket{0}$ and $\ket{1}.$</p>
+
+                    <p><strong>Enforcing Normalization</strong></p>
+                    <p>The constraint $|\alpha|^2 + |\beta|^2 = 1$ is satisfied by writing </p>
+                    <p>$$\begin{aligned}
+                        |\alpha|^2 + |\beta|^2 &= 1 \\
+                        &= \cos^2\tfrac{\theta}{2} + \sin^2\tfrac{\theta}{2} \\
+                        &\implies |\alpha| = \cos\tfrac{\theta}{2}, \quad |\beta| = \sin\tfrac{\theta}{2} \\
+                        &\implies |\alpha||0\rangle + e^{i\phi}|\beta||1\rangle = \cos\tfrac{\theta}{2}|0\rangle + e^{i\phi}\sin\tfrac{\theta}{2}|1\rangle                        
+                    \end{aligned}$$</p>
+
+                    <p>Hence leaving us with two real parameters, $\theta \in [0, \pi], \quad \phi \in [0, 2\pi)$, where
+                    the inclination (polar angle) is: </p>
+                    <p>$$\begin{aligned}
+                        \theta &= 2\arccos(\sqrt{a^2 + b^2}) \\
+                        &= 2\arcsin(\sqrt{c^2 + d^2})
+                    \end{aligned}$$</p>
+                    <p>and the azimuthal angle is: </p>
+                    <p>$$\begin{aligned}
+                        \phi &= \varphi - \tau \\
+                        &= \operatorname{atan2}(d, c) - \operatorname{atan2}(b, a)
+                    \end{aligned}$$</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$|\psi\rangle = \cos\tfrac{\theta}{2}|0\rangle + e^{i\phi}\sin\tfrac{\theta}{2}|1\rangle$$</p>
+                    </div>
+
+                    <p><strong>From Spherical to Rectangular/Cartesian Coordinates</strong></p>
+                    <p>Given the azimuth, $\phi$, and the inclination, $\theta$, compute: </p>
+                    <p>$$\begin{aligned}
+                        x &= \sin\theta\cos\phi \\
+                        y &= \sin\theta\sin\phi \\
+                        z &= \cos\theta
+                    \end{aligned}$$</p>
+
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">qubit</span>
+                    <span class="tag">bloch sphere</span>
+                    <span class="tag">quantum gates</span>
+                </div>
+            </li>
+
         </ul>
 
         <footer>
@@ -1095,22 +1149,25 @@
         const R = 42; // node radius
         const nodes = [
             { id: 0, x: 80,  y: 140, lines: ['Quantum', 'Harmonic', 'Oscillator'] },
-            { id: 1, x: 220, y: 72,  lines: ['The Fock', 'Basis'] },
-            { id: 2, x: 600, y: 72,  lines: ['RY(θ) via', 'Harm. Osc.'] },
-            { id: 3, x: 220, y: 210, lines: ['The', 'Transmon'] },
+            { id: 1, x: 210, y: 65,  lines: ['The Fock', 'Basis'] },
+            { id: 2, x: 600, y: 65,  lines: ['RY(θ) via', 'Harm. Osc.'] },
+            { id: 3, x: 210, y: 210, lines: ['The', 'Transmon'] },
             { id: 4, x: 600, y: 210, lines: ['RY(θ) via', 'Transmon'] },
-            { id: 5, x: 400, y: 140, lines: ['Pulse Seq.', 'Encoding'] },
+            { id: 5, x: 400, y: 155, lines: ['Pulse Seq.', 'Encoding'] },
             { id: 6, x: 510, y: 210, lines: ['Transmon', 'Free Evo.'] },
+            { id: 7, x: 400, y: 65,  lines: ['Bloch', 'Sphere'] },
         ];
 
         const edges = [
             { from: 0, to: 1, curve:  28 },
             { from: 1, to: 3, curve:  22 },
             { from: 1, to: 5, curve: -22 },
+            { from: 1, to: 7, curve:   0 },
             { from: 3, to: 5, curve:  22 },
             { from: 5, to: 2, curve: -22 },
             { from: 5, to: 6, curve:  22 },
             { from: 6, to: 4, curve: -22 },
+            { from: 7, to: 2, curve:  22 },
         ];
 
         // ── Build SVG graph ──
