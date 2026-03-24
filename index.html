@@ -402,7 +402,7 @@
         <!-- ── Knowledge Graph ── -->
         <div id="graph-section">
             <p class="graph-label">// knowledge map</p>
-            <svg id="graph-svg" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
+            <svg id="graph-svg" viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
                             markerWidth="5" markerHeight="5" orient="auto">
@@ -869,6 +869,16 @@
                         \end{aligned}$$</p>
                     </div>
                     
+                    <p>Also note that $\hat{H}$ can be approximated as follows: </p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{H} \approx \hbar \omega_q\hat{b}^{\dagger}\hat{b} - \tfrac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2$$</p>
+                    </div>
+
+                    <p>Similarly, $\hat{n}$ can be approximated as:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{n} \approx ir(\hat{a}^{\dagger} - \hat{a}), \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}$$</p>
+                    </div>
+                    
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -885,10 +895,8 @@
 
             <li class="entry" data-index="4">
                 <div class="entry-title">Approximating an $RY(\theta)$ Unitary with a Transmon</div>
-                <div class="entry-body">
-                    <p>First, note that the charge operator can be approximated in the Fock basis as follows:</p>
-                    <p>$$[\hat{n}]_F \approx ir(\hat{a}^{\dagger} - \hat{a}), \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}$$</p>
-                    <p>We will use $[\hat{n}]_F$ to build the kick unitary $\hat{U}_{\theta}$, as Shillito does in the paper.<a class="cite" data-ref="1">[1]</a></p>
+                <div class="entry-body">                    
+                    <p>We will use the Fock approximated $\hat{n}$ to build the kick unitary $\hat{U}_{\theta}$, as Shillito does in the paper.<a class="cite" data-ref="1">[1]</a></p>
                     <p>Lets once more set ncut = 3 and see how we might apply an RY gate</p>
                     <p>Set our initial state</p>
                     <p>$$\psi_0 = \ket{\psi_0} \equiv \sum_{n=1}^{3} c_n\ket{\psi_n} = \sum_{n=1}^{3} c_n\ket{n} = \vec{e}_1$$</p>
@@ -954,6 +962,98 @@
                 </div>
             </li>
 
+            <li class="entry" data-index="5">
+                <div class="entry-title">Encoding the Pulse Sequence</div>
+                <div class="entry-body">
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
+
+                    <p><strong>The Kick Operator</strong></p>
+                    <p>The SFQ kick applied to the qubit can be represented as a displacement operator:</p>
+                    <p>$$\hat{U}_\theta = \exp\!\left(\frac{\theta}{2}[\hat{b}^\dagger - \hat{b}]\right), \quad \theta = C_c \Phi_0\sqrt{\frac{2\omega_q}{C}}$$</p>
+                    <p>where $C_c$ is the coupling capacitance and $\Phi_0 = h/2e$ is the flux quantum. Typically $\theta \approx 0.03$ rad.</p>
+
+                    <p><strong>Building Gates from Kicks</strong></p>
+                    <p>Unitary operations on the qubit are modeled as a series of $N$ kicks interleaved with free evolution:</p>
+                    <p>$$\hat{U} = \prod_{i=0}^{N} \exp\!\left(\frac{-i\hat{H}t_i}{\hbar}\right)\hat{U}_\theta$$</p>
+                    <p>where $t_i$ is the free-evolution time between kick $i$ and kick $i+1$.</p>
+
+                    <p>In the two-level approximation, a single kick followed by one full qubit cycle of free evolution approximates an $RY$ rotation:</p>
+                    <p>$$\hat{RY}(\theta) \approx \exp\!\left(\frac{-i\hat{H}T_q}{\hbar}\right)\hat{U}_\theta, \quad T_q = \frac{2\pi}{\omega_q}$$</p>
+                    <p>Chaining $N$ such kick-evolve pairs gives an arbitrary rotation:</p>
+                    <p>$$\hat{RY}(\theta_{\text{target}}) \approx \hat{RY}(\theta)^N, \quad N = \frac{\theta_{\text{target}}}{\theta}$$</p>
+
+                    <p><strong>SFQ-DRAG Decomposition</strong></p>
+                    <p>The SFQ analog of DRAG decomposes any stand-alone pulse train into a ramp-on, train, and ramp-off segment:</p>
+                    <p>$$\hat{U} = \hat{U}(t_r)_{\text{on}}\,\hat{U}_{\text{train}}\,\hat{U}(t_r)_{\text{off}}, \quad t_r = \text{ramp time}$$</p>
+                    <p>e.g. $\hat{U}_{\text{train}} = \hat{RY}(\theta)^N$.</p>
+
+                    <p><strong>Bit-String Encoding</strong></p>
+                    <p>Given an SFQ clock frequency $f_c$ with period $T_c = 1/f_c$, define</p>
+                    <p>$$M = \frac{T_q}{T_c}, \quad T_q \gg T_c$$</p>
+                    <p>so $M$ is the number of clock cycles per qubit cycle. Each qubit cycle is then described by a bit string</p>
+                    <p>$$s \in \{0,1\}^M = (s_0,\, s_1,\, \ldots,\, s_M)$$</p>
+                    <p>with the convention:</p>
+                    <p>$$s_i = 0 \;\Rightarrow\; \text{free-evolve the qubit for } T_c \text{ seconds}$$</p>
+                    <p>$$s_i = 1 \;\Rightarrow\; \text{apply an instantaneous kick, then free-evolve for } T_c \text{ seconds}$$</p>
+                    <p>For example:</p>
+                    <p>$$1000 \;\Longrightarrow\; \exp\!\left(\frac{-i\hat{H}T_q}{\hbar}\right)\hat{U}_\theta$$</p>
+                    <p>This encodes a single-kick gate: one kick at the start, followed by $M$ free clock cycles totalling one full qubit period.</p>
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">SFQ</span>
+                    <span class="tag">pulse</span>
+                    <span class="tag">quantum control</span>
+                </div>
+            </li>
+
+            <li class="entry" data-index="6">
+                <div class="entry-title">Transmon Free Evolution</div>
+                <div class="entry-body">
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
+
+                    <p><strong>Transmon Energy Levels (Fock Approximation)</strong></p>
+                    <p>Recall the first transition frequency: $E_1 - E_0 = \hbar\omega_q$. Using the Fock-basis approximation of the transmon Hamiltonian $\hat{H} \approx \hbar\omega_q\hat{b}^\dagger\hat{b} - \frac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2$, the $n$-th energy level is:</p>
+                    <p>$$E_n = \hbar\omega_q n - \frac{\alpha}{2}n(n-1)$$</p>
+                    <p>For $n = 2$:</p>
+                    <p>$$E_2 = 2\hbar\omega_q - \alpha \quad \implies \quad E_2 - E_0 = 2\hbar\omega_q - \alpha$$</p>
+                    <p>This is the key distinction from the harmonic oscillator, where $E_2 - E_0 = 2\hbar\omega_q$ exactly.</p>
+
+                    <p><strong>Free Evolution in the Energy Basis</strong></p>
+                    <p>The free evolution operator is $\hat{U} = \exp(-i\hat{H}t/\hbar)$. For a 3-level state $|\psi\rangle \equiv [\alpha,\, \beta,\, \gamma]^T$, this is diagonal in the energy basis:</p>
+                    <p>$$\begin{aligned}
+                    \hat{U}|\psi\rangle &\equiv \exp\!\left(-i[\mathcal{H}]_E\, t/\hbar\right)\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix} \\
+                    &= \begin{bmatrix} e^{-iE_0 t/\hbar} \\ & e^{-iE_1 t/\hbar} \\ & & e^{-iE_2 t/\hbar}\end{bmatrix}\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix} \\[6pt]
+                    &= e^{-iE_0 t/\hbar}\begin{bmatrix}\alpha \\ e^{-i(E_1-E_0)t/\hbar}\,\beta \\ e^{-i(E_2-E_0)t/\hbar}\,\gamma\end{bmatrix} \\
+                    &= e^{-iE_0 t/\hbar}\begin{bmatrix}\alpha \\ e^{-i\omega_q t}\,\beta \\ e^{-i(2\omega_q - \alpha/\hbar)t}\,\gamma\end{bmatrix}
+                    \end{aligned}$$</p>
+                    <p>So after time $t$, the relative phase between $|0\rangle$ and $|1\rangle$ is $\phi_1 = t\omega_q$, and between $|0\rangle$ and $|2\rangle$ is $\phi_2 = t(2\omega_q - \alpha/\hbar)$.</p>
+
+                    <p><strong>Why One Qubit Cycle Works</strong></p>
+                    <p>Setting $t = T_q = 2\pi/\omega_q$:</p>
+                    <p>$$\phi_1 = \frac{2\pi}{\omega_q}\cdot\omega_q = 2\pi \equiv 0 \pmod{2\pi}$$</p>
+                    <p>The qubit subspace $\{|0\rangle, |1\rangle\}$ returns to itself (up to global phase), while the $|2\rangle$ component acquires:</p>
+                    <p>$$e^{-i(2\omega_q - \alpha/\hbar)T_q} \neq 1$$</p>
+                    <p>because $\alpha \neq 0$. This residual phase continuously rotates the leakage component away from the qubit subspace — which is what makes the transmon suitable for qubit control.</p>
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">transmon</span>
+                    <span class="tag">free evolution</span>
+                    <span class="tag">anharmonicity</span>
+                </div>
+            </li>
+
         </ul>
 
         <footer>
@@ -995,19 +1095,22 @@
         const R = 42; // node radius
         const nodes = [
             { id: 0, x: 80,  y: 140, lines: ['Quantum', 'Harmonic', 'Oscillator'] },
-            { id: 1, x: 260, y: 72,  lines: ['The Fock', 'Basis'] },
-            { id: 2, x: 490, y: 72,  lines: ['RY(θ) via', 'Harm. Osc.'] },
-            { id: 3, x: 295, y: 205, lines: ['The', 'Transmon'] },
-            { id: 4, x: 490, y: 205, lines: ['RY(θ) via', 'Transmon'] },
+            { id: 1, x: 220, y: 72,  lines: ['The Fock', 'Basis'] },
+            { id: 2, x: 600, y: 72,  lines: ['RY(θ) via', 'Harm. Osc.'] },
+            { id: 3, x: 220, y: 210, lines: ['The', 'Transmon'] },
+            { id: 4, x: 600, y: 210, lines: ['RY(θ) via', 'Transmon'] },
+            { id: 5, x: 400, y: 140, lines: ['Pulse Seq.', 'Encoding'] },
+            { id: 6, x: 510, y: 210, lines: ['Transmon', 'Free Evo.'] },
         ];
 
         const edges = [
             { from: 0, to: 1, curve:  28 },
-            { from: 0, to: 3, curve: -28 },
-            { from: 1, to: 2, curve: -22 },
             { from: 1, to: 3, curve:  22 },
-            { from: 2, to: 4, curve:  22 },
-            { from: 3, to: 4, curve: -22 },
+            { from: 1, to: 5, curve: -22 },
+            { from: 3, to: 5, curve:  22 },
+            { from: 5, to: 2, curve: -22 },
+            { from: 5, to: 6, curve:  22 },
+            { from: 6, to: 4, curve: -22 },
         ];
 
         // ── Build SVG graph ──
