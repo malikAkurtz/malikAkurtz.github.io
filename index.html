@@ -1091,14 +1091,6 @@
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
                         <p>$$|\psi\rangle = \cos\tfrac{\theta}{2}|0\rangle + e^{i\phi}\sin\tfrac{\theta}{2}|1\rangle$$</p>
                     </div>
-
-                    <p><strong>From Spherical to Rectangular/Cartesian Coordinates</strong></p>
-                    <p>Given the azimuth, $\phi$, and the inclination, $\theta$, compute: </p>
-                    <p>$$\begin{aligned}
-                        x &= \sin\theta\cos\phi \\
-                        y &= \sin\theta\sin\phi \\
-                        z &= \cos\theta
-                    \end{aligned}$$</p>
                     
                     <strong>1. Pauli-X Expectation Value</strong>
                     <p>
@@ -1109,7 +1101,13 @@
                         &= (a - bi)(c + di) + (c - di)(a + bi) \\
                         &= (ac + adi - bci + bd) + (ca + cbi - dai + db) \\
                         &= 2ac + 2bd = 2(ac + bd) \\
-                        &= 2\text{Re}(\alpha^* \beta)
+                        &= 2\text{Re}(\alpha^* \beta) \\
+                        &= 2\text{Re}(|\alpha|e^{-i\tau}|\beta|e^{i\varphi}) \\
+                        &= 2|\alpha||\beta|\text{Re}(e^{i(\varphi - \tau)}) \\
+                        &= 2|\alpha||\beta|\text{Re}(\cos\phi + i\sin\phi) \\
+                        &= 2|\alpha||\beta|\cos\phi \\
+                        &= 2\cos\frac{\theta}{2}\sin\frac{\theta}{2}\cos\phi \\
+                        &= \sin\theta\cos\phi = x
                         \end{aligned}$$
                     </p>
                     
@@ -1122,7 +1120,11 @@
                         &= -i[(a - bi)(c + di)] + i[(c - di)(a + bi)] \\
                         &= -i[2adi - 2bci] = 2ad - 2bc \\
                         &= 2(ad - bc) \\
-                        &= 2\text{Im}(\alpha^* \beta)
+                        &= 2\text{Im}(\alpha^* \beta) \\
+                        &= 2\text{Im}(|\alpha|e^{-i\tau}|\beta|e^{i\varphi}) \\
+                        &= 2|\alpha||\beta|\text{Im}(e^{i\phi}) \\
+                        &= 2\cos\frac{\theta}{2}\sin\frac{\theta}{2}\sin\phi \\
+                        &= \sin\theta\sin\phi = y
                         \end{aligned}$$
                     </p>
 
@@ -1133,8 +1135,22 @@
                         &= \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha^* & \beta^* \end{bmatrix} \begin{bmatrix} \alpha \\ -\beta \end{bmatrix} \\
                         &= \alpha^*\alpha - \beta^*\beta \\
                         &= |\alpha|^2 - |\beta|^2 \\
+                        &= \cos^2\frac{\theta}{2} - \sin^2\frac{\theta}{2} \\
+                        &= \cos 2\cdot\frac{\theta}{2} \\
+                        &= \cos\theta = z
                         \end{aligned}$$
                     </p>
+
+                    <p>Thus, our rectangular coordinates are precisely the expectation values of each Pauli operator, </p>
+                    
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\begin{aligned}
+                        x &= \sin\theta\cos\phi  = \langle X \rangle\\
+                        y &= \sin\theta\sin\phi  = \langle Y \rangle \\
+                        z &= \cos\theta = \langle Z \rangle 
+                    \end{aligned}$$</p>
+                    </div>
+                    
 
                 </div>
                 <div class="entry-tags">
