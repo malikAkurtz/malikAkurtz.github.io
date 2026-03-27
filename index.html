@@ -1160,6 +1160,39 @@
                 </div>
             </li>
 
+            <li class="entry" data-index="8">
+                <div class="entry-title">The Unitary Group &amp; SU(2)</div>
+                <div class="entry-body">
+                    <p>The unitary group is defined as:</p>
+                    <p>$$U(2) = \{U \in \mathbb{C}^{2\times 2} \mid U^\dagger U = UU^\dagger = I\}$$</p>
+
+                    <p>The special unitary group is the subgroup:</p>
+                    <p>$$SU(2) = \left\{U = \begin{bmatrix}\alpha & -\bar{\beta} \\ \beta & \bar{\alpha}\end{bmatrix} \;\middle|\; \alpha,\beta \in \mathbb{C},\; \det(U) = |\alpha|^2 + |\beta|^2 = 1\right\}$$</p>
+                    <p>$$\subseteq U(2)$$</p>
+
+                    <p>Also, for every $U \in U(2)$, there exists $V \in SU(2)$ such that $U = e^{i\phi}V$. That is to say:</p>
+                    <p>$$SU(2) \cong U(2)/U(1)$$</p>
+                    <p>where $U(1) = \{e^{i\phi}I \mid \phi \in [0, 2\pi)\}$.</p>
+
+                    <p><strong>Generators of SU(2)</strong></p>
+                    <p>The generators are the identity and the three Pauli matrices:</p>
+                    <p>$$I = \begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}, \quad \sigma_x = \begin{bmatrix}0 & 1\\1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i\\i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0\\0 & -1\end{bmatrix}$$</p>
+
+                    <p><strong>Decomposition Theorem</strong></p>
+                    <p>For every $U \in SU(2)$, there exists $\theta \in [0, 2\pi]$ and a unit vector $(n_x, n_y, n_z) \in S^2$ such that:</p>
+                    <p>$$U = \exp\!\left(-i\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)\right)$$</p>
+                    <p>$$= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)$$</p>
+
+                    <p><strong>Example:</strong> The $RY(\theta)$ gate corresponds to a rotation about the $y$-axis ($\hat{n} = \hat{y}$):</p>
+                    <p>$$RY(\theta) = \cos\frac{\theta}{2}\,I - i\sin\frac{\theta}{2}\,\sigma_y = \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">lie groups</span>
+                    <span class="tag">quantum gates</span>
+                    <span class="tag">pauli matrices</span>
+                </div>
+            </li>
+
         </ul>
 
         <footer>
@@ -1208,6 +1241,7 @@
             { id: 5, x: 400, y: 155, lines: ['Pulse Seq.', 'Encoding'] },
             { id: 6, x: 510, y: 210, lines: ['Transmon', 'Free Evo.'] },
             { id: 7, x: 400, y: 65,  lines: ['Bloch', 'Sphere'] },
+            { id: 8, x: 80,  y: 65,  lines: ['SU(2)', 'Group'] },
         ];
 
         const edges = [
@@ -1220,6 +1254,8 @@
             { from: 5, to: 6, curve:  22 },
             { from: 6, to: 4, curve: -22 },
             { from: 7, to: 2, curve:  22 },
+            { from: 8, to: 7, curve:   0 },
+            { from: 8, to: 0, curve:  22 },
         ];
 
         // ── Build SVG graph ──
