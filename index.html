@@ -998,6 +998,31 @@
                     <p>For example:</p>
                     <p>$$1000 \;\Longrightarrow\; \exp\!\left(\frac{-i\hat{H}T_q}{\hbar}\right)\hat{U}_\theta$$</p>
                     <p>This encodes a single-kick gate: one kick at the start, followed by $M$ free clock cycles totalling one full qubit period.</p>
+                    
+                    <p>It is imperative that $\hat{U}_{\text{on}}$ and $\hat{U}_{\text{off}}$ destructively interfere depending on the gate being 
+                        approximated by the SFQ pulse train. That is to say "The off-ramp pulses $\hat{U}_{\text{off}}$ should be symmetric with
+                        respect to the on-ramp unitary along the Y-axis and anti-symmetric along the X-axis for the implementation of an 
+                        $\hat{RY}(\theta)$ gate."
+                    </p>
+                    <p>In order to do this, we first decompose our on-ramp unitary as: </p>
+                    <p>$$\hat{U}_{on}(t_r) = c_I\hat{I} + c_x\hat{\sigma}_x + c_y\hat{\sigma}_y + c_z\hat{\sigma}_z$$</p>
+                    <p>Now, if we are effectuating an $\hat{RY}(\theta)$ gate, we would have: </p>
+                    <p>$$\hat{U}_{off}(t_r) = c_I\hat{I} - c_x\hat{\sigma}_x + c_y\hat{\sigma}_y + c_z\hat{\sigma}_z$$</p>
+                    <p>To remove any accumulated rotation along the X-axis, similarly, if we are effectuating an $\hat{RX}(\theta)$ gate, 
+                        we would have: 
+                    </p>
+                    <p>$$\hat{U}_{off}(t_r) = c_I\hat{I} + c_x\hat{\sigma}_x - c_y\hat{\sigma}_y + c_z\hat{\sigma}_z$$</p>
+                    <p>To remove any accumulated rotation along the Y-axis.</p>
+
+                    <strong>Example</strong>
+                    <p>Assume we wish to effectuate an $\hat{RY}(\theta_{\text{target}})$ gate, that is:</p>
+                    <p>$$\hat{U}_{train} = \hat{RY}(\theta)^N, \quad N = \frac{\theta_{\text{target}}}{\theta}$$</p>
+                    <p>Say we want our ramp to be the sequence (0100), i.e.</p>
+                    <p>$$\begin{aligned}
+                        \hat{U}_{on}(T_q) &= e^{-i\hat{\mathcal{H}}\frac{3T_q}{4}/\hbar}\hat{U}_{\theta}e^{-i\hat{\mathcal{H}}\frac{T_q}{4}/\hbar} \\
+                        &\equiv e^{-i\mathcal{H}_E\frac{3T_q}{4}/\hbar}U_{\theta}e^{-i\mathcal{H}_E\frac{T_q}{4}/\hbar} \\
+                        &= 
+                        \end{aligned}$$</p>
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -1017,29 +1042,33 @@
                 <div class="entry-body">
                     <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
 
-                    <p><strong>Transmon Energy Levels (Fock Approximation)</strong></p>
-                    <p>Recall the first transition frequency: $E_1 - E_0 = \hbar\omega_q$. Using the Fock-basis approximation of the transmon Hamiltonian $\hat{H} \approx \hbar\omega_q\hat{b}^\dagger\hat{b} - \frac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2$, the $n$-th energy level is:</p>
-                    <p>$$E_n = \hbar\omega_q n - \frac{\alpha}{2}n(n-1)$$</p>
-                    <p>For $n = 2$:</p>
-                    <p>$$E_2 = 2\hbar\omega_q - \alpha \quad \implies \quad E_2 - E_0 = 2\hbar\omega_q - \alpha$$</p>
-                    <p>This is the key distinction from the harmonic oscillator, where $E_2 - E_0 = 2\hbar\omega_q$ exactly.</p>
+                    <p><strong>Full Free Evolution Unitary</strong></p>
+                    <p>The free evolution unitary is:</p>
+                    <p>$$\hat{U}_f(t) = e^{-i\hat{H}t/\hbar} \equiv e^{-i\mathcal{H}_E t/\hbar}$$</p>
+                    <p>Since $\mathcal{H}_E$ is diagonal in the energy basis, the matrix exponential is just the exponential of each diagonal entry:</p>
+                    <p>$$= \begin{bmatrix} e^{-iE_0 t/\hbar} & 0 & 0 & \cdots \\ 0 & e^{-iE_1 t/\hbar} & 0 & \cdots \\ 0 & 0 & e^{-iE_2 t/\hbar} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
+                    <p>Factor out $e^{-iE_0 t/\hbar}$ as a global phase, using $\frac{-iE_n t}{\hbar} + \frac{iE_0 t}{\hbar} = \frac{-i(E_n-E_0)t}{\hbar}$:</p>
+                    <p>$$= e^{-iE_0 t/\hbar} \begin{bmatrix} 1 & 0 & 0 & \cdots \\ 0 & e^{-i(E_1-E_0)t/\hbar} & 0 & \cdots \\ 0 & 0 & e^{-i(E_2-E_0)t/\hbar} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
+                    <p>Using the transmon energy differences $E_n - E_0 = n\omega_q - \frac{\alpha}{2\hbar}n(n-1)$:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{U}_f(t) = e^{-iE_0 t/\hbar} \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & e^{-i\left(n\omega_q - \frac{\alpha}{2\hbar}n(n-1)\right)t} \end{bmatrix}$$</p>
+                    </div>
 
-                    <p><strong>Free Evolution in the Energy Basis</strong></p>
-                    <p>The free evolution operator is $\hat{U} = \exp(-i\hat{H}t/\hbar)$. For a 3-level state $|\psi\rangle \equiv [\alpha,\, \beta,\, \gamma]^T$, this is diagonal in the energy basis:</p>
-                    <p>$$\begin{aligned}
-                    \hat{U}|\psi\rangle &\equiv \exp\!\left(-i[\mathcal{H}]_E\, t/\hbar\right)\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix} \\
-                    &= \begin{bmatrix} e^{-iE_0 t/\hbar} \\ & e^{-iE_1 t/\hbar} \\ & & e^{-iE_2 t/\hbar}\end{bmatrix}\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix} \\[6pt]
-                    &= e^{-iE_0 t/\hbar}\begin{bmatrix}\alpha \\ e^{-i(E_1-E_0)t/\hbar}\,\beta \\ e^{-i(E_2-E_0)t/\hbar}\,\gamma\end{bmatrix} \\
-                    &= e^{-iE_0 t/\hbar}\begin{bmatrix}\alpha \\ e^{-i\omega_q t}\,\beta \\ e^{-i(2\omega_q - \alpha/\hbar)t}\,\gamma\end{bmatrix}
-                    \end{aligned}$$</p>
-                    <p>So after time $t$, the relative phase between $|0\rangle$ and $|1\rangle$ is $\phi_1 = t\omega_q$, and between $|0\rangle$ and $|2\rangle$ is $\phi_2 = t(2\omega_q - \alpha/\hbar)$.</p>
-
-                    <p><strong>Why One Qubit Cycle Works</strong></p>
-                    <p>Setting $t = T_q = 2\pi/\omega_q$:</p>
-                    <p>$$\phi_1 = \frac{2\pi}{\omega_q}\cdot\omega_q = 2\pi \equiv 0 \pmod{2\pi}$$</p>
-                    <p>The qubit subspace $\{|0\rangle, |1\rangle\}$ returns to itself (up to global phase), while the $|2\rangle$ component acquires:</p>
-                    <p>$$e^{-i(2\omega_q - \alpha/\hbar)T_q} \neq 1$$</p>
-                    <p>because $\alpha \neq 0$. This residual phase continuously rotates the leakage component away from the qubit subspace — which is what makes the transmon suitable for qubit control.</p>
+                    <p><strong>Reduction to $RZ$ in the Qubit Subspace</strong></p>
+                    <p>Since $e^{-iE_0 t/\hbar}I$ was already dropped as a global phase on the full $n_\text{cut}$-level space, the free evolution unitary is:</p>
+                    <p>$$\hat{U}_f(t) = \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & \ddots \end{bmatrix}$$</p>
+                    <p>Projecting onto $\{|0\rangle, |1\rangle\}$:</p>
+                    <p>$$\hat{U}_f(t)\big|_{\text{qubit}} = \begin{bmatrix} 1 & 0 \\ 0 & e^{-i\omega_q t} \end{bmatrix}$$</p>
+                    <p>No further phase removal is needed — the only global phase has already been removed on the full space before projection.</p>
+                    <p>Recall:</p>
+                    <p>$$RZ(\theta) = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix}$$</p>
+                    <p>In the no-leakage limit, the qubit subspace is dynamically closed, so $e^{-i\theta/2}I_{2\times 2}$ is a valid global phase:</p>
+                    <p>$$\xrightarrow{\text{no leakage}} \begin{bmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{bmatrix}$$</p>
+                    <p>Matching: $e^{i\theta} = e^{-i\omega_q t} \implies \theta = -\omega_q t$, so:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{U}_f(t)\big|_{\text{qubit}} = RZ(-\omega_q t)$$</p>
+                    </div>
+                    <p>Free evolution in the qubit subspace is precisely an $RZ$ rotation accumulating phase at rate $\omega_q$. This identification is exact only in the no-leakage limit where the qubit subspace is dynamically closed.</p>
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -1167,29 +1196,54 @@
                     <p>$$U(2) = \{U \in \mathbb{C}^{2\times 2} \mid U^\dagger U = UU^\dagger = I\}$$</p>
 
                     <p>The special unitary group is the subgroup:</p>
-                    <p>$$SU(2) = \left\{U = \begin{bmatrix}\alpha & -\bar{\beta} \\ \beta & \bar{\alpha}\end{bmatrix} \;\middle|\; \alpha,\beta \in \mathbb{C},\; \det(U) = |\alpha|^2 + |\beta|^2 = 1\right\}$$</p>
-                    <p>$$\subseteq U(2)$$</p>
+                    <p>$$\begin{aligned}
+                        SU(2) &= \left\{U = \begin{bmatrix}\alpha & -\bar{\beta} \\ \beta & \bar{\alpha}\end{bmatrix} \;\middle|\; \alpha,\beta \in \mathbb{C},\; \det(U) = |\alpha|^2 + |\beta|^2 = 1\right\} \\
+                        &\subseteq U(2)
+                        \end{aligned}$$</p>
 
                     <p>Also, for every $U \in U(2)$, there exists $V \in SU(2)$ such that $U = e^{i\phi}V$. That is to say:</p>
                     <p>$$SU(2) \cong U(2)/U(1)$$</p>
-                    <p>where $U(1) = \{e^{i\phi}I \mid \phi \in [0, 2\pi)\}$.</p>
+                    <p>where </p>
+                    <p>$$U(1) = \{e^{i\phi}I \mid \phi \in [0, 2\pi)\}$$</p>
 
                     <p><strong>Generators of SU(2)</strong></p>
-                    <p>The generators are the identity and the three Pauli matrices:</p>
-                    <p>$$I = \begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}, \quad \sigma_x = \begin{bmatrix}0 & 1\\1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i\\i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0\\0 & -1\end{bmatrix}$$</p>
+                    <p>The generators are the identity and the three Pauli matrices (in the computational basis):</p>
+                    <p>$$\hat{I} \equiv \begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}, \quad \hat{\sigma}_x \equiv \begin{bmatrix}0 & 1\\1 & 0\end{bmatrix}, \quad \hat{\sigma}_y \equiv \begin{bmatrix}0 & -i\\i & 0\end{bmatrix}, \quad \hat{\sigma}_z \equiv \begin{bmatrix}1 & 0\\0 & -1\end{bmatrix}$$</p>
 
                     <p><strong>Decomposition Theorem</strong></p>
                     <p>For every $U \in SU(2)$, there exists $\theta \in [0, 2\pi]$ and a unit vector $(n_x, n_y, n_z) \in S^2$ such that:</p>
-                    <p>$$U = \exp\!\left(-i\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)\right)$$</p>
-                    <p>$$= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)$$</p>
+                    <p>$$\begin{aligned}
+                        U &= \exp\!\left(-i\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)\right) \\
+                        &= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)
+                        \end{aligned}$$</p>
 
-                    <p><strong>Example:</strong> The $RY(\theta)$ gate corresponds to a rotation about the $y$-axis ($\hat{n} = \hat{y}$):</p>
-                    <p>$$RY(\theta) = \cos\frac{\theta}{2}\,I - i\sin\frac{\theta}{2}\,\sigma_y = \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
+                    <p><strong>Thus, </strong>
+                    <p>$$\hat{RX}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_x \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
+                    <p>$$\hat{RY}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_y \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
+                    <p>$$\hat{RZ}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_z \equiv \begin{bmatrix} e^{-i\frac{\theta}{2}} & 0 \\ 0 & e^{i\frac{\theta}{2}} \end{bmatrix}$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">lie groups</span>
                     <span class="tag">quantum gates</span>
                     <span class="tag">pauli matrices</span>
+                </div>
+            </li>
+
+            <li class="entry" data-index="9">
+                <div class="entry-title">Pulse Encoding Symmetries &amp; Asymmetries</div>
+                <div class="entry-body">
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">SFQ</span>
+                    <span class="tag">pulse</span>
+                    <span class="tag">quantum control</span>
                 </div>
             </li>
 
@@ -1242,6 +1296,7 @@
             { id: 6, x: 510, y: 210, lines: ['Transmon', 'Free Evo.'] },
             { id: 7, x: 400, y: 65,  lines: ['Bloch', 'Sphere'] },
             { id: 8, x: 80,  y: 65,  lines: ['SU(2)', 'Group'] },
+            { id: 9, x: 310, y: 210, lines: ['Pulse Enc.', 'Symmetry'] },
         ];
 
         const edges = [
@@ -1256,6 +1311,7 @@
             { from: 7, to: 2, curve:  22 },
             { from: 8, to: 7, curve:   0 },
             { from: 8, to: 0, curve:  22 },
+            { from: 5, to: 9, curve:  22 },
         ];
 
         // ── Build SVG graph ──
