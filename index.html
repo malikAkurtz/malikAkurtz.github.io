@@ -484,6 +484,51 @@
                     <p>$$\text{Lemma: } \hat{a}_+\psi_n = \sqrt{n+1}\;\psi_{n+1} \quad \text{and} \quad \hat{a}_-\psi_n = \sqrt{n}\;\psi_{n-1}$$</p>
                     <p>Also note, </p>
                     <p>$$\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}_+ - \hat{a}_-) \quad \text{and} \quad \hat{p} = i\sqrt{\frac{\hbar m\omega}{2}}(\hat{a}_+ - \hat{a}_-)$$</p>
+
+                    <p>Note: </p>
+                    <p>$$\hat{a}_+ = \hat{a}^\dagger, \quad \hat{a}_- = \hat{a}$$</p>
+
+                    <p><strong>Zero-Point Fluctuations</strong></p>
+                    <p>The zero point fluctuation of an arbitrary operator $\hat{A}$ is the standard deviation of $\hat{A}$ in state $\ket{0}$, </p>
+                    <p>$$\hat{A}_{\text{zpf}} = \sqrt{\bra{0}\hat{A}^2\ket{0} - (\bra{0}\hat{A}\ket{0})^2}$$</p>
+
+                    <p><strong>Position Zero-Point Fluctuation</strong></p>
+                    <p>$$\hat{x} = \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}^{\dagger} + \hat{a})$$</p>
+                    <p>$$\begin{aligned}
+                    \implies \hat{x}|0\rangle &= \sqrt{\frac{\hbar}{2m\omega}}(\hat{a}^{\dagger}|0\rangle + \hat{a}|0\rangle) \\
+                    &= \sqrt{\frac{\hbar}{2m\omega}}|1\rangle
+                    \end{aligned}$$</p>
+                    <p>$$\implies \langle 0|\hat{x}|0\rangle = \sqrt{\frac{\hbar}{2m\omega}}\langle 0|1\rangle = 0$$</p>
+                    <p>$$\begin{aligned}
+                    \hat{x}^2|0\rangle &= \frac{\hbar}{2m\omega}(\hat{a}^{\dagger} + \hat{a})^2|0\rangle \\
+                    &= \frac{\hbar}{2m\omega}(\hat{a}^{\dagger 2} + \hat{a}^{\dagger}\hat{a} + \hat{a}\hat{a}^{\dagger} + \hat{a}^2)|0\rangle \\
+                    &= \frac{\hbar}{2m\omega}(\sqrt{2}|2\rangle + 0 + |0\rangle + 0) \\
+                    &= \frac{\hbar}{2m\omega}(|0\rangle + \sqrt{2}|2\rangle)
+                    \end{aligned}$$</p>
+                    <p>$$\implies \langle 0|\hat{x}^2|0\rangle = \frac{\hbar}{2m\omega}$$</p>
+                    <p>$$\implies x_{\text{zpf}} = \sqrt{\langle 0|\hat{x}^2|0\rangle - \langle 0|\hat{x}|0\rangle^2} = \sqrt{\frac{\hbar}{2m\omega}}$$</p>
+
+                    <p><strong>Momentum Zero-Point Fluctuation</strong></p>
+                    <p>$$\hat{p} = i\sqrt{\frac{\hbar m\omega}{2}}(\hat{a}^{\dagger} - \hat{a})$$</p>
+                    <p>$$\begin{aligned}
+                    \implies \hat{p}|0\rangle &= i\sqrt{\frac{\hbar m\omega}{2}}(\hat{a}^{\dagger}|0\rangle - \hat{a}|0\rangle) \\
+                    &= i\sqrt{\frac{\hbar m\omega}{2}}|1\rangle
+                    \end{aligned}$$</p>
+                    <p>$$\implies \langle 0|\hat{p}|0\rangle = i\sqrt{\frac{\hbar m\omega}{2}}\langle 0|1\rangle = 0$$</p>
+                    <p>$$\begin{aligned}
+                    \hat{p}^2|0\rangle &= -\frac{\hbar m\omega}{2}(\hat{a}^{\dagger} - \hat{a})^2|0\rangle \\
+                    &= -\frac{\hbar m\omega}{2}(\hat{a}^{\dagger 2} - \hat{a}^{\dagger}\hat{a} - \hat{a}\hat{a}^{\dagger} + \hat{a}^2)|0\rangle \\
+                    &= -\frac{\hbar m\omega}{2}(\sqrt{2}|2\rangle - 0 - |0\rangle + 0) \\
+                    &= \frac{\hbar m\omega}{2}(|0\rangle - \sqrt{2}|2\rangle)
+                    \end{aligned}$$</p>
+                    <p>$$\implies \langle 0|\hat{p}^2|0\rangle = \frac{\hbar m\omega}{2}$$</p>
+                    <p>$$\implies p_{\text{zpf}} = \sqrt{\langle 0|\hat{p}^2|0\rangle - \langle 0|\hat{p}|0\rangle^2} = \sqrt{\frac{\hbar m\omega}{2}}$$</p>
+
+                    <p><strong>Thus:</strong></p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{x} = x_{\text{zpf}}(\hat{a}^{\dagger} + \hat{a}), \qquad \hat{p} = ip_{\text{zpf}}(\hat{a}^{\dagger} - \hat{a})$$</p>
+                    </div>
+
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -871,12 +916,20 @@
                     
                     <p>Also note that $\hat{H}$ can be approximated as follows: </p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
-                        <p>$$\hat{H} \approx \hbar \omega_q\hat{b}^{\dagger}\hat{b} - \tfrac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2$$</p>
+                        <p>$$\begin{aligned}
+                        \hat{H} &\approx \hbar \omega_q\hat{b}^{\dagger}\hat{b} - \tfrac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2 \\
+                        &\equiv \begin{bmatrix} 0 & & & \\ & \hbar\omega_q & & \\ & & 2\hbar\omega_q - \alpha & \\ & & & 3\hbar\omega_q - 3\alpha & \\ & & & & \ddots \end{bmatrix} \\
+                        &= [\hat{\tilde{H}}]_F
+                        \end{aligned}$$</p>
                     </div>
 
                     <p>Similarly, $\hat{n}$ can be approximated as:</p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
-                        <p>$$\hat{n} \approx ir(\hat{a}^{\dagger} - \hat{a}), \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}$$</p>
+                        <p>$$\begin{aligned}
+                        \hat{n} &\approx ir(\hat{b}^{\dagger} - \hat{b}) \\
+                        &\equiv \begin{bmatrix} 0 & -ir & 0 & \cdots \\ ir & 0 & -i\sqrt{2}\,r & \cdots \\ 0 & i\sqrt{2}\,r & 0 & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix} \\
+                        &= [\hat{\tilde{n}}]_F, \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}
+                        \end{aligned}$$</p>
                     </div>
                     
                 </div>
@@ -991,13 +1044,17 @@
                     <p>Given an SFQ clock frequency $f_c$ with period $T_c = 1/f_c$, define</p>
                     <p>$$M = \frac{T_q}{T_c}, \quad T_q \gg T_c$$</p>
                     <p>so $M$ is the number of clock cycles per qubit cycle. Each qubit cycle is then described by a bit string</p>
-                    <p>$$s \in \{0,1\}^M = (s_0,\, s_1,\, \ldots,\, s_M)$$</p>
+                    <p>$$s = (s_0,\, s_1,\, \ldots,\, s_M) \in \{0,1\}^{M-1} $$</p>
                     <p>with the convention:</p>
                     <p>$$s_i = 0 \;\Rightarrow\; \text{free-evolve the qubit for } T_c \text{ seconds}$$</p>
                     <p>$$s_i = 1 \;\Rightarrow\; \text{apply an instantaneous kick, then free-evolve for } T_c \text{ seconds}$$</p>
-                    <p>For example:</p>
-                    <p>$$1000 \;\Longrightarrow\; \exp\!\left(\frac{-i\hat{H}T_q}{\hbar}\right)\hat{U}_\theta$$</p>
-                    <p>This encodes a single-kick gate: one kick at the start, followed by $M$ free clock cycles totalling one full qubit period.</p>
+                    <p>$$\begin{aligned}
+                    1000 \implies &\; e^{-i\hat{H}T_c/\hbar} \, e^{-i\hat{H}T_c/\hbar} \, e^{-i\hat{H}T_c/\hbar} \, e^{-i\hat{H}T_c/\hbar} \, \hat{U}_\theta \\
+                    &= e^{4(-i\hat{H}T_c/\hbar)} \, \hat{U}_\theta \\
+                    &= e^{-i\hat{H}4T_c/\hbar} \, \hat{U}_\theta \\
+                    &= e^{-i\hat{H}T_q/\hbar} \, \hat{U}_\theta
+                    \end{aligned}$$</p>
+                    <p>This encodes a single-kick gate: one kick at the start, followed by $M=4$ free clock cycles totalling one full qubit period.</p>
                     
                     <p>It is imperative that $\hat{U}_{\text{on}}$ and $\hat{U}_{\text{off}}$ destructively interfere depending on the gate being 
                         approximated by the SFQ pulse train. That is to say "The off-ramp pulses $\hat{U}_{\text{off}}$ should be symmetric with
@@ -1019,10 +1076,39 @@
                     <p>$$\hat{U}_{train} = \hat{RY}(\theta)^N, \quad N = \frac{\theta_{\text{target}}}{\theta}$$</p>
                     <p>Say we want our ramp to be the sequence (0100), i.e.</p>
                     <p>$$\begin{aligned}
-                        \hat{U}_{on}(T_q) &= e^{-i\hat{\mathcal{H}}\frac{3T_q}{4}/\hbar}\hat{U}_{\theta}e^{-i\hat{\mathcal{H}}\frac{T_q}{4}/\hbar} \\
-                        &\equiv e^{-i\mathcal{H}_E\frac{3T_q}{4}/\hbar}U_{\theta}e^{-i\mathcal{H}_E\frac{T_q}{4}/\hbar} \\
-                        &= 
+                        \hat{U}_{on}(T_q) &= \hat{U}_f(3T_q/4)\hat{U}_\theta\hat{U}_f(T_q/4) \\
+                        &= e^{-i\hat{\mathcal{H}}(3T_q/4)/\hbar} \, \hat{U}_\theta \, e^{-i\hat{\mathcal{H}}(T_q/4)/\hbar} \\
+                        &\approx \hat{RZ}\!\left(-\omega_q\tfrac{3T_q}{4}\right) \hat{U}_\theta \, \hat{RZ}\!\left(-\omega_q\tfrac{T_q}{4}\right) \\
+                        &= \hat{RZ}\!\left(-\omega_q \cdot \tfrac{3}{4} \cdot \tfrac{2\pi}{\omega_q}\right) \hat{U}_\theta \, \hat{RZ}\!\left(-\omega_q \cdot \tfrac{1}{4} \cdot \tfrac{2\pi}{\omega_q}\right) \\
+                        &= \hat{RZ}\!\left(-\tfrac{3}{2}\pi\right) \hat{U}_\theta \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) \\[12pt]
+                        \hat{RY}(\theta) &\approx e^{-i\hat{H}T_q/\hbar} \hat{U}_\theta \\
+                        \implies \hat{U}_\theta &\approx e^{i\hat{H}T_q/\hbar} \hat{RY}(\theta) \\
+                        &\approx \hat{RZ}(\omega_q T_q) \, \hat{RY}(\theta) \\[12pt]
+                        \hat{RZ}\!\left(-\tfrac{3}{2}\pi\right) \hat{U}_\theta \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) &\approx \hat{RZ}\!\left(-\tfrac{3}{2}\pi\right) \hat{RZ}(\omega_q T_q) \, \hat{RY}(\theta) \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) \\
+                        &= \hat{RZ}\!\left(-\tfrac{3}{2}\pi\right) \hat{RZ}(2\pi) \, \hat{RY}(\theta) \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) \\
+                        &= \hat{RZ}\!\left(-\tfrac{3}{2}\pi + 2\pi\right) \hat{RY}(\theta) \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) \\
+                        &= \hat{RZ}\!\left(\tfrac{\pi}{2}\right) \hat{RY}(\theta) \, \hat{RZ}\!\left(-\tfrac{\pi}{2}\right) \\
+                        &\equiv RZ\!\left(\tfrac{\pi}{2}\right) RY(\theta) \, RZ\!\left(-\tfrac{\pi}{2}\right) \\
+                        &= e^{-i\pi/4 \, \sigma_z} \, e^{-i\frac{\theta}{2}\sigma_y} \, e^{i\pi/4 \, \sigma_z} \\[12pt]
+                        &= \left[\cos\tfrac{\pi}{4}I - i\sin\tfrac{\pi}{4}\sigma_z\right]\left[\cos\tfrac{\theta}{2}I - i\sin\tfrac{\theta}{2}\sigma_y\right]\left[\cos\tfrac{\pi}{4}I + i\sin\tfrac{\pi}{4}\sigma_z\right] \\[12pt]
+                        &= \frac{1}{\sqrt{2}}\begin{bmatrix} 1-i & 0 \\ 0 & 1+i \end{bmatrix} \begin{bmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \frac{1}{\sqrt{2}}\begin{bmatrix} 1+i & 0 \\ 0 & 1-i \end{bmatrix} \\[12pt]
+                        &= \frac{1}{2}\begin{bmatrix} \cos\frac{\theta}{2}(1-i) & -\sin\frac{\theta}{2}(1-i) \\ \sin\frac{\theta}{2}(1+i) & \cos\frac{\theta}{2}(1+i) \end{bmatrix} \begin{bmatrix} 1+i & 0 \\ 0 & 1-i \end{bmatrix} \\[12pt]
+                        &= \frac{1}{2}\begin{bmatrix} \cos\frac{\theta}{2}(1-i)(1+i) & -\sin\frac{\theta}{2}(1-i)(1-i) \\ \sin\frac{\theta}{2}(1+i)(1+i) & \cos\frac{\theta}{2}(1+i)(1-i) \end{bmatrix} \\[12pt]
+                        &= \frac{1}{2}\begin{bmatrix} \cos\frac{\theta}{2} \cdot 2 & -\sin\frac{\theta}{2} \cdot (-2i) \\ \sin\frac{\theta}{2} \cdot 2i & \cos\frac{\theta}{2} \cdot 2 \end{bmatrix} \\[12pt]
+                        &= \begin{bmatrix} \cos\frac{\theta}{2} & i\sin\frac{\theta}{2} \\ i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \\[12pt]
+                        &= \cos\tfrac{\theta}{2}\,I + i\sin\tfrac{\theta}{2}\,\sigma_x \\[6pt]
+                        &= e^{i\frac{\theta}{2}\sigma_x} \\[6pt]
+                        &= e^{-i(-\frac{\theta}{2})\sigma_x} \\[6pt]
+                        &= RX(-\theta) \\
+                        &\equiv \hat{RX}(-\theta)
+                    \end{aligned}$$</p>
+                    <p>In summary, </p>
+                    <p>$$\begin{aligned}
+                        \hat{U}_{on}(t_r) &= 0100 \approx \hat{RX}(-\theta) \\
+                        \implies \hat{U}_{off}(t_r) &= 0001 \approx \hat{RX}(\theta)
                         \end{aligned}$$</p>
+
+                    <p>In general</p>
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -1044,31 +1130,35 @@
 
                     <p><strong>Full Free Evolution Unitary</strong></p>
                     <p>The free evolution unitary is:</p>
-                    <p>$$\hat{U}_f(t) = e^{-i\hat{H}t/\hbar} \equiv e^{-i\mathcal{H}_E t/\hbar}$$</p>
-                    <p>Since $\mathcal{H}_E$ is diagonal in the energy basis, the matrix exponential is just the exponential of each diagonal entry:</p>
+                    <p>$$\hat{U}_f(t) = e^{-i\hat{H}t/\hbar} \equiv e^{-i[\mathcal{H}]_E t/\hbar}$$</p>
+                    <p>Since $[\mathcal{H}]_E$ is diagonal in the energy basis, the matrix exponential is just the exponential of each diagonal entry:</p>
                     <p>$$= \begin{bmatrix} e^{-iE_0 t/\hbar} & 0 & 0 & \cdots \\ 0 & e^{-iE_1 t/\hbar} & 0 & \cdots \\ 0 & 0 & e^{-iE_2 t/\hbar} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
                     <p>Factor out $e^{-iE_0 t/\hbar}$ as a global phase, using $\frac{-iE_n t}{\hbar} + \frac{iE_0 t}{\hbar} = \frac{-i(E_n-E_0)t}{\hbar}$:</p>
                     <p>$$= e^{-iE_0 t/\hbar} \begin{bmatrix} 1 & 0 & 0 & \cdots \\ 0 & e^{-i(E_1-E_0)t/\hbar} & 0 & \cdots \\ 0 & 0 & e^{-i(E_2-E_0)t/\hbar} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
                     <p>Using the transmon energy differences $E_n - E_0 = n\omega_q - \frac{\alpha}{2\hbar}n(n-1)$:</p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
-                        <p>$$\hat{U}_f(t) = e^{-iE_0 t/\hbar} \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & e^{-i\left(n\omega_q - \frac{\alpha}{2\hbar}n(n-1)\right)t} \end{bmatrix}$$</p>
+                        <p>$$\hat{U}_f(t) \equiv e^{-iE_0 t/\hbar} \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & e^{-i\left(n\omega_q - \frac{\alpha}{2\hbar}n(n-1)\right)t} \end{bmatrix}$$</p>
                     </div>
 
                     <p><strong>Reduction to $RZ$ in the Qubit Subspace</strong></p>
                     <p>Since $e^{-iE_0 t/\hbar}I$ was already dropped as a global phase on the full $n_\text{cut}$-level space, the free evolution unitary is:</p>
-                    <p>$$\hat{U}_f(t) = \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & \ddots \end{bmatrix}$$</p>
+                    <p>$$\hat{U}_f(t) \equiv \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & \ddots \end{bmatrix}$$</p>
                     <p>Projecting onto $\{|0\rangle, |1\rangle\}$:</p>
-                    <p>$$\hat{U}_f(t)\big|_{\text{qubit}} = \begin{bmatrix} 1 & 0 \\ 0 & e^{-i\omega_q t} \end{bmatrix}$$</p>
+                    <p>$$\hat{U}_f(t)\big|_{\text{qubit}} \equiv \begin{bmatrix} 1 & 0 \\ 0 & e^{-i\omega_q t} \end{bmatrix}$$</p>
                     <p>No further phase removal is needed — the only global phase has already been removed on the full space before projection.</p>
                     <p>Recall:</p>
-                    <p>$$RZ(\theta) = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix}$$</p>
-                    <p>In the no-leakage limit, the qubit subspace is dynamically closed, so $e^{-i\theta/2}I_{2\times 2}$ is a valid global phase:</p>
-                    <p>$$\xrightarrow{\text{no leakage}} \begin{bmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{bmatrix}$$</p>
-                    <p>Matching: $e^{i\theta} = e^{-i\omega_q t} \implies \theta = -\omega_q t$, so:</p>
+                    <p>$$RZ(\theta) = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix} \in SU(2)$$</p>
+                    <p>In the no-leakage limit, the qubit subspace is dynamically closed, so $e^{-i\theta/2}I_{2\times 2}$ is a valid global phase and can be factored out:</p>
+                    <p>$$RZ(\theta) = e^{-i\theta/2}\begin{bmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{bmatrix} \xrightarrow{\text{drop global phase}} \begin{bmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{bmatrix}$$</p>
+                    <p>Matching with the projected free evolution unitary: $e^{i\theta} = e^{-i\omega_q t} \implies \theta = -\omega_q t$, so:</p>
+                    <p>$$\hat{U}_f(t)\big|_{\text{qubit}} = \hat{RZ}(-\omega_q t) \equiv RZ(-\omega_q t) = \begin{bmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{bmatrix}$$</p>
+                    <p>Free evolution in the qubit subspace is precisely an $RZ$ rotation accumulating phase at rate $\omega_q$. This identification is exact only in the no-leakage limit where the qubit subspace is dynamically closed.
+                        In the case where leakage is present (real-world), we only have an approximation: 
+                    </p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
-                        <p>$$\hat{U}_f(t)\big|_{\text{qubit}} = RZ(-\omega_q t)$$</p>
+                        <p>$$\hat{U}_f(t)\big|_{\text{qubit}} \approx \hat{RZ}(-\omega_q t) \equiv RZ(-\omega_q t)$$</p>
                     </div>
-                    <p>Free evolution in the qubit subspace is precisely an $RZ$ rotation accumulating phase at rate $\omega_q$. This identification is exact only in the no-leakage limit where the qubit subspace is dynamically closed.</p>
+
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -1207,17 +1297,19 @@
                     <p>$$U(1) = \{e^{i\phi}I \mid \phi \in [0, 2\pi)\}$$</p>
 
                     <p><strong>Generators of SU(2)</strong></p>
-                    <p>The generators are the identity and the three Pauli matrices (in the computational basis):</p>
-                    <p>$$\hat{I} \equiv \begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}, \quad \hat{\sigma}_x \equiv \begin{bmatrix}0 & 1\\1 & 0\end{bmatrix}, \quad \hat{\sigma}_y \equiv \begin{bmatrix}0 & -i\\i & 0\end{bmatrix}, \quad \hat{\sigma}_z \equiv \begin{bmatrix}1 & 0\\0 & -1\end{bmatrix}$$</p>
+                    <p>The generators are the identity and the three Pauli matrices:</p>
+                    <p>$$I = \begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}, \quad \sigma_x = \begin{bmatrix}0 & 1\\1 & 0\end{bmatrix}, \quad \sigma_y = \begin{bmatrix}0 & -i\\i & 0\end{bmatrix}, \quad \sigma_z = \begin{bmatrix}1 & 0\\0 & -1\end{bmatrix}$$</p>
 
                     <p><strong>Decomposition Theorem</strong></p>
-                    <p>For every $U \in SU(2)$, there exists $\theta \in [0, 2\pi]$ and a unit vector $(n_x, n_y, n_z) \in S^2$ such that:</p>
+                    <p>For every $U \in SU(2)$, there exists $\theta \in [0, 2\pi)$ and a unit vector 
+                        $\hat{\mathbf{n}} = (n_x, n_y, n_z) \in S^2 \subset \mathbb{R}^3$ such that:</p>
                     <p>$$\begin{aligned}
                         U &= \exp\!\left(-i\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)\right) \\
                         &= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)
                         \end{aligned}$$</p>
+                    <p>where $S^2 = \{\mathbf{v} \in \mathbb{R}^3 \mid \|\mathbf{v}\| = 1\}$ is the unit 2-sphere.</p>
 
-                    <p><strong>Thus, </strong>
+                    <p>Thus, </p>
                     <p>$$\hat{RX}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_x \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
                     <p>$$\hat{RY}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_y \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
                     <p>$$\hat{RZ}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_z \equiv \begin{bmatrix} e^{-i\frac{\theta}{2}} & 0 \\ 0 & e^{i\frac{\theta}{2}} \end{bmatrix}$$</p>
