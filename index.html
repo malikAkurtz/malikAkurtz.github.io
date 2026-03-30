@@ -136,12 +136,12 @@
         nav a.nav-active { color: var(--accent); }
         nav a.nav-active::before { content: '› '; color: var(--highlight); }
 
-        /* ── Graph ── */
-        #graph-section {
+        /* ── TOC ── */
+        #toc-section {
             margin-bottom: 8px;
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 20px 0 12px;
+            padding: 20px 20px 16px;
             background: rgba(255,255,255,0.012);
         }
 
@@ -151,69 +151,84 @@
             color: var(--text-muted);
             letter-spacing: 0.1em;
             opacity: 0.45;
-            padding-left: 20px;
             margin-bottom: 12px;
         }
 
-        #graph-svg {
-            width: 100%;
-            height: auto;
-            display: block;
-            overflow: visible;
+        #toc-list {
+            list-style: none;
+            position: relative;
+            margin-top: 4px;
         }
 
-        @keyframes glow-pulse {
-            0%, 100% { stroke: #2a2a2a; filter: drop-shadow(0 0 0px transparent); }
-            50%       { stroke: #555;    filter: drop-shadow(0 0 7px rgba(255,255,255,0.12)); }
+        #toc-list::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background: var(--border);
         }
 
-        .gnode { cursor: pointer; }
-
-        .gnode circle {
-            fill: var(--surface);
-            stroke: var(--border);
-            stroke-width: 1.5;
-            transition: stroke 0.25s, fill 0.25s, filter 0.25s;
-            animation: glow-pulse 2.8s ease-in-out infinite;
+        .toc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            cursor: pointer;
+            padding: 6px 0;
+            position: relative;
         }
 
-        .gnode:hover circle {
-            stroke: var(--highlight);
-            fill: rgba(255, 107, 53, 0.07);
+        .toc-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--border);
+            flex-shrink: 0;
+            margin-top: 5px;
+            margin-left: 8px;
+            transition: background 0.2s, box-shadow 0.2s;
         }
 
-        .gnode.active circle {
-            stroke: var(--highlight);
-            fill: rgba(255, 107, 53, 0.13);
-            stroke-width: 2;
-        }
-
-        .gnode text {
-            fill: var(--text-muted);
+        .toc-num {
             font-family: var(--mono);
             font-size: 10px;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            pointer-events: none;
-            transition: fill 0.25s;
+            color: var(--text-muted);
+            width: 18px;
+            flex-shrink: 0;
+            opacity: 0.45;
+            padding-top: 2px;
+            transition: color 0.2s, opacity 0.2s;
         }
 
-        .gnode:hover text, .gnode.active text {
-            fill: var(--accent);
+        .toc-title {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            transition: color 0.2s;
         }
 
-        .gedge {
-            stroke: #282828;
-            stroke-width: 1.5;
-            fill: none;
+        .toc-item:hover .toc-dot {
+            background: var(--highlight);
+            box-shadow: 0 0 5px var(--highlight);
         }
+        .toc-item:hover .toc-num { opacity: 0.8; }
+        .toc-item:hover .toc-title { color: var(--accent); }
+
+        .toc-item.active .toc-dot {
+            background: var(--highlight);
+            box-shadow: 0 0 6px var(--highlight);
+        }
+        .toc-item.active .toc-num { color: var(--highlight); opacity: 1; }
+        .toc-item.active .toc-title { color: var(--accent); }
 
         #graph-hint {
             font-family: var(--mono);
             font-size: 11px;
             color: var(--text-muted);
             text-align: center;
-            margin-top: 10px;
+            margin-top: 12px;
             letter-spacing: 0.05em;
             opacity: 0.7;
         }
@@ -399,20 +414,11 @@
             </nav>
         </header>
 
-        <!-- ── Knowledge Graph ── -->
-        <div id="graph-section">
-            <p class="graph-label">// knowledge map</p>
-            <svg id="graph-svg" viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5"
-                            markerWidth="5" markerHeight="5" orient="auto">
-                        <path d="M 0 1 L 9 5 L 0 9 z" fill="#303030"/>
-                    </marker>
-                </defs>
-                <g id="edges-layer"></g>
-                <g id="nodes-layer"></g>
-            </svg>
-            <p id="graph-hint">click a node to read</p>
+        <!-- ── Knowledge Sequence ── -->
+        <div id="toc-section">
+            <p class="graph-label">// knowledge sequence</p>
+            <ul id="toc-list"></ul>
+            <p id="graph-hint">click an entry to read</p>
         </div>
 
         <!-- ── Entry detail panel ── -->
@@ -1424,20 +1430,12 @@
             </li>
 
             <li class="entry" data-index="9">
-                <div class="entry-title">Pulse Encoding Symmetries &amp; Asymmetries</div>
+                <div class="entry-title">Leakage Metrics</div>
                 <div class="entry-body">
-                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
                 </div>
                 <div class="entry-refs">
-                    <div class="ref" data-ref-id="1">
-                        <span class="ref-num">[1]</span>
-                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
-                    </div>
                 </div>
                 <div class="entry-tags">
-                    <span class="tag">SFQ</span>
-                    <span class="tag">pulse</span>
-                    <span class="tag">quantum control</span>
                 </div>
             </li>
 
@@ -1478,96 +1476,8 @@
             }
         });
 
-        // ── Graph data ──
-        const R = 42; // node radius
-        const nodes = [
-            { id: 0, x: 80,  y: 140, lines: ['Quantum', 'Harmonic', 'Oscillator'] },
-            { id: 1, x: 210, y: 65,  lines: ['The Fock', 'Basis'] },
-            { id: 2, x: 600, y: 65,  lines: ['RY(θ) via', 'Harm. Osc.'] },
-            { id: 3, x: 210, y: 210, lines: ['The', 'Transmon'] },
-            { id: 4, x: 600, y: 210, lines: ['RY(θ) via', 'Transmon'] },
-            { id: 5, x: 400, y: 155, lines: ['Pulse Seq.', 'Encoding'] },
-            { id: 6, x: 510, y: 210, lines: ['Transmon', 'Free Evo.'] },
-            { id: 7, x: 400, y: 65,  lines: ['Bloch', 'Sphere'] },
-            { id: 8, x: 80,  y: 65,  lines: ['SU(2)', 'Group'] },
-            { id: 9, x: 310, y: 210, lines: ['Pulse Enc.', 'Symmetry'] },
-        ];
-
-        const edges = [
-            { from: 0, to: 1, curve:  28 },
-            { from: 1, to: 3, curve:  22 },
-            { from: 1, to: 5, curve: -22 },
-            { from: 1, to: 7, curve:   0 },
-            { from: 3, to: 5, curve:  22 },
-            { from: 5, to: 2, curve: -22 },
-            { from: 5, to: 6, curve:  22 },
-            { from: 6, to: 4, curve: -22 },
-            { from: 7, to: 2, curve:  22 },
-            { from: 8, to: 7, curve:   0 },
-            { from: 8, to: 0, curve:  22 },
-            { from: 5, to: 9, curve:  22 },
-        ];
-
-        // ── Build SVG graph ──
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const edgesLayer = document.getElementById('edges-layer');
-        const nodesLayer = document.getElementById('nodes-layer');
-
-        function edgePts(a, b) {
-            const dx = b.x - a.x, dy = b.y - a.y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            const ux = dx / d, uy = dy / d;
-            return {
-                x1: a.x + ux * R,
-                y1: a.y + uy * R,
-                x2: b.x - ux * R,
-                y2: b.y - uy * R,
-            };
-        }
-
-        edges.forEach(e => {
-            const a = nodes[e.from], b = nodes[e.to];
-            const p = edgePts(a, b);
-            // Midpoint + perpendicular offset for quadratic Bezier control point
-            const mx = (p.x1 + p.x2) / 2, my = (p.y1 + p.y2) / 2;
-            const dx = p.x2 - p.x1, dy = p.y2 - p.y1;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            const px = -dy / d, py = dx / d; // perpendicular unit vector
-            const cx = mx + px * e.curve, cy = my + py * e.curve;
-            const path = document.createElementNS(svgNS, 'path');
-            path.setAttribute('d', `M ${p.x1} ${p.y1} Q ${cx} ${cy} ${p.x2} ${p.y2}`);
-            path.setAttribute('class', 'gedge');
-            path.setAttribute('marker-end', 'url(#arr)');
-            edgesLayer.appendChild(path);
-        });
-
-        const PULSE_PERIOD = 2.8;
-        nodes.forEach((n, i) => {
-            const g = document.createElementNS(svgNS, 'g');
-            g.setAttribute('class', 'gnode');
-            g.dataset.id = n.id;
-
-            const circle = document.createElementNS(svgNS, 'circle');
-            circle.setAttribute('cx', n.x);
-            circle.setAttribute('cy', n.y);
-            circle.setAttribute('r', R);
-            // Stagger each node's pulse so they breathe independently
-            circle.style.animationDelay = `-${(i * PULSE_PERIOD / nodes.length).toFixed(2)}s`;
-            g.appendChild(circle);
-
-            const lineHeight = 14;
-            const totalH = (n.lines.length - 1) * lineHeight;
-            n.lines.forEach((ln, i) => {
-                const t = document.createElementNS(svgNS, 'text');
-                t.setAttribute('x', n.x);
-                t.setAttribute('y', n.y - totalH / 2 + i * lineHeight);
-                t.textContent = ln;
-                g.appendChild(t);
-            });
-
-            g.addEventListener('click', () => selectNode(n.id));
-            nodesLayer.appendChild(g);
-        });
+        // Linear reading order derived from dependency graph
+        const linearOrder = [8, 0, 1, 7, 3, 5, 6, 2, 4, 9];
 
         // ── Entry data extraction ──
         const entries = [];
@@ -1579,6 +1489,18 @@
                 refs:   refsEl ? refsEl.innerHTML : '',
                 tags:   [...el.querySelectorAll('.entry-tags .tag')].map(t => t.textContent),
             });
+        });
+
+        // ── Build TOC ──
+        const tocList = document.getElementById('toc-list');
+        linearOrder.forEach((entryId, displayIdx) => {
+            const e = entries[entryId];
+            const li = document.createElement('li');
+            li.className = 'toc-item';
+            li.dataset.id = entryId;
+            li.innerHTML = `<span class="toc-dot"></span><span class="toc-num">${String(displayIdx + 1).padStart(2, '0')}</span><span class="toc-title">${e.title}</span>`;
+            li.addEventListener('click', () => selectNode(entryId));
+            tocList.appendChild(li);
         });
 
         // ── Panel elements ──
@@ -1597,9 +1519,9 @@
             if (activeId === id) return;
             activeId = id;
 
-            // Update node styles
-            document.querySelectorAll('.gnode').forEach(g => {
-                g.classList.toggle('active', parseInt(g.dataset.id) === id);
+            // Update item styles
+            document.querySelectorAll('.toc-item').forEach(el => {
+                el.classList.toggle('active', parseInt(el.dataset.id) === id);
             });
 
             // Populate panel
@@ -1607,7 +1529,7 @@
             panelTitle.innerHTML     = e.title;
             panelBody.innerHTML      = e.body;
             panelTags.innerHTML      = e.tags.map(t => `<span class="tag">${t}</span>`).join('');
-            panelCounter.textContent = `${id + 1} / ${entries.length}`;
+            panelCounter.textContent = `${linearOrder.indexOf(id) + 1} / ${entries.length}`;
 
             // Render references section
             if (e.refs) {
@@ -1641,8 +1563,8 @@
             activeId = null;
             panel.classList.remove('visible');
             hint.style.opacity = '0.7';
-            document.querySelectorAll('.gnode').forEach(g => g.classList.remove('active'));
-            document.getElementById('graph-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelectorAll('.toc-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('toc-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
     });
