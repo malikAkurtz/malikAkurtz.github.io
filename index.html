@@ -569,16 +569,16 @@
                     <p>$$\text{Now let } \hat{n} = \hat{a}^\dagger\hat{a} \equiv \begin{bmatrix} 0 & 0 & 0 & 0 & \cdots \\ 0 & 1 & 0 & 0 & \cdots \\ 0 & 0 & 2 & 0 & \cdots \\ 0 & 0 & 0 & 3 & \cdots \\ \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [n]_F$$</p>
                     <p>Thus, </p>
                     <p>$$\begin{aligned}
-                    \hat{\mathcal{H}}_0 &= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right) \\
+                    \hat{\mathcal{H}} &= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \tfrac{1}{2}\right) \\
                     &= \hbar\omega\left(\hat{n} + \tfrac{1}{2}\right) \\
                     &\equiv \hbar\omega\left([n]_F + \tfrac{1}{2}\mathbb{I}\right)
                     \end{aligned}$$</p>
                     <p>Which is then diagonal in the Fock basis</p>
-                    <p>We can now diagonalize $\hat{\mathcal{H}_0}$ to get: </p>
-                    <p>$$[\mathcal{H}_0]_E = [V][\mathcal{H}_0]_F[V^{-1}] = [V][\mathcal{H}_0]_F[V^\dagger]$$</p>
-                    <p>Since $\hat{\mathcal{H_0}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
-                    <p>and the columns of $[V]$ are the energy eigenstates/vectors of $[\mathcal{H}_0]_E$ in the Fock basis</p>
-                    <p>In the case of a harmonic oscillator, $[\mathcal{H}_0]_F$ is diagonal so $[V] = \mathbb{I}$</p>
+                    <p>We can now diagonalize $\hat{\mathcal{H}}$ to get: </p>
+                    <p>$$[\mathcal{H}]_E = [V][\mathcal{H}]_F[V^{-1}] = [V][\mathcal{H}]_F[V^\dagger]$$</p>
+                    <p>Since $\hat{\mathcal{H}}$ is Hermitian $\implies V \text{ unitary} \implies V^{-1} = V^\dagger$</p>
+                    <p>and the columns of $[V]$ are the energy eigenstates/vectors of $[\mathcal{H}]_E$ in the Fock basis</p>
+                    <p>In the case of a harmonic oscillator, $[\mathcal{H}]_F$ is diagonal so $[V] = \mathbb{I}$</p>
                     <p>i.e the energy basis and Fock basis are identical.</p>
                 </div>
                 <div class="entry-refs">
@@ -603,13 +603,13 @@
                     <p>$$\psi_0 = \ket{\psi_0} \equiv \sum_{n=1}^{3} c_n\ket{\psi_n} = \sum_{n=1}^{3} c_n\ket{n} = \vec{e}_1$$</p>
                     <p>Define qubit period in seconds $T = \frac{2\pi}{\omega}$</p>
                     <p>Define free evolution unitaries:</p>
-                    <p>$$\hat{U}(t)\ket{\psi} = \exp(-i\hat{\mathcal{H}}_0 t/\hbar)\ket{\psi}$$</p>
+                    <p>$$\hat{U}(t)\ket{\psi} = \exp(-i\hat{\mathcal{H}} t/\hbar)\ket{\psi}$$</p>
                     <p>let</p>
                     <p>$$\begin{aligned}
-                    \hat{U}_1 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{T}{4})/\hbar) \\
-                    \hat{U}_2 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{2T}{4})/\hbar) \\
-                    \hat{U}_3 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{3T}{4})/\hbar) \\
-                    \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{4T}{4})/\hbar)
+                    \hat{U}_1 &= \exp(-i\hat{\mathcal{H}}(\tfrac{T}{4})/\hbar) \\
+                    \hat{U}_2 &= \exp(-i\hat{\mathcal{H}}(\tfrac{2T}{4})/\hbar) \\
+                    \hat{U}_3 &= \exp(-i\hat{\mathcal{H}}(\tfrac{3T}{4})/\hbar) \\
+                    \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}(\tfrac{4T}{4})/\hbar)
                     \end{aligned}$$</p>
                     <p>Fix the kick angle defined by our system</p>
                     <p>$$\theta = C_c \Phi_0 \sqrt{2\omega / C}, \quad \Phi_0 = \frac{h}{2e}$$</p>
@@ -617,18 +617,18 @@
                     <p>Define the kick unitary operator</p>
                     <p>$$\hat{U}_\theta = \exp(-\tfrac{\theta}{2}[\hat{a}^\dagger - \hat{a}])$$</p>
                     <p>Then</p>
-                    <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
+                    <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
                     <p>and</p>
                     <p>$$\begin{aligned}
                     \hat{RY}(\theta_{\text{target}}) &\approx \hat{RY}(n\theta) \qquad (N = \theta_{\text{target}} / \theta) \\
                     &= \hat{RY}(\theta)^N \\
                     &\approx (\hat{U}_4\hat{U}_\theta)^N \\
-                    &= (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^N
+                    &= (\exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta)^N
                     \end{aligned}$$</p>
                     <p>Let $\theta_{\text{target}} = \pi/2$ and $\theta = 0.03$ (typical) s.t $ = \frac{\pi}{2\theta} \approx 52$</p>
                     <p>Also, let $C = m$ and $L = \tfrac{1}{k} s.t. $\omega = \sqrt{\tfrac{k}{m}} = \tfrac{1}{\sqrt{LC}} rad/sec$ </p>
                     <p>So</p>
-                    <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^{52}$$</p>
+                    <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta)^{52}$$</p>
                     <p>Lets apply the first kick, (in Fock basis)</p>
 
                     <p>$$\begin{aligned}
@@ -638,7 +638,7 @@
                     &= [U_4][V]e^{-\frac{\theta}{2}[D]}[V^{-1}]\vec{e}_1 \\
                     &= [U_4][V]\begin{bmatrix} e^{-\frac{\theta}{2}\lambda_1} & 0 & 0 \\ 0 & e^{-\frac{\theta}{2}\lambda_2} & 0 \\ 0 & 0 & e^{-\frac{\theta}{2}\lambda_3} \end{bmatrix}[V^{-1}]\vec{e}_1 \\
                     &= [U_4]\ket{\psi}_{\text{1}} \quad \leftarrow \text{rotated a little more toward } \ket{1} \\
-                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}_0] \text{ is diagonal in the Fock basis} \\
+                    &= e^{-i[\mathcal{H}]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}] \text{ is diagonal in the Fock basis} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iT\hbar\omega(0+\frac{1}{2})/\hbar} & 0 & 0 \\ 0 & e^{-iT\hbar\omega(1+\frac{1}{2})/\hbar} & 0 \\ 0 & 0 & e^{-iT\hbar\omega(2+\frac{1}{2})/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iT\omega/2} & 0 & 0 \\ 0 & e^{-3iT\omega/2} & 0 \\ 0 & 0 & e^{-5iT\omega/2} \end{bmatrix}\ket{\psi_1} \\
@@ -833,7 +833,7 @@
 
                     <p>and since $\hat{n}$ is diagonal in the charge basis, we get</p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
-                        <p>$$\hat{H} \equiv \begin{bmatrix} \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \\ \cdots & 16E_C & -\frac{E_J}{2} & 0 & 0 & 0 & \cdots \\ \cdots & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & 0 & \cdots \\ \cdots & 0 & -\frac{E_J}{2} & 0 & -\frac{E_J}{2} & 0 & \cdots \\ \cdots & 0 & 0 & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & \cdots \\ \cdots & 0 & 0 & 0 & -\frac{E_J}{2} & 16E_C & \cdots \\ & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [\hat{\mathcal{H}}]_{charge}$$</p>
+                        <p>$$\hat{H} \equiv \begin{bmatrix} \ddots & \vdots & \vdots & \vdots & \vdots & \vdots & \\ \cdots & 16E_C & -\frac{E_J}{2} & 0 & 0 & 0 & \cdots \\ \cdots & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & 0 & 0 & \cdots \\ \cdots & 0 & -\frac{E_J}{2} & 0 & -\frac{E_J}{2} & 0 & \cdots \\ \cdots & 0 & 0 & -\frac{E_J}{2} & 4E_C & -\frac{E_J}{2} & \cdots \\ \cdots & 0 & 0 & 0 & -\frac{E_J}{2} & 16E_C & \cdots \\ & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots \end{bmatrix} = [\mathcal{H}]_{charge}$$</p>
                     </div>
 
                     <p>Now diagonalize $\hat{H}$ in the charge basis:</p>
@@ -919,7 +919,7 @@
                         <p>$$\begin{aligned}
                         \hat{H} &\approx \hbar \omega_q\hat{b}^{\dagger}\hat{b} - \tfrac{\alpha}{2}\hat{b}^{\dagger 2}\hat{b}^2 \\
                         &\equiv \begin{bmatrix} 0 & & & \\ & \hbar\omega_q & & \\ & & 2\hbar\omega_q - \alpha & \\ & & & 3\hbar\omega_q - 3\alpha & \\ & & & & \ddots \end{bmatrix} \\
-                        &= [\hat{\tilde{H}}]_F
+                        &= [\tilde{H}]_F
                         \end{aligned}$$</p>
                     </div>
 
@@ -928,7 +928,7 @@
                         <p>$$\begin{aligned}
                         \hat{n} &\approx ir(\hat{b}^{\dagger} - \hat{b}) \\
                         &\equiv \begin{bmatrix} 0 & -ir & 0 & \cdots \\ ir & 0 & -i\sqrt{2}\,r & \cdots \\ 0 & i\sqrt{2}\,r & 0 & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix} \\
-                        &= [\hat{\tilde{n}}]_F, \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}
+                        &= [\tilde{n}]_F, \quad r = \frac{1}{2}\left(\frac{E_J/E_C}{2}\right)^{1/4}
                         \end{aligned}$$</p>
                     </div>
                     
@@ -956,10 +956,10 @@
                     <p>Define qubit period in seconds $T = \frac{2\pi}{\omega_q}$</p>
                     <p>Define free evolution unitaries:</p>
                     <p>$$\begin{aligned}
-                    \hat{U}_1 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{T}{4})/\hbar) \\
-                    \hat{U}_2 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{2T}{4})/\hbar) \\
-                    \hat{U}_3 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{3T}{4})/\hbar) \\
-                    \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}_0(\tfrac{4T}{4})/\hbar)
+                    \hat{U}_1 &= \exp(-i\hat{\mathcal{H}}(\tfrac{T}{4})/\hbar) \\
+                    \hat{U}_2 &= \exp(-i\hat{\mathcal{H}}(\tfrac{2T}{4})/\hbar) \\
+                    \hat{U}_3 &= \exp(-i\hat{\mathcal{H}}(\tfrac{3T}{4})/\hbar) \\
+                    \hat{U}_4 &= \exp(-i\hat{\mathcal{H}}(\tfrac{4T}{4})/\hbar)
                     \end{aligned}$$</p>
                     <p>Fix the kick angle defined by our system</p>
                     <p>$$\theta = C_c \Phi_0 \sqrt{2\omega_q / C}$$</p>
@@ -969,17 +969,17 @@
                     <p>where</p>
                     <p>$$\theta' = \theta / r$$</p>
                     <p>Then</p>
-                    <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
+                    <p>$$\hat{RY}(\theta) \approx \exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta = \hat{U}_4\hat{U}_\theta$$</p>
                     <p>and</p>
                     <p>$$\begin{aligned}
                     \hat{RY}(\theta_{\text{target}}) &\approx \hat{RY}(N\theta) \qquad (N = \theta_{\text{target}} / \theta) \\
                     &= \hat{RY}(\theta)^N \\
                     &\approx (\hat{U}_4\hat{U}_\theta)^N \\
-                    &= (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^N
+                    &= (\exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta)^N
                     \end{aligned}$$</p>
                     <p>Let $\theta_{\text{target}} = \pi/2$ and $\theta = 0.03$ (typical) s.t $N = \frac{\pi}{2\theta} \approx 52$</p>
                     <p>So</p>
-                    <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}}_0 T)\hat{U}_\theta)^{52}$$</p>
+                    <p>$$\hat{RY}(\tfrac{\pi}{2}) = (\exp(-i\hat{\mathcal{H}} T)\hat{U}_\theta)^{52}$$</p>
                     <p>Lets apply the first kick, (in Fock basis)</p>
 
                     <p>$$\begin{aligned}
@@ -989,7 +989,7 @@
                     &= [U_4][V]e^{-\frac{\theta}{2}[D]}[V^{-1}]\vec{e}_1 \\
                     &= [U_4][V]\begin{bmatrix} e^{-\frac{\theta}{2}\lambda_1} & 0 & 0 \\ 0 & e^{-\frac{\theta}{2}\lambda_2} & 0 \\ 0 & 0 & e^{-\frac{\theta}{2}\lambda_3} \end{bmatrix}[V^{-1}]\vec{e}_1 \\
                     &= [U_4]\ket{\psi}_{\text{1}} \quad \leftarrow \text{rotated a little more toward } \ket{1} \\
-                    &= e^{-i[\mathcal{H}_0]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}_0] \text{ is diagonal in the energy basis} \\
+                    &= e^{-i[\mathcal{H}]T/\hbar}\ket{\psi_1}, \quad [\mathcal{H}] \text{ is diagonal in the energy basis} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\ket{\psi_1} \\
                     &= \begin{bmatrix} e^{-iTE_0/\hbar} & 0 & 0 \\ 0 & e^{-iTE_1/\hbar} & 0 \\ 0 & 0 & e^{-iTE_2/\hbar} \end{bmatrix}\begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix} \\
                     &= \begin{bmatrix} \alpha e^{-iTE_0/\hbar} \\ \beta e^{-iTE_1/\hbar} \\
@@ -1108,7 +1108,76 @@
                         \implies \hat{U}_{off}(t_r) &= 0001 \approx \hat{RX}(\theta)
                         \end{aligned}$$</p>
 
-                    <p>In general</p>
+                    <p><strong>General Off-Ramp Construction</strong></p>
+                    <p><em>Single kick case:</em></p>
+                    <p>Given an arbitrary on-ramp sequence $\mathbf{s} = (s_0, s_1, \ldots, s_{M-1})$, let $k$ be the index of the kick in the sequence. Then we wait $k$ clock cycles, kick, wait $M-k$ clock cycles:</p>
+                    <p>$$\hat{U}_{on} = \hat{U}_f((M-k)T_c)\,\hat{U}_\theta\,\hat{U}_f(kT_c), \quad T_c = \frac{2\pi}{M\omega_q}$$</p>
+                    <p>Apply the no-leakage approximation:</p>
+                    <p>$$\begin{aligned}
+                    \hat{U}_{on} &\approx \hat{RZ}(-\omega_q(M-k)T_c)\,\hat{U}_\theta\,\hat{RZ}(-\omega_q kT_c), \quad \omega_q T_c = \frac{2\pi}{M} \\
+                    &= \hat{RZ}\!\left(-\frac{2\pi}{M}(M-k)\right)\hat{U}_\theta\,\hat{RZ}\!\left(-\frac{2\pi k}{M}\right), \quad \phi_k = \frac{2\pi k}{M} \\
+                    &= \hat{RZ}(-(2\pi - \phi_k))\,\hat{U}_\theta\,\hat{RZ}(-\phi_k) \\
+                    &\approx \hat{RZ}(-(2\pi - \phi_k))\,\hat{RZ}(2\pi)\,\hat{RY}(\theta)\,\hat{RZ}(-\phi_k) \\
+                    &= \hat{RZ}(\phi_k)\,\hat{RY}(\theta)\,\hat{RZ}(-\phi_k)
+                    \end{aligned}$$</p>
+
+                    <p>Write as matrix exponentials:</p>
+                    <p>$$\hat{U}_{on} \approx e^{-i\frac{\phi_k}{2}\hat{\sigma}_z}\,e^{-i\frac{\theta}{2}\hat{\sigma}_y}\,e^{i\frac{\phi_k}{2}\hat{\sigma}_z}$$</p>
+
+                    <p><em>Lemma:</em> For any operator $\hat{A}$ and unitary $\hat{V}$,</p>
+                    <p>$$\hat{V}\,e^{\hat{A}}\,\hat{V}^\dagger = e^{\hat{V}\hat{A}\hat{V}^\dagger}$$</p>
+                    <p>Therefore:</p>
+                    <p>$$\hat{U}_{on} \approx e^{-i\frac{\theta}{2}\hat{B}}, \quad \hat{B} = e^{-i\frac{\phi_k}{2}\hat{\sigma}_z}\,\hat{\sigma}_y\,e^{i\frac{\phi_k}{2}\hat{\sigma}_z}$$</p>
+
+                    <p>Compute $\hat{B}$:</p>
+                    <p>$$\begin{aligned}
+                    \hat{B} &= \left(\cos\frac{\phi_k}{2}\hat{I} - i\sin\frac{\phi_k}{2}\hat{\sigma}_z\right)\hat{\sigma}_y\left(\cos\frac{\phi_k}{2}\hat{I} + i\sin\frac{\phi_k}{2}\hat{\sigma}_z\right) \\
+                    &= \cos^2\frac{\phi_k}{2}\hat{\sigma}_y + i\cos\frac{\phi_k}{2}\sin\frac{\phi_k}{2}\hat{\sigma}_y\hat{\sigma}_z - i\sin\frac{\phi_k}{2}\cos\frac{\phi_k}{2}\hat{\sigma}_z\hat{\sigma}_y + \sin^2\frac{\phi_k}{2}\hat{\sigma}_z\hat{\sigma}_y\hat{\sigma}_z
+                    \end{aligned}$$</p>
+
+                    <p>Evaluate the Pauli products:</p>
+                    <p>$$\hat{\sigma}_y\hat{\sigma}_z = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}\begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} = \begin{bmatrix}0 & i \\ i & 0\end{bmatrix} = i\hat{\sigma}_x$$</p>
+                    <p>$$\hat{\sigma}_z\hat{\sigma}_y = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\begin{bmatrix}0 & -i \\ i & 0\end{bmatrix} = \begin{bmatrix}0 & -i \\ -i & 0\end{bmatrix} = -i\hat{\sigma}_x$$</p>
+                    <p>$$\hat{\sigma}_z\hat{\sigma}_y\hat{\sigma}_z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\begin{bmatrix}0 & i \\ i & 0\end{bmatrix} = \begin{bmatrix}0 & i \\ -i & 0\end{bmatrix} = -\hat{\sigma}_y$$</p>
+
+                    <p>Substitute back:</p>
+                    <p>$$\begin{aligned}
+                    \hat{B} &= \cos^2\frac{\phi_k}{2}\hat{\sigma}_y + i\cos\frac{\phi_k}{2}\sin\frac{\phi_k}{2}(i\hat{\sigma}_x) - i\sin\frac{\phi_k}{2}\cos\frac{\phi_k}{2}(-i\hat{\sigma}_x) + \sin^2\frac{\phi_k}{2}(-\hat{\sigma}_y) \\
+                    &= \cos^2\frac{\phi_k}{2}\hat{\sigma}_y - \cos\frac{\phi_k}{2}\sin\frac{\phi_k}{2}\hat{\sigma}_x - \sin\frac{\phi_k}{2}\cos\frac{\phi_k}{2}\hat{\sigma}_x - \sin^2\frac{\phi_k}{2}\hat{\sigma}_y \\
+                    &= (\cos^2\frac{\phi_k}{2} - \sin^2\frac{\phi_k}{2})\hat{\sigma}_y - 2\cos\frac{\phi_k}{2}\sin\frac{\phi_k}{2}\hat{\sigma}_x \\
+                    &= \cos(\phi_k)\hat{\sigma}_y - \sin(\phi_k)\hat{\sigma}_x
+                    \end{aligned}$$</p>
+
+                    <p>Therefore:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                    <p>$$\hat{U}_{on} \approx e^{-i\frac{\theta}{2}(\cos\phi_k\hat{\sigma}_y - \sin\phi_k\hat{\sigma}_x)}$$</p>
+                    </div>
+                    <p>This is a rotation by $\theta$ about the axis $\hat{\mathbf{n}}_k = (-\sin\phi_k,\;\cos\phi_k,\;0)$.</p>
+
+                    <p><em>Example: $M = 4$</em></p>
+                    <p>$$\begin{aligned}
+                    1000 &\implies \phi_k = 0 \implies \hat{\mathbf{n}} = (0,1,0) \implies e^{-i\frac{\theta}{2}\hat{\sigma}_y} = \hat{RY}(\theta) \\
+                    0100 &\implies \phi_k = \frac{\pi}{2} \implies \hat{\mathbf{n}} = (-1,0,0) \implies e^{i\frac{\theta}{2}\hat{\sigma}_x} = \hat{RX}(-\theta) \\
+                    0010 &\implies \phi_k = \pi \implies \hat{\mathbf{n}} = (0,-1,0) \implies e^{i\frac{\theta}{2}\hat{\sigma}_y} = \hat{RY}(-\theta) \\
+                    0001 &\implies \phi_k = \frac{3\pi}{2} \implies \hat{\mathbf{n}} = (1,0,0) \implies e^{-i\frac{\theta}{2}\hat{\sigma}_x} = \hat{RX}(\theta)
+                    \end{aligned}$$</p>
+
+                    <p><strong>DRAG Condition</strong></p>
+                    <p>For an $\hat{RY}(\theta_{\text{target}})$ gate, the off-ramp must preserve the $y$-component and negate the $x$-component of the rotation axis. That is, we need position $k'$ such that:</p>
+                    <p>$$\cos\phi_{k'} = \cos\phi_k \quad \text{and} \quad \sin\phi_{k'} = -\sin\phi_k$$</p>
+                    <p>Both conditions are satisfied iff $\phi_{k'} = -\phi_k \pmod{2\pi}$:</p>
+                    <p>$$\frac{2\pi k'}{M} = -\frac{2\pi k}{M} \pmod{2\pi} \implies k' = (M - k) \bmod M \equiv \sigma(k)$$</p>
+
+                    <p>Thus:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                    <p>$$\forall\;\mathbf{s}_{on} = (s_0, s_1, \ldots, s_M), \quad \mathbf{s}_{off} = (s_{\sigma(0)}, s_{\sigma(1)}, \ldots, s_{\sigma(M)})$$</p>
+                    <p>$$\sigma(k) = (M - k) \bmod M$$</p>
+                    </div>
+                    <p>This also holds in the case where we have more than a single kick in a qubit period, since the quadrature structure is a property of the clock geometry: positions with phase $\phi_k$ contribute $\cos\phi_k$ to the $y$-quadrature and $-\sin\phi_k$ to the $x$-quadrature independently, so the map $\sigma(k) = (M-k) \bmod M$ negates the total $x$-quadrature while preserving the total $y$-quadrature regardless of how many kicks are present.</p>
+
+
+                    <p>Note: If we have a on-ramp that consists of multiple qubit cycles (multiple sequences $s$), we need apply them in reverse in the off-ramp unitary.</p>
+                    
                 </div>
                 <div class="entry-refs">
                     <div class="ref" data-ref-id="1">
@@ -1310,9 +1379,9 @@
                     <p>where $S^2 = \{\mathbf{v} \in \mathbb{R}^3 \mid \|\mathbf{v}\| = 1\}$ is the unit 2-sphere.</p>
 
                     <p>Thus, </p>
-                    <p>$$\hat{RX}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_x \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
-                    <p>$$\hat{RY}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_y \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}$$</p>
-                    <p>$$\hat{RZ}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_z \equiv \begin{bmatrix} e^{-i\frac{\theta}{2}} & 0 \\ 0 & e^{i\frac{\theta}{2}} \end{bmatrix}$$</p>
+                    <p>$$\hat{RX}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_x \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix} \in SU(2) \subseteq U(2)$$</p>
+                    <p>$$\hat{RY}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_y \equiv \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix} \in SU(2) \subseteq U(2)$$</p>
+                    <p>$$\hat{RZ}(\theta) = \cos\frac{\theta}{2}\,\hat{I} - i\sin\frac{\theta}{2}\,\hat{\sigma}_z \equiv \begin{bmatrix} e^{-i\frac{\theta}{2}} & 0 \\ 0 & e^{i\frac{\theta}{2}} \end{bmatrix} \in SU(2) \subseteq U(2)$$</p>
                 </div>
                 <div class="entry-tags">
                     <span class="tag">lie groups</span>
