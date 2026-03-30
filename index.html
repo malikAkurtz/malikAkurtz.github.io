@@ -1221,10 +1221,10 @@
                     <p><strong>Full Free Evolution Unitary</strong></p>
                     <p>The free evolution unitary is:</p>
                     <p>$$\hat{U}_f(t) = e^{-i\hat{H}t/\hbar}$$</p>
-                    <p>Which is an operator that acts on the full $n_cut$-dimensional Hilbert space $\mathcal{H}_n_cut$</p>
-                    <p>We can then project $$\hat{U}_f(t)$$ onto the energy basis to get: </p>
-                    <p>\hat{U}_f(t) \equiv e^{-i[\mathcal{H}]_E t/\hbar}$$</p>
-                    <p>Which is a matrix that acts on $\mathbb{C}^{n_cut x n_cut}</p>
+                    <p>Which is an operator that acts on the full n_cut-dimensional Hilbert space $\mathcal{H}_{n_{\text{cut}}}$</p>
+                    <p>We can then project $\hat{U}_f(t)$ onto the energy basis to get: </p>
+                    <p>$$\hat{U}_f(t) \equiv e^{-i[\mathcal{H}]_E t/\hbar}$$</p>
+                    <p>Which is a matrix that acts on $\mathbb{C}^{n_{\text{cut}} \times n_{\text{cut}}}$</p>
                     <p>Since $[\mathcal{H}]_E$ is diagonal in the energy basis, the matrix exponential is just the exponential of each diagonal entry:</p>
                     <p>$$= \begin{bmatrix} e^{-iE_0 t/\hbar} & 0 & 0 & \cdots \\ 0 & e^{-iE_1 t/\hbar} & 0 & \cdots \\ 0 & 0 & e^{-iE_2 t/\hbar} & \cdots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}$$</p>
                     <p>Factor out $e^{-iE_0 t/\hbar}$ as a global phase, using $\frac{-iE_n t}{\hbar} + \frac{iE_0 t}{\hbar} = \frac{-i(E_n-E_0)t}{\hbar}$:</p>
@@ -1237,7 +1237,7 @@
                     <p><strong>Reduction to $RZ$ in the Qubit Subspace</strong></p>
                     <p>Since $e^{-iE_0 t/\hbar}I$ was already dropped as a global phase on the full $n_\text{cut}$-level space, the free evolution unitary is:</p>
                     <p>$$\hat{U}_f(t) \equiv \begin{bmatrix} 1 & & & \\ & e^{-i\omega_q t} & & \\ & & e^{-i(2\omega_q - \alpha/\hbar)t} & \\ & & & \ddots \end{bmatrix}$$</p>
-                    <p>Projecting onto $\{|0\rangle, |1\rangle\}$:</p>
+                    <p>Projecting onto $\mathcal{H}_2 \equiv \mathbb{C}^{2 \times 2}$:</p>
                     <p>$$\hat{U}_f(t)\big|_{\text{qubit}} \equiv \begin{bmatrix} 1 & 0 \\ 0 & e^{-i\omega_q t} \end{bmatrix}$$</p>
                     <p>No further phase removal is needed — the only global phase has already been removed on the full space before projection.</p>
                     <p>Recall:</p>
