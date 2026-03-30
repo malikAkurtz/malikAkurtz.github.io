@@ -1164,17 +1164,32 @@
 
                     <p><strong>DRAG Condition</strong></p>
                     <p>For an $\hat{RY}(\theta_{\text{target}})$ gate, the off-ramp must preserve the $y$-component and negate the $x$-component of the rotation axis. That is, we need position $k'$ such that:</p>
-                    <p>$$\cos\phi_{k'} = \cos\phi_k \quad \text{and} \quad \sin\phi_{k'} = -\sin\phi_k$$</p>
-                    <p>Both conditions are satisfied iff $\phi_{k'} = -\phi_k \pmod{2\pi}$:</p>
-                    <p>$$\frac{2\pi k'}{M} = -\frac{2\pi k}{M} \pmod{2\pi} \implies k' = (M - k) \bmod M \equiv \sigma(k)$$</p>
+                    <p>$$(-\sin\phi_{k'},\;\cos\phi_{k'},\;0) = (\sin\phi_k,\;\cos\phi_k,\;0)$$</p>
+                    <p>Matching components:</p>
+                    <p>$$-\sin\phi_{k'} = \sin\phi_k \quad \text{and} \quad \cos\phi_{k'} = \cos\phi_k$$</p>
+                    <p>Multiply the first equation by $i$ and add to the second:</p>
+                    <p>$$\begin{aligned}
+                    \cos\phi_{k'} - i\sin\phi_{k'} &= \cos\phi_k + i\sin\phi_k \\
+                    e^{-i\phi_{k'}} &= e^{i\phi_k} \\
+                    \phi_{k'} &\equiv -\phi_k \pmod{2\pi}
+                    \end{aligned}$$</p>
+                    <p>Substitute $\phi_k = 2\pi k/M$:</p>
+                    <p>$$\begin{aligned}
+                    \frac{2\pi k'}{M} &= -\frac{2\pi k}{M} + 2\pi n, \quad n \in \mathbb{Z} \\
+                    k' &= -k + Mn \\
+                    k' &\equiv -k \pmod{M} \\
+                    k' &= (M - k) \bmod M
+                    \end{aligned}$$</p>
+                    <p>where the last step follows from the definition of modular arithmetic: $-k \equiv M - k \pmod{M}$.</p>
 
                     <p>Thus:</p>
                     <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
                     <p>$$\forall\;\mathbf{s}_{on} = (s_0, s_1, \ldots, s_M), \quad \mathbf{s}_{off} = (s_{\sigma(0)}, s_{\sigma(1)}, \ldots, s_{\sigma(M)})$$</p>
                     <p>$$\sigma(k) = (M - k) \bmod M$$</p>
                     </div>
-                    <p>This also holds in the case where we have more than a single kick in a qubit period, since the quadrature structure is a property of the clock geometry: positions with phase $\phi_k$ contribute $\cos\phi_k$ to the $y$-quadrature and $-\sin\phi_k$ to the $x$-quadrature independently, so the map $\sigma(k) = (M-k) \bmod M$ negates the total $x$-quadrature while preserving the total $y$-quadrature regardless of how many kicks are present.</p>
-
+                    <p>This also holds in the case where we have more than a single kick in a qubit period, since the quadrature structure is a property of the clock geometry: 
+                        positions with phase $\phi_k$ contribute $\cos\phi_k$ to the $y$-quadrature and $-\sin\phi_k$ to the $x$-quadrature independently, so the map $\sigma(k) = (M-k) \bmod M$ 
+                        negates the total $x$-quadrature while preserving the total $y$-quadrature regardless of how many kicks are present.</p>
 
                     <p>Note: If we have a on-ramp that consists of multiple qubit cycles (multiple sequences $s$), we need apply them in reverse in the off-ramp unitary.</p>
                     
@@ -1374,7 +1389,25 @@
                         $\hat{\mathbf{n}} = (n_x, n_y, n_z) \in S^2 \subset \mathbb{R}^3$ such that:</p>
                     <p>$$\begin{aligned}
                         U &= \exp\!\left(-i\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)\right) \\
-                        &= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z)
+                        &= \cos\frac{\theta}{2}\, I - i\sin\frac{\theta}{2}(n_x\sigma_x + n_y\sigma_y + n_z\sigma_z) \\
+                        &= (\cos\tfrac{\theta}{2})I + (-in_x\sin\tfrac{\theta}{2})\sigma_x + (-in_y\sin\tfrac{\theta}{2})\sigma_y + (-in_z\sin\tfrac{\theta}{2})\sigma_z \\
+                        &= c_{I}I + (-ic_{x})\sigma_x + (-ic_{y})\sigma_y + (-ic_{z})\sigma_z \\
+                        &= \begin{bmatrix} c_I & 0 \\ 0 & c_I \end{bmatrix} + \begin{bmatrix} 0 & -ic_x \\ -ic_x & 0 \end{bmatrix} + \begin{bmatrix} 0 & -c_y \\ c_y & 0 \end{bmatrix} + \begin{bmatrix} -ic_z & 0 \\ 0 & ic_z \end{bmatrix} \\
+                        &= \begin{bmatrix} c_I - ic_z & -ic_x - c_y \\ -ic_x + c_y & c_I + ic_z \end{bmatrix}
+                        \end{aligned}$$</p>
+                    <p>and since $U \in SU(2)$, we have that: </p>
+                    <p>$$\begin{aligned}
+                        U &= \begin{bmatrix} c_I - ic_z & -ic_x - c_y \\ -ic_x + c_y & c_I + ic_z \end{bmatrix} \\
+                        &= \begin{bmatrix} \alpha & -\bar{\beta} \\ \beta & \bar{\alpha} \end{bmatrix} \\
+                        \end{aligned}$$
+                    </p>
+                    <p>and </p>
+                    <p>$$\begin{aligned}
+                        \det(U) &= \alpha\bar{\alpha} - (-\bar{\beta})\beta = |\alpha|^2 + |\beta|^2 = 1 \\
+                        \alpha &= c_I - ic_z, \quad \beta = -ic_x + c_y \\
+                        |\alpha|^2 &= |c_I - ic_z|^2 = c_I^2 + c_z^2 \\
+                        |\beta|^2 &= |-ic_x + c_y|^2 = c_x^2 + c_y^2 \\
+                        |\alpha|^2 + |\beta|^2 &= c_I^2 + c_x^2 + c_y^2 + c_z^2 = 1
                         \end{aligned}$$</p>
                     <p>where $S^2 = \{\mathbf{v} \in \mathbb{R}^3 \mid \|\mathbf{v}\| = 1\}$ is the unit 2-sphere.</p>
 
