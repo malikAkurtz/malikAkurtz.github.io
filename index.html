@@ -676,6 +676,71 @@
             </li>
 
             <li class="entry" data-index="3">
+                <div class="entry-title">DC SQUID Transmon: Circuit Graph &amp; Hamiltonian</div>
+                <div class="entry-body">
+                    <p><strong>Circuit Description</strong></p>
+                    <p>A DC SQUID transmon replaces the single Josephson junction of a CPB with a SQUID loop (two JJs, left $L$ and right $R$) shunted by a capacitor $C_s$. The circuit graph is:</p>
+                    <p>$$G = (V,\, E), \quad V = \{\text{gnd},\, T\}, \quad E = \{C_s,\, L_{J_L},\, L_{J_R},\, C_{J_L},\, C_{J_R}\}$$</p>
+
+                    <p><strong>Subgraphs and Node Classification</strong></p>
+                    <p>Decompose $G$ into capacitive and inductive subgraphs:</p>
+                    <p>$$G_c = (V,\, E_c),\quad E_c = \{C_s,\, C_{J_L},\, C_{J_R}\}$$</p>
+                    <p>$$G_L = (V,\, E_L \cup E_{NL}),\quad E_L = \emptyset,\quad E_{NL} = \{L_{J_L},\, L_{J_R}\}$$</p>
+                    <p>Active nodes (inductive degree $> 1$, excluding ground): $V_A = \{T\}$, so $N = |V_A| = 1$.</p>
+                    <p>Passive nodes (inductive degree $= 0$, excluding ground): $V_P = \emptyset$.</p>
+                    <p>State-space dimension: $P = |V_A| + |V_P| + 1 = 2$.</p>
+
+                    <p><strong>Circuit Matrices</strong></p>
+                    <p>The full $P\times P$ capacitance matrix (rows/cols indexed by $\{\text{gnd},\, T\}$) reduces after dropping the ground row/col to the $N\times N$ matrix:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$[C] = [C_s + C_{J_L} + C_{J_R}], \quad C \equiv C_s + C_{J_L} + C_{J_R}$$</p>
+                    </div>
+                    <p>There are no linear inductors, so:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$[L]^{-1} = [0]$$</p>
+                    </div>
+
+                    <p><strong>Canonical Variables and Kinetic Energy</strong></p>
+                    <p>Canonical flux and charge vectors: $\vec{\Phi} = [\Phi_T]$, $\vec{q} = [q_T]$.</p>
+                    <p>$$\vec{\dot{\Phi}} = [C]^{-1}\vec{q} = \frac{q_T}{C}$$</p>
+                    <p>Kinetic energy:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$T = \tfrac{1}{2}\vec{\dot{\Phi}}^{\,T}[C]\vec{\dot{\Phi}} = \frac{q_T^2}{2C}$$</p>
+                    </div>
+
+                    <p><strong>Potential Energy: Two-JJ SQUID Loop</strong></p>
+                    <p>With external flux $\tilde{\Phi}$ threading the SQUID loop (fluxoid quantization requires $\varphi_L - \varphi_R = \tilde{\Phi}/\varphi_0$), the Josephson potential is:</p>
+                    <p>$$V = E_{J_L}\!\left(1-\cos\varphi_T\right) + E_{J_R}\!\left(1-\cos\!\left(\varphi_T - \frac{\tilde{\Phi}}{\varphi_0}\right)\right)$$</p>
+                    <p>Dropping the constants and expanding:</p>
+                    <p>$$V = -E_{J_L}\cos(\varphi_T) - E_{J_R}\cos\!\left(\varphi_T - \frac{\tilde{\Phi}}{\varphi_0}\right)$$</p>
+                    <p>Using the identity $a\cos\alpha + b\cos\beta = \sqrt{a^2+b^2+2ab\cos(\alpha-\beta)}\cos(\alpha - \phi_0)$ with appropriate phase, this reduces to:</p>
+                    <p>$$V = -E_{J_\Sigma}\cos\!\left(\frac{\tilde{\Phi}}{2\varphi_0}\right)\sqrt{1 + d^2\tan^2\!\left(\frac{\tilde{\Phi}}{2\varphi_0}\right)}\,\cos\varphi$$</p>
+                    <p>where $E_{J_\Sigma} = E_{J_L} + E_{J_R}$, $d = \frac{E_{J_R} - E_{J_L}}{E_{J_\Sigma}}$, and $\varphi$ is the effective phase shifted by $\arctan\!\left(d\tan\!\left(\tfrac{\tilde{\Phi}}{2\varphi_0}\right)\right)$. Defining the flux-tunable Josephson energy:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$E_J(\tilde{\Phi}) = E_{J_\Sigma}\cos\!\left(\frac{\tilde{\Phi}}{2\varphi_0}\right)\sqrt{1 + d^2\tan^2\!\left(\frac{\tilde{\Phi}}{2\varphi_0}\right)}$$</p>
+                    </div>
+                    <p>the potential simplifies to $V = -E_J\cos(\varphi)$, identical in form to a single-junction CPB.</p>
+
+                    <p><strong>Classical and Quantum Hamiltonian</strong></p>
+                    <p>The classical Hamiltonian $\mathcal{H} = T + V$:</p>
+                    <p>$$\mathcal{H} = \frac{q_T^2}{2C} - E_J\cos(\varphi), \quad Q = q_T$$</p>
+                    <p>Promoting to operators ($\hat{Q} = 2e\hat{n}$, $E_C = e^2/2C$):</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{\mathcal{H}} = 4E_C\hat{n}^2 - E_J\cos(\hat{\varphi}), \quad E_C = \frac{e^2}{2C}$$</p>
+                    </div>
+                    <p>This is the standard transmon Hamiltonian — the DC SQUID topology adds the crucial feature that $E_J$ is continuously tunable via $\tilde{\Phi}$, without changing the functional form.</p>
+                </div>
+                <div class="entry-refs">
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">transmon</span>
+                    <span class="tag">DC SQUID</span>
+                    <span class="tag">hamiltonian</span>
+                    <span class="tag">circuit quantization</span>
+                </div>
+            </li>
+
+            <li class="entry" data-index="4">
                 <div class="entry-title">The Transmon, an Anharmonic Quantum Oscillator</div>
                 <div class="entry-body">
                     <p>These are notes on <em>Introduction to Quantum Electromagnetic Circuits</em>, by Uri Vool and Michel Devoret</p>
@@ -953,6 +1018,48 @@
             </li>
 
             <li class="entry" data-index="4">
+                <div class="entry-title">SFQ Drive Hamiltonian &amp; Kick Unitary Derivation</div>
+                <div class="entry-body">
+                    <p>These are notes on <em>Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control</em>, by Shillito et al.<a class="cite" data-ref="1">[1]</a></p>
+
+                    <p><strong>Drive Hamiltonian</strong></p>
+                    <p>The SFQ driver couples to the transmon via a coupling capacitance $C_c$. The drive Hamiltonian is:</p>
+                    <p>$$\hat{H}_D = -\frac{C_c}{C_T} V(t)\hat{n}, \quad V(t) = \Phi_0\sum_n \delta(t - nT_c)$$</p>
+                    <p>where $C_T$ is the total capacitance of the transmon island, $\Phi_0 = h/2e$ is the flux quantum, and $T_c = 1/f_c$ is the SFQ clock period.</p>
+
+                    <p><strong>Kick Unitary per Pulse</strong></p>
+                    <p>The time-evolution operator over the $n$-th pulse (integrating through the delta function at $t = nT_c$) is:</p>
+                    <p>$$\hat{U} = \exp\!\left(-\frac{i}{\hbar}\int_{nT_c^-}^{nT_c^+} \hat{H}_D\,dt\right)$$</p>
+                    <p>Substituting $\hat{H}_D$:</p>
+                    <p>$$\begin{aligned}
+                        \hat{U} &= \exp\!\left(-\frac{i}{\hbar}\int_{nT_c^-}^{nT_c^+} -\frac{C_c}{C_T}\Phi_0\sum_n\delta(t-nT_c)\hat{n}\,dt\right) \\
+                        &= \exp\!\left(\frac{iC_c\Phi_0\hat{n}}{\hbar C_T}\int_{nT_c^-}^{nT_c^+}\sum_n\delta(t-nT_c)\,dt\right) \\
+                        &= \exp\!\left(\frac{iC_c\Phi_0}{\hbar C_T}\hat{n}\right)
+                    \end{aligned}$$</p>
+                    <p>Define the coupling parameter:</p>
+                    <p>$$\beta = \frac{C_c\Phi_0}{\hbar C_T}$$</p>
+                    <p>Recalling the zero-point fluctuation amplitude $n_{zps}$ and the kick angle $\theta = C_c\Phi_0\sqrt{2\omega_q/C}$, one finds:</p>
+                    <p>$$\beta \approx \frac{\theta}{2n_{zps}} = \frac{\theta'}{2}, \quad \theta' = \frac{\theta}{r}, \quad r = \tfrac{1}{2}\!\left(\frac{E_J/E_C}{2}\right)^{1/4}$$</p>
+                    <p>Therefore:</p>
+                    <div style="border: 1px solid var(--highlight); padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+                        <p>$$\hat{U} \approx \exp\!\left(\frac{i\theta'}{2}\hat{n}\right) \equiv \hat{U}_\theta$$</p>
+                    </div>
+                    <p>This is the <em>kick unitary</em> — the instantaneous phase-space displacement applied to the transmon by each SFQ pulse.</p>
+                </div>
+                <div class="entry-refs">
+                    <div class="ref" data-ref-id="1">
+                        <span class="ref-num">[1]</span>
+                        <span class="ref-body">R. Shillito et al. "Compact Pulse Schedules for High-Fidelity Single-Flux Quantum Qubit Control." <a href="https://arxiv.org/abs/2110.11501" target="_blank">arXiv:2110.11501</a> (2021).</span>
+                    </div>
+                </div>
+                <div class="entry-tags">
+                    <span class="tag">SFQ</span>
+                    <span class="tag">transmon</span>
+                    <span class="tag">quantum control</span>
+                </div>
+            </li>
+
+            <li class="entry" data-index="5">
                 <div class="entry-title">Approximating an $RY(\theta)$ Unitary with a Transmon</div>
                 <div class="entry-body">                    
                     <p>We will use the Fock approximated $\hat{n}$ to build the kick unitary $\hat{U}_{\theta}$, as Shillito does in the paper.<a class="cite" data-ref="1">[1]</a></p>
@@ -1621,7 +1728,7 @@
         });
 
         // Linear reading order derived from dependency graph
-        const linearOrder = [8, 0, 1, 7, 3, 5, 6, 2, 4, 9];
+        const linearOrder = [10, 0, 1, 9, 3, 4, 5, 7, 8, 2, 6, 11];
 
         // ── Entry data extraction ──
         const entries = [];
